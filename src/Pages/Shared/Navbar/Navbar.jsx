@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { use } from 'react'
 // import Logo from '../../../Components/Logo/Logo'
 import { Link, NavLink } from 'react-router'
 import { FaCircleArrowRight } from 'react-icons/fa6'
 import { useScrollDirection } from './useScrollDir'
 import Logo from '../../../Components/Logo/Logo'
+import { AuthContext } from '../../../Context/AuthContext'
 
 const Navbar = () => {
   //   const { user, logOut } = useAuth()
@@ -18,8 +19,9 @@ const Navbar = () => {
   //       })
   //   }
 
-  //   const user = true
-  const user = false
+  const { user, logOut } = use(AuthContext)
+
+  console.log(user)
 
   const direction = useScrollDirection()
 
@@ -45,6 +47,10 @@ const Navbar = () => {
       </li>
     </>
   )
+
+  const handleLogOut = () => {
+    logOut()
+  }
 
   return (
     <div
@@ -95,7 +101,7 @@ const Navbar = () => {
                 className="tooltip tooltip-bottom"
                 tabIndex={0}
                 role="button"
-                data-tip="User Name"
+                data-tip={user.email}
               >
                 <img className="w-10 h-10 object-cover  rounded-full" src={user?.photoURL} />
               </div>
@@ -107,7 +113,7 @@ const Navbar = () => {
                   <Link to={'/profile'}>Profile</Link>
                 </li>
                 <li>
-                  <Link>Log Out</Link>
+                  <button onClick={handleLogOut}>Log Out</button>
                 </li>
               </ul>
             </div>
