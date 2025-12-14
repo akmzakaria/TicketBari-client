@@ -2,3 +2,32 @@
 @plugin "daisyui" {
   themes: light --default, dark;
 }
+
+.nav a.active {
+  border-bottom: 2px solid #432bd5;
+  color: #432bd5;
+  padding-bottom: 0.25rem;
+  font-weight: 600;
+}
+.dash-nav a.active {
+  color: #432bd5;
+  padding-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.nav a:hover {
+  color: #432bd5;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.dash-nav a:hover {
+  color: #432bd5;
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+
+.nav a:active {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  outline: none;
+}

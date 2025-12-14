@@ -1,0 +1,51 @@
+import { FaTicketAlt, FaLock, FaClock, FaHeadset } from 'react-icons/fa'
+
+const features = [
+  {
+    id: 1,
+    icon: <FaTicketAlt />,
+    title: 'Easy Booking',
+    desc: 'Book tickets in just a few clicks',
+  },
+  {
+    id: 2,
+    icon: <FaLock />,
+    title: 'Secure Payment',
+    desc: 'Your payments are fully protected',
+  },
+  {
+    id: 3,
+    icon: <FaClock />,
+    title: '24/7 Availability',
+    desc: 'Book tickets anytime, anywhere',
+  },
+  {
+    id: 4,
+    icon: <FaHeadset />,
+    title: 'Customer Support',
+    desc: 'We are always here to help you',
+  },
+]
+
+const WhyChooseUs = () => {
+  return (
+    <section className="my-14">
+      <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Us?</h2>
+
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {features.map((item) => (
+          <div
+            key={item.id}
+            className="text-center p-6 border rounded-xl hover:shadow-lg transition"
+          >
+            <div className="text-3xl text-primary mb-3 mx-auto">{item.icon}</div>
+            <h3 className="font-semibold text-lg">{item.title}</h3>
+            <p className="text-sm text-gray-500 mt-2">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export default WhyChooseUs

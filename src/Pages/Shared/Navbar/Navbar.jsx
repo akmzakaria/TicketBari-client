@@ -7,42 +7,33 @@ import Logo from '../../../Components/Logo/Logo'
 import { AuthContext } from '../../../Context/AuthContext'
 
 const Navbar = () => {
-  //   const { user, logOut } = useAuth()
-
-  //   const handleLogOut = () => {
-  //     logOut()
-  //       .then(() => {
-  //         // console.log(result.user)
-  //       })
-  //       .catch(() => {
-  //         // console.log(err)
-  //       })
-  //   }
-
   const { user, logOut } = use(AuthContext)
 
-  console.log(user)
+  //   console.log(user)
 
   const direction = useScrollDirection()
 
   const links = (
     <>
-      <li>
+      <li className="nav">
         <NavLink to={'/'}>Home</NavLink>
       </li>
-      <li>
+      <li className="nav">
         <NavLink to={'/all-tickets'}>All Tickets</NavLink>
       </li>
 
       {user && (
         <>
-          <li>
+          <li className="nav">
+            <NavLink to={'/add-ticket'}>Add Ticket</NavLink>
+          </li>
+          <li className="nav">
             <NavLink to={'/dashboard'}>Dashboard</NavLink>
           </li>
         </>
       )}
 
-      <li>
+      <li className="nav">
         <NavLink to={'/aboutus'}>About Us</NavLink>
       </li>
     </>
@@ -59,7 +50,7 @@ const Navbar = () => {
         direction === 'down' ? '-translate-y-full' : 'translate-y-0'
       } `}
     >
-      <div className={` navbar bg-base-100 max-w-11/12 mx-auto  `}>
+      <div className={` navbar bg-base-100 max-w-350 mx-auto  `}>
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -101,7 +92,7 @@ const Navbar = () => {
                 className="tooltip tooltip-bottom"
                 tabIndex={0}
                 role="button"
-                data-tip={user.email}
+                data-tip={user?.displayName}
               >
                 <img className="w-10 h-10 object-cover  rounded-full" src={user?.photoURL} />
               </div>
