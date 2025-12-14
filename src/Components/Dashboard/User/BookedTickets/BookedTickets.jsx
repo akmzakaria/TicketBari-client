@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import useAxios from '../../Hooks/useAxios'
-import Loading from '../Loading/Loading'
 import { MdOutlineConfirmationNumber } from 'react-icons/md'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { FaClock } from 'react-icons/fa6'
 import { PiClockCountdownBold } from 'react-icons/pi'
 import { GoClock } from 'react-icons/go'
+import useAxios from '../../../../Hooks/useAxios'
+import Loading from '../../../Loading/Loading'
 
 const BookedTickets = () => {
   const [tickets, setTickets] = useState([])

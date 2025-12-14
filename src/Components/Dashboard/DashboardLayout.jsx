@@ -7,6 +7,7 @@ import { HiHome } from 'react-icons/hi2'
 import useAxios from '../../Hooks/useAxios'
 import { FaHistory, FaUserCircle } from 'react-icons/fa'
 import { HiTicket } from 'react-icons/hi2'
+import { FaUserEdit } from 'react-icons/fa'
 
 const DashboardLayout = () => {
   const { user, loading } = use(AuthContext)
@@ -171,6 +172,19 @@ const DashboardLayout = () => {
                   <HiTicket />
 
                   <span className="is-drawer-close:hidden">Manage Tickets</span>
+                </NavLink>
+              </li>
+
+              {/* List item */}
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/manage-users'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Manage Users"
+                >
+                  <FaUserEdit />
+
+                  <span className="is-drawer-close:hidden">Manage Users</span>
                 </NavLink>
               </li>
 

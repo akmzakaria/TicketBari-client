@@ -10,10 +10,14 @@ import About from '../Components/About/About'
 import PrivateRoute from './PrivateRoute'
 import AddTicket from '../Pages/AddTicket/AddTicket'
 import TicketDetails from '../Pages/TicketDetails/TicketDetails'
-import UserProfile from '../Components/UserProfile/UserProfile'
-import BookedTickets from '../Components/BookedTickets/BookedTickets'
-import TransactionHistory from '../Components/TransactionHistory/TransactionHistory'
+import UserProfile from '../Components/Dashboard/User/UserProfile/UserProfile'
 import DashboardHome from '../Components/Dashboard/DashboardHome'
+import BookedTickets from '../Components/Dashboard/User/BookedTickets/BookedTickets'
+import TransactionHistory from '../Components/Dashboard/User/TransactionHistory/TransactionHistory'
+import AdminProfile from '../Components/Dashboard/Admin/AdminProfile/AdminProfile'
+import ManageTickets from '../Components/Dashboard/Admin/ManageTickets/ManageTickets'
+import AdvertiseTickets from '../Components/Dashboard/Admin/AdvertiseTickets/AdvertiseTickets'
+import ManageUsers from '../Components/Dashboard/Admin/ManageUsers/ManageUsers'
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +97,22 @@ export const router = createBrowserRouter([
       {
         path: 'transaction-history',
         Component: TransactionHistory,
+      },
+      {
+        path: 'admin-profile',
+        Component: AdminProfile,
+      },
+      {
+        path: 'manage-tickets',
+        Component: ManageTickets,
+      },
+      {
+        path: 'manage-users',
+        Component: ManageUsers,
+      },
+      {
+        path: 'advertise-history',
+        Component: AdvertiseTickets,
       },
     ],
   },
