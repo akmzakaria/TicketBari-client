@@ -18,6 +18,7 @@ import AdminProfile from '../Components/Dashboard/Admin/AdminProfile/AdminProfil
 import ManageTickets from '../Components/Dashboard/Admin/ManageTickets/ManageTickets'
 import AdvertiseTickets from '../Components/Dashboard/Admin/AdvertiseTickets/AdvertiseTickets'
 import ManageUsers from '../Components/Dashboard/Admin/ManageUsers/ManageUsers'
+import TickstDetailsAdmin from '../Components/Dashboard/Admin/TickstDetailsAdmin/TickstDetailsAdmin'
 
 export const router = createBrowserRouter([
   {
@@ -113,6 +114,10 @@ export const router = createBrowserRouter([
       {
         path: 'advertise-history',
         Component: AdvertiseTickets,
+      },
+      {
+        path: 'ticket-details-admin/:id',
+        Component: TickstDetailsAdmin,
       },
     ],
   },

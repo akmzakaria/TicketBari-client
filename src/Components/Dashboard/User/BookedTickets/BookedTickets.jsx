@@ -1,23 +1,34 @@
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 import { MdOutlineConfirmationNumber } from 'react-icons/md'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { FaClock } from 'react-icons/fa6'
 import { PiClockCountdownBold } from 'react-icons/pi'
 import { GoClock } from 'react-icons/go'
 import useAxios from '../../../../Hooks/useAxios'
+import { useQuery } from '@tanstack/react-query'
+import { AuthContext } from '../../../../Context/AuthContext'
 import Loading from '../../../Loading/Loading'
 
 const BookedTickets = () => {
-  const [tickets, setTickets] = useState([])
+  // const [tickets, setTickets] = useState([])
   const [countdowns, setCountdowns] = useState({})
   const instance = useAxios()
+  const { user, loading } = use(AuthContext)
 
   // Fetch booked tickets
-  useEffect(() => {
-    instance.get('/booked-tickets').then((res) => {
-      setTickets(res.data)
-    })
-  }, [instance])
+  // useEffect(() => {
+  //   instance.get('/booked-tickets').then((res) => {
+  //     setTickets(res.data)
+  //   })
+  // }, [instance])
+
+  const { data: tickets = [] } = useQuery({
+    queryKey: ['booked-tickets', user.email],
+    queryFn: async () => {
+      const res = await instance.get(`/booked-tickets?userEmail=${user.email}`)
+      return res.data
+    },
+  })
 
   // Countdown logic (SAFE)
   useEffect(() => {
@@ -53,13 +64,19 @@ const BookedTickets = () => {
   }, [tickets])
 
   // Loading state
-  if (!tickets.length) {
+  if (loading) {
     return <Loading></Loading>
   }
 
   return (
     <div className="max-w-7xl mx-auto px-5 py-10">
       <h2 className="text-3xl font-bold text-center mb-10">My Booked Tickets</h2>
+
+      {tickets.length === 0 && (
+        <div className="flex justify-center h-[70vh] items-center">
+          <p>You haven't purchase any ticket yet!</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tickets.map((ticket) => {

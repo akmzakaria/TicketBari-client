@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import useAxios from '../../../../Hooks/useAxios'
 import { AuthContext } from '../../../../Context/AuthContext'
 import { useQuery } from '@tanstack/react-query'
@@ -6,13 +6,14 @@ import { useQuery } from '@tanstack/react-query'
 const ManageUsers = () => {
   //   const { user } = use(AuthContext)
   //   const [users, setUsers] = useState([])
-  const instance = useAxios()
 
   //   useEffect(() => {
   //     instance.get('/users').then((res) => {
   //       setUsers(res.data)
   //     })
   //   }, [])
+
+  const instance = useAxios()
 
   const { refetch, data: users = [] } = useQuery({
     queryKey: ['users'],

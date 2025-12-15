@@ -25,7 +25,7 @@ const TicketDetails = () => {
     instance.get('/tickets').then((res) => {
       setTickets(res.data)
     })
-  }, [instance])
+  }, [])
 
   // Find selected ticket
   useEffect(() => {
