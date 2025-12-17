@@ -22,10 +22,12 @@ const BookedTickets = () => {
   //   })
   // }, [instance])
 
-  const { data: tickets = [] } = useQuery({
-    queryKey: ['booked-tickets', user.email],
+  const { isLoading, data: tickets = [] } = useQuery({
+    queryKey: ['booked-tickets', user.email, 'accepted'],
     queryFn: async () => {
-      const res = await instance.get(`/booked-tickets?userEmail=${user.email}`)
+      const res = await instance.get(
+        `/booked-tickets?userEmail=${user.email}&bookingStatus=accepted`
+      )
       return res.data
     },
   })
@@ -63,8 +65,23 @@ const BookedTickets = () => {
     return () => clearInterval(interval)
   }, [tickets])
 
+  // make payment
+  const handlePayment = async (ticket) => {
+    const paymentInfo = {
+      totalPrice: ticket.totalPrice,
+      ticketId: ticket._id,
+      userEmail: ticket.userEmail,
+      title: ticket.title,
+      // trackingId: ticket.trackingId,
+    }
+
+    const res = await instance.post('/create-checkout-session', paymentInfo)
+    // console.log(res.data)
+    window.location.assign(res.data.url)
+  }
+
   // Loading state
-  if (loading) {
+  if (loading || isLoading) {
     return <Loading></Loading>
   }
 
@@ -124,8 +141,9 @@ const BookedTickets = () => {
                 </p>
 
                 {/* booking status */}
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
+                <div className="flex justify-between items-center">
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
                     ${
                       ticket.bookingStatus === 'pending'
                         ? 'bg-yellow-100 text-yellow-700'
@@ -135,9 +153,16 @@ const BookedTickets = () => {
                         ? 'bg-green-100 text-green-700'
                         : 'bg-red-100 text-red-700'
                     }`}
-                >
-                  {ticket.bookingStatus}
-                </span>
+                  >
+                    {ticket.bookingStatus}
+                  </span>
+                  <button
+                    onClick={() => handlePayment(ticket)}
+                    className="btn btn-sm rounded-full bg-green-600 text-white active:scale-100 hover:scale-105 hover:bg-green-700 transition"
+                  >
+                    Pay Now
+                  </button>
+                </div>
               </div>
             </div>
           )

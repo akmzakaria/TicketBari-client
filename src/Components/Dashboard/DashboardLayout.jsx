@@ -3,11 +3,20 @@ import { AuthContext } from '../../Context/AuthContext'
 import Loading from '../Loading/Loading'
 import { FaFileCircleCheck, FaRegCircleCheck } from 'react-icons/fa6'
 import { NavLink, Outlet } from 'react-router'
-import { HiHome } from 'react-icons/hi2'
+import { HiHome, HiOutlineDocumentCheck, HiOutlineTicket } from 'react-icons/hi2'
 import useAxios from '../../Hooks/useAxios'
 import { FaHistory, FaUserCircle } from 'react-icons/fa'
 import { HiTicket } from 'react-icons/hi2'
 import { FaUserEdit } from 'react-icons/fa'
+import { IoIosAddCircle } from 'react-icons/io'
+import { MdAddCard, MdOutlineAdminPanelSettings } from 'react-icons/md'
+import { VscGitPullRequestNewChanges } from 'react-icons/vsc'
+import { GrOverview, GrUserAdmin } from 'react-icons/gr'
+import { MdBookmarkAdded } from 'react-icons/md'
+import { MdOutlineBookmarkAdded } from 'react-icons/md'
+import { LuHouse, LuHousePlug, LuHousePlus, LuUserRound, LuUserRoundPen } from 'react-icons/lu'
+import { GoHistory } from 'react-icons/go'
+import { AiOutlineFileDone } from 'react-icons/ai'
 
 const DashboardLayout = () => {
   const { user, loading } = use(AuthContext)
@@ -87,7 +96,8 @@ const DashboardLayout = () => {
                   data-tip="Home Page"
                 >
                   {/* Home icon */}
-                  <HiHome />
+                  {/* <HiHome /> */}
+                  <LuHouse />
                   <span className="is-drawer-close:hidden">Home Page</span>
                 </NavLink>
               </li>
@@ -99,7 +109,8 @@ const DashboardLayout = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="User Profile"
                 >
-                  <FaUserCircle />
+                  {/* <FaUserCircle /> */}
+                  <LuUserRound />
                   <span className="is-drawer-close:hidden">User Profile</span>
                 </NavLink>
               </li>
@@ -111,7 +122,9 @@ const DashboardLayout = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="My Booked Tickets"
                 >
-                  <FaFileCircleCheck />
+                  {/* <FaFileCircleCheck /> */}
+                  {/* <AiOutlineFileDone /> */}
+                  <HiOutlineDocumentCheck />
 
                   <span className="is-drawer-close:hidden">My Booked Tickets</span>
                 </NavLink>
@@ -126,7 +139,8 @@ const DashboardLayout = () => {
                 >
                   {/* Settings icon */}
                   {/* <GrHistory /> */}
-                  <FaHistory />
+                  {/* <FaHistory /> */}
+                  <GoHistory />
 
                   <span className="is-drawer-close:hidden">Transaction History</span>
                 </NavLink>
@@ -145,7 +159,9 @@ const DashboardLayout = () => {
                   data-tip="Home Page"
                 >
                   {/* Home icon */}
-                  <HiHome />
+                  {/* <HiHome /> */}
+                  <LuHouse />
+
                   <span className="is-drawer-close:hidden">Home Page</span>
                 </NavLink>
               </li>
@@ -157,7 +173,9 @@ const DashboardLayout = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Admin Profile"
                 >
-                  <FaUserCircle />
+                  {/* <FaUserCircle /> */}
+                  <GrUserAdmin />
+                  {/* <MdOutlineAdminPanelSettings /> */}
                   <span className="is-drawer-close:hidden">Admin Profile</span>
                 </NavLink>
               </li>
@@ -169,7 +187,8 @@ const DashboardLayout = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Manage Tickets"
                 >
-                  <HiTicket />
+                  {/* <HiTicket /> */}
+                  <HiOutlineTicket />
 
                   <span className="is-drawer-close:hidden">Manage Tickets</span>
                 </NavLink>
@@ -182,7 +201,8 @@ const DashboardLayout = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Manage Users"
                 >
-                  <FaUserEdit />
+                  {/* <FaUserEdit /> */}
+                  <LuUserRoundPen />
 
                   <span className="is-drawer-close:hidden">Manage Users</span>
                 </NavLink>
@@ -195,9 +215,93 @@ const DashboardLayout = () => {
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                   data-tip="Advertise History"
                 >
-                  <FaHistory />
+                  {/* <FaHistory /> */}
+                  <GoHistory />
 
                   <span className="is-drawer-close:hidden">Advertise History</span>
+                </NavLink>
+              </li>
+            </ul>
+          )}
+
+          {fltUser?.role === 'vendor' && (
+            <ul className="menu w-full grow">
+              {/* List item */}
+
+              <li className="dash-nav">
+                <NavLink
+                  to={'/'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Home Page"
+                >
+                  {/* Home icon */}
+                  {/* <HiHome /> */}
+                  <LuHouse />
+                  <span className="is-drawer-close:hidden">Home Page</span>
+                </NavLink>
+              </li>
+
+              {/* List item */}
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/vendor-profile'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Vendor Profile"
+                >
+                  {/* <FaUserCircle /> */}
+                  <LuUserRound />
+                  <span className="is-drawer-close:hidden">Vendor Profile</span>
+                </NavLink>
+              </li>
+
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/add-ticket'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Add Ticket"
+                >
+                  <MdAddCard />
+                  <span className="is-drawer-close:hidden">Add Ticket</span>
+                </NavLink>
+              </li>
+
+              {/* List item */}
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/added-tickets'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Added Tickets"
+                >
+                  {/* <MdBookmarkAdded /> */}
+                  <MdOutlineBookmarkAdded className="text-[17px] -mx-[1.5px]" />
+
+                  <span className="is-drawer-close:hidden">Added Tickets</span>
+                </NavLink>
+              </li>
+
+              {/* List item */}
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/requested-bookings'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Requested Bookings"
+                >
+                  <VscGitPullRequestNewChanges />
+
+                  <span className="is-drawer-close:hidden">Requested Bookings</span>
+                </NavLink>
+              </li>
+
+              {/* List item */}
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/revenue-overview'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Revenue Overview"
+                >
+                  <GrOverview />
+
+                  <span className="is-drawer-close:hidden">Revenue Overview</span>
                 </NavLink>
               </li>
             </ul>

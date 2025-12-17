@@ -8,7 +8,6 @@ import DashboardLayout from '../Components/Dashboard/DashboardLayout'
 import Profile from '../Components/Profile/Profile'
 import About from '../Components/About/About'
 import PrivateRoute from './PrivateRoute'
-import AddTicket from '../Pages/AddTicket/AddTicket'
 import TicketDetails from '../Pages/TicketDetails/TicketDetails'
 import UserProfile from '../Components/Dashboard/User/UserProfile/UserProfile'
 import DashboardHome from '../Components/Dashboard/DashboardHome'
@@ -19,6 +18,13 @@ import ManageTickets from '../Components/Dashboard/Admin/ManageTickets/ManageTic
 import AdvertiseTickets from '../Components/Dashboard/Admin/AdvertiseTickets/AdvertiseTickets'
 import ManageUsers from '../Components/Dashboard/Admin/ManageUsers/ManageUsers'
 import TickstDetailsAdmin from '../Components/Dashboard/Admin/TickstDetailsAdmin/TickstDetailsAdmin'
+import VendorProfile from '../Components/Dashboard/Vendor/VendorProfile/VendorProfile'
+import VendorAddedTickets from '../Components/Dashboard/Vendor/VendorAddedTickets/VendorAddedTickets'
+import RequestedBookings from '../Components/Dashboard/Vendor/RequestedBookings/RequestedBookings'
+import RevenueOverview from '../Components/Dashboard/Vendor/RevenueOverview/RevenueOverview'
+import AddTicket from '../Components/Dashboard/Vendor/AddTicket/AddTicket'
+import PaymentSuccess from '../Components/Dashboard/User/BookedTickets/PaymentSuccess'
+import PaymentCancelled from '../Components/Dashboard/User/BookedTickets/PaymentCancel'
 
 export const router = createBrowserRouter([
   {
@@ -56,14 +62,6 @@ export const router = createBrowserRouter([
       {
         path: 'aboutus',
         Component: About,
-      },
-      {
-        path: 'add-ticket',
-        element: (
-          <PrivateRoute>
-            <AddTicket></AddTicket>
-          </PrivateRoute>
-        ),
       },
       {
         path: 'ticket-details/:id',
@@ -119,6 +117,34 @@ export const router = createBrowserRouter([
         path: 'ticket-details-admin/:id',
         Component: TickstDetailsAdmin,
       },
+      {
+        path: 'vendor-profile',
+        Component: VendorProfile,
+      },
+      {
+        path: 'add-ticket',
+        Component: AddTicket,
+      },
+      {
+        path: 'added-tickets',
+        Component: VendorAddedTickets,
+      },
+      {
+        path: 'requested-bookings',
+        Component: RequestedBookings,
+      },
+      {
+        path: 'revenue-overview',
+        Component: RevenueOverview,
+      },
     ],
+  },
+  {
+    path: 'payment-success',
+    Component: PaymentSuccess,
+  },
+  {
+    path: 'payment-cancelled',
+    Component: PaymentCancelled,
   },
 ])

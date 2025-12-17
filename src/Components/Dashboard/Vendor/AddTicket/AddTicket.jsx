@@ -1,7 +1,7 @@
 import React, { use } from 'react'
 import { useForm } from 'react-hook-form'
-import { AuthContext } from '../../Context/AuthContext'
-import useAxios from '../../Hooks/useAxios'
+import { AuthContext } from '../../../../Context/AuthContext'
+import useAxios from '../../../../Hooks/useAxios'
 
 const AddTicket = () => {
   const { user } = use(AuthContext)
@@ -124,6 +124,7 @@ const AddTicket = () => {
         </div>
 
         {/* Image upload */}
+        {/* Image will be uploaded to imgbb */}
         <div>
           <label className="label">Ticket Image</label>
           <input
@@ -131,7 +132,6 @@ const AddTicket = () => {
             type="file"
             className="file-input file-input-bordered w-full"
           />
-          <p className="text-sm text-gray-500 mt-1">Image will be uploaded to imgbb</p>
         </div>
 
         {/* Vendor info */}
