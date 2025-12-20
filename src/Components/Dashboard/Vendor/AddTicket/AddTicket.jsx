@@ -38,7 +38,9 @@ const AddTicket = () => {
 
       instance.post('/tickets', allData).then((res) => {
         if (res.status) {
-          toast.success('Ticket request sent!')
+          toast.success('Ticket request sent!', {
+            position: 'top-center',
+          })
           reset()
         }
         // console.log(res.status)

@@ -19,10 +19,14 @@ const ManageUsers = () => {
     try {
       await instance.patch(`/users/${id}`, { role }).then(() => {
         refetch()
-        toast.success(`User role changed to ${role}`)
+        toast.success(`User role changed to ${role}`, {
+          position: 'top-center',
+        })
       })
     } catch (error) {
-      toast.error('Failed to change role')
+      toast.error('Failed to change role', {
+        position: 'top-center',
+      })
     }
   }
 

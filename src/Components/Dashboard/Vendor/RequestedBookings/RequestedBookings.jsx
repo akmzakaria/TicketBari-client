@@ -20,9 +20,13 @@ const RequestedBookings = () => {
     try {
       await instance.patch(`/booked-tickets/${id}`, { bookingStatus: 'accepted' })
       refetch()
-      toast.success('Booking accepted')
+      toast.success('Booking accepted', {
+        position: 'top-center',
+      })
     } catch (error) {
-      toast.error('Failed to accept booking')
+      toast.error('Failed to accept booking', {
+        position: 'top-center',
+      })
     }
   }
 
@@ -30,7 +34,7 @@ const RequestedBookings = () => {
     try {
       await instance.patch(`/booked-tickets/${id}`, { bookingStatus: 'rejected' })
       refetch()
-      toast.success('Booking rejected')
+      toast.error('Booking rejected')
     } catch (error) {
       toast.error('Failed to reject booking')
     }
@@ -68,7 +72,7 @@ const RequestedBookings = () => {
 
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="bottom-center" reverseOrder={true} />
       <h2 className="text-2xl font-bold ml-5  my-5">Requested Bookings:</h2>
 
       {tickets.length === 0 ? (

@@ -33,9 +33,13 @@ const VendorAddedTickets = () => {
       await instance.delete(`/tickets/${id}`)
       refetch()
 
-      toast.success('Ticket deleted successfully')
+      toast.success('Ticket deleted successfully', {
+        position: 'top-center',
+      })
     } catch (error) {
-      toast.error('Failed to delete ticket')
+      toast.error('Failed to delete ticket', {
+        position: 'top-center',
+      })
     }
   }
 
@@ -70,7 +74,7 @@ const VendorAddedTickets = () => {
 
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="bottom-center" reverseOrder={true} />
       <h2 className="text-2xl font-bold mb-5">My Added Tickets:</h2>
 
       {tickets.length === 0 ? (

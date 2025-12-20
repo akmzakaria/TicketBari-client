@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query'
 const TicketDetails = () => {
   const instance = useAxiosSecure()
   const { id } = useParams()
-  const { user } = use(AuthContext)
+  const { user, loading } = use(AuthContext)
   //   console.log(user.email)
 
   // const [tickets, setTickets] = useState([])
@@ -29,7 +29,7 @@ const TicketDetails = () => {
   //   })
   // }, [])
 
-  const { data: ticket = [] } = useQuery({
+  const { isLoading, data: ticket = [] } = useQuery({
     queryKey: ['ticket', id],
     queryFn: async () => {
       const res = await instance.get(`/tickets/${id}`)
@@ -122,11 +122,19 @@ const TicketDetails = () => {
 
     instance.post('/booked-tickets', data).then((res) => {
       if (res.status === 200) {
-        toast.success('Booking request sent!')
+        toast.success('Booking request sent!', {
+          position: 'top-center',
+        })
       } else {
-        toast.error('Cannot sent booking request! Try again later.')
+        toast.error('Cannot sent booking request! Try again later.', {
+          position: 'top-center',
+        })
       }
     })
+  }
+
+  if (isLoading || loading) {
+    return <Loading></Loading>
   }
 
   return (

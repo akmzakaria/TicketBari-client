@@ -19,7 +19,9 @@ const ManageTickets = () => {
     try {
       await instance.patch(`/tickets/${id}`, { ticketStatus: 'approved' })
       refetch()
-      toast.success('Ticket approved')
+      toast.success('Ticket approved', {
+        position: 'top-center',
+      })
     } catch (error) {
       toast.error('Failed to approve ticket')
     }
@@ -29,7 +31,9 @@ const ManageTickets = () => {
     try {
       await instance.patch(`/tickets/${id}`, { ticketStatus: 'rejected' })
       refetch()
-      toast.success('Ticket rejected')
+      toast.success('Ticket rejected', {
+        position: 'top-center',
+      })
     } catch (error) {
       toast.error('Failed to reject ticket')
     }

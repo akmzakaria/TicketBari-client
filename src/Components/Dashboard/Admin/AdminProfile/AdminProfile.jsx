@@ -27,13 +27,13 @@ const AdminProfile = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="max-w-2xl w-full p-6 bg-white shadow-lg rounded-xl">
+    <div className="min-h-screen flex items-center bg-base-200 justify-center">
+      <div className="max-w-2xl w-full p-6 bg-white pt-15 shadow-lg rounded-xl">
         <div className="flex flex-col items-center">
           <img
             src={fltUser.photoURL || '/default-profile.png'}
             alt={fltUser.userName}
-            className="w-32 h-32 rounded-full object-cover mb-4 border-2 border-green-600"
+            className="w-35 h-35 rounded-full object-cover mb-4 border-2 border-green-600"
           />
           <h2 className="text-2xl font-bold mb-2">{fltUser.userName}</h2>
           <p className="text-gray-600 mb-1">Email: {fltUser.userEmail}</p>

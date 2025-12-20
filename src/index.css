@@ -3,6 +3,11 @@
   themes: light --default, dark;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+  font-optical-sizing: auto;
+}
+
 .nav a.active {
   border-bottom: 2px solid #432bd5;
   color: #432bd5;

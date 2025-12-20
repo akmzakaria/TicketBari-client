@@ -45,7 +45,9 @@ const AdvertiseTickets = () => {
                   refetch()
                   adRefetch()
                   toast.dismiss(t.id)
-                  toast.success('Ticket advertised')
+                  toast.success('Ticket advertised', {
+                    position: 'top-center',
+                  })
                 })
             }}
             className="btn btn-xs btn-outline hover:bg-green-600 border-green-600 text-green-600 hover:text-white"
@@ -75,7 +77,9 @@ const AdvertiseTickets = () => {
                   refetch()
                   adRefetch()
                   toast.dismiss(t.id)
-                  toast.success('Ticket unadvertised')
+                  toast.success('Ticket unadvertised', {
+                    position: 'top-center',
+                  })
                 })
             }}
             className="btn btn-xs btn-outline hover:bg-red-600 border-red-600 text-red-600 hover:text-white"
@@ -88,8 +92,8 @@ const AdvertiseTickets = () => {
   }
 
   return (
-    <div>
-      <p>This is advertise tickets section</p>
+    <div className="m-5">
+      <h2 className="text-2xl font-bold">Manage Advertise</h2>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">
