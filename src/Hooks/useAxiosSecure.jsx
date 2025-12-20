@@ -4,7 +4,7 @@ import { AuthContext } from '../Context/AuthContext'
 import { useNavigate } from 'react-router'
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://ticket-bari-server-eta.vercel.app',
 })
 
 const useAxiosSecure = () => {

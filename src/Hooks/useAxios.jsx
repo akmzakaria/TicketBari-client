@@ -3,7 +3,7 @@ import React from 'react'
 
 const useAxios = () => {
   const instance = axios.create({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'https://ticket-bari-server-eta.vercel.app',
   })
 
   return instance

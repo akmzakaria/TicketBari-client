@@ -26,11 +26,7 @@ const TickstDetailsAdmin = () => {
 
       <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
         <div className="max-w-3xl w-full bg-white rounded-lg shadow-lg overflow-hidden">
-          <img
-            src={ticket?.image || '/logo1.png'}
-            alt="ticket"
-            className="w-full h-72 object-cover"
-          />
+          <img src={ticket?.image} alt="ticket" className="w-full h-72 object-cover" />
 
           <div className="p-6">
             <h2 className="text-2xl font-bold mb-2">{ticket?.title}</h2>
