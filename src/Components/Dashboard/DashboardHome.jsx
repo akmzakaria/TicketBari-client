@@ -3,11 +3,13 @@ import UserProfile from './User/UserProfile/UserProfile'
 import { AuthContext } from '../../Context/AuthContext'
 import useAxios from '../../Hooks/useAxios'
 import AdminProfile from './Admin/AdminProfile/AdminProfile'
+import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import VendorProfile from './Vendor/VendorProfile/VendorProfile'
 
 const DashboardHome = () => {
   const { user } = use(AuthContext)
   const [users, setUsers] = useState([])
-  const instance = useAxios()
+  const instance = useAxiosSecure()
 
   useEffect(() => {
     instance.get('/users').then((res) => {
@@ -20,10 +22,9 @@ const DashboardHome = () => {
     return <UserProfile></UserProfile>
   }
 
-  //   if(fltUser?.role==='vendor'){
-
-  //       return <UserProfile></UserProfile>
-  //   }
+  if (fltUser?.role === 'vendor') {
+    return <VendorProfile></VendorProfile>
+  }
 
   if (fltUser?.role === 'admin') {
     return <AdminProfile></AdminProfile>

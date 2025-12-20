@@ -17,13 +17,14 @@ import { MdOutlineBookmarkAdded } from 'react-icons/md'
 import { LuHouse, LuHousePlug, LuHousePlus, LuUserRound, LuUserRoundPen } from 'react-icons/lu'
 import { GoHistory } from 'react-icons/go'
 import { AiOutlineFileDone } from 'react-icons/ai'
+import useAxiosSecure from '../../Hooks/useAxiosSecure'
 
 const DashboardLayout = () => {
   const { user, loading } = use(AuthContext)
   const [showLoading, setShowLoading] = useState(true)
 
   const [users, setUsers] = useState([])
-  const instance = useAxios()
+  const instance = useAxiosSecure()
 
   useEffect(() => {
     instance.get('/users').then((res) => {
@@ -211,14 +212,14 @@ const DashboardLayout = () => {
               {/* List item */}
               <li className="dash-nav">
                 <NavLink
-                  to={'/dashboard/advertise-history'}
+                  to={'/dashboard/advertise-tickets'}
                   className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                  data-tip="Advertise History"
+                  data-tip="Advertise Tickets"
                 >
                   {/* <FaHistory /> */}
                   <GoHistory />
 
-                  <span className="is-drawer-close:hidden">Advertise History</span>
+                  <span className="is-drawer-close:hidden">Advertise Tickets</span>
                 </NavLink>
               </li>
             </ul>

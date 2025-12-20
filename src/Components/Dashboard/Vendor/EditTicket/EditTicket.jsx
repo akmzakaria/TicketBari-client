@@ -1,38 +1,50 @@
 import React, { use } from 'react'
 import { useForm } from 'react-hook-form'
-import { AuthContext } from '../../../../Context/AuthContext'
-import useAxios from '../../../../Hooks/useAxios'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
-import toast, { Toaster, ToastIcon } from 'react-hot-toast'
+import { AuthContext } from '../../../../Context/AuthContext'
+import { useParams } from 'react-router'
+import { useQuery } from '@tanstack/react-query'
+import toast, { Toaster } from 'react-hot-toast'
 
-const AddTicket = () => {
+const EditTicket = () => {
+  const { id } = useParams()
+  const instance = useAxiosSecure()
+
+  const { data: tickets = [] } = useQuery({
+    queryKey: ['tickets'],
+    queryFn: async () => {
+      const res = await instance.get('/tickets')
+      return res.data
+    },
+  })
+
+  const ticket = tickets.find((t) => t._id === id)
+  //   console.log(ticket)
+
   const { user } = use(AuthContext)
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm()
-  const instance = useAxiosSecure()
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data)
     // later: upload image to imgbb, then send data to backend
 
-    instance.post('/tickets', data).then((res) => {
-      if (res.status) {
-        toast.success('Ticket request sent!')
-        reset()
-      }
-      // console.log(res.status)
-      return res.data
-    })
+    const res = await instance.patch(`/tickets/${id}`, data)
+    if (res.data.modifiedCount) {
+      toast.success('Ticket updated successfully')
+    }
+    console.log(res.data)
+
+    return res.data
   }
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Toaster position="top-center" reverseOrder={true}></Toaster>
-      <h2 className="text-3xl font-bold mb-6">Add New Ticket</h2>
+      <h2 className="text-3xl font-bold my-6">Edit Ticket</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Ticket title */}
@@ -42,7 +54,7 @@ const AddTicket = () => {
             {...register('title', { required: true })}
             type="text"
             className="input input-bordered w-full"
-            placeholder="Dhaka to Chittagong Bus"
+            defaultValue={ticket?.title}
           />
           {errors.title?.type === 'required' && <span className="text-red-600">Required</span>}
         </div>
@@ -55,7 +67,7 @@ const AddTicket = () => {
               {...register('from', { required: true })}
               type="text"
               className="input input-bordered w-full"
-              placeholder="Dhaka"
+              defaultValue={ticket?.from}
             />
             {errors.from?.type === 'required' && <span className="text-red-600">Required</span>}
           </div>
@@ -66,7 +78,7 @@ const AddTicket = () => {
               {...register('to', { required: true })}
               type="text"
               className="input input-bordered w-full"
-              placeholder="Chittagong"
+              defaultValue={ticket?.to}
             />
             {errors.to?.type === 'required' && <span className="text-red-600">Required</span>}
           </div>
@@ -78,6 +90,7 @@ const AddTicket = () => {
           <select
             {...register('transport', { required: true })}
             className="select select-bordered w-full"
+            defaultValue={ticket?.transport}
           >
             <option value="">Select type</option>
             <option>Bus</option>
@@ -96,7 +109,7 @@ const AddTicket = () => {
               {...register('price', { required: true })}
               type="number"
               className="input input-bordered w-full"
-              placeholder="1200"
+              defaultValue={ticket?.price}
             />
             {errors.price?.type === 'required' && <span className="text-red-600">Required</span>}
           </div>
@@ -107,7 +120,7 @@ const AddTicket = () => {
               {...register('quantity', { required: true })}
               type="number"
               className="input input-bordered w-full"
-              placeholder="40"
+              defaultValue={ticket?.quantity}
             />
             {errors.quantity?.type === 'required' && <span className="text-red-600">Required</span>}
           </div>
@@ -120,73 +133,10 @@ const AddTicket = () => {
             {...register('departure', { required: true })}
             type="datetime-local"
             className="input input-bordered w-full"
+            defaultValue={ticket?.departure}
           />
           {errors.departure?.type === 'required' && <span className="text-red-600">Required</span>}
         </div>
-
-        {/* Perks */}
-        {/* <div>
-          <label className="label">Perks</label>
-          <div className="flex flex-wrap gap-4">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                {...register(
-                  'perks',
-                  {
-                    validate: (value) => value.length > 0 || 'Select at least one perk',
-                  },
-                  { required: true }
-                )}
-                value="AC"
-              />
-              AC
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                {...register(
-                  'perks',
-                  {
-                    validate: (value) => value.length > 0 || 'Select at least one perk',
-                  },
-                  { required: true }
-                )}
-                value="Breakfast"
-              />
-              Breakfast
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                {...register(
-                  'perks',
-                  {
-                    validate: (value) => value.length > 0 || 'Select at least one perk',
-                  },
-                  { required: true }
-                )}
-                value="WiFi"
-              />
-              WiFi
-            </label>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                {...register(
-                  'perks',
-                  {
-                    validate: (value) => value.length > 0 || 'Select at least one perk',
-                  },
-                  { required: true }
-                )}
-                value="None"
-              />
-              None
-            </label>
-            {errors.perks?.type === 'required' && <span className="text-error">Required</span>}
-          </div>
-        </div> */}
 
         {/* fixed perks */}
         <div>
@@ -201,6 +151,7 @@ const AddTicket = () => {
                   {...register('perks', {
                     validate: (value) => value?.length > 0 || 'Select at least one perk',
                   })}
+                  //   defaultChecked={ticket?.perks}
                 />
                 {perk}
               </label>
@@ -246,10 +197,10 @@ const AddTicket = () => {
         </div>
 
         {/* Submit */}
-        <button className="btn btn-primary w-full">Add Ticket</button>
+        <button className="btn btn-primary w-full">Update Ticket</button>
       </form>
     </div>
   )
 }
 
-export default AddTicket
+export default EditTicket

@@ -6,11 +6,12 @@ import TicketCard from '../../Components/TicketCard/TicketCard'
 import WhyChooseUs from '../../Components/WhyChooseUs/WhyChooseUs'
 import PopularRoutes from '../../Components/PopularRoutes/PopularRoutes'
 import { useQuery } from '@tanstack/react-query'
+import useAxiosSecure from '../../Hooks/useAxiosSecure'
 
 const Home = () => {
   const { loading } = use(AuthContext)
   const [showLoading, setShowLoading] = useState(true)
-  const instance = useAxios()
+  const instance = useAxiosSecure()
   //   const [tickets, setTickets] = useState([])
 
   //   useEffect(() => {
@@ -42,7 +43,7 @@ const Home = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  if (loading || showLoading || tickets.length === 0) {
+  if (loading || showLoading) {
     return <Loading></Loading>
   }
 

@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../Context/AuthContext'
 import { Link, useLocation, useNavigate } from 'react-router'
 import useAxios from '../../Hooks/useAxios'
+import useAxiosSecure from '../../Hooks/useAxiosSecure'
 
 const Login = () => {
-  const instance = useAxios()
+  const instance = useAxiosSecure()
   const location = useLocation()
   const navigate = useNavigate()
   const { userLogin, googleLogin } = use(AuthContext)

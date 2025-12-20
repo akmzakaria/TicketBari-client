@@ -4,11 +4,12 @@ import Loading from '../Loading/Loading'
 import useAxios from '../../Hooks/useAxios'
 import TicketCard from '../TicketCard/TicketCard'
 import { useQuery } from '@tanstack/react-query'
+import useAxiosSecure from '../../Hooks/useAxiosSecure'
 
 const AllTickets = () => {
   const { loading } = use(AuthContext)
   const [showLoading, setShowLoading] = useState(true)
-  const instance = useAxios()
+  const instance = useAxiosSecure()
   //   const [tickets, setTickets] = useState([])
 
   //   useEffect(() => {

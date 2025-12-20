@@ -7,9 +7,10 @@ import { MdOutlineConfirmationNumber } from 'react-icons/md'
 import Loading from '../../Components/Loading/Loading'
 import { PiClockCountdownBold } from 'react-icons/pi'
 import { AuthContext } from '../../Context/AuthContext'
+import useAxiosSecure from '../../Hooks/useAxiosSecure'
 
 const TicketDetails = () => {
-  const instance = useAxios()
+  const instance = useAxiosSecure()
   const { id } = useParams()
 
   const { user } = use(AuthContext)

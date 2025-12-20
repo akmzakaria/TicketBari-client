@@ -4,9 +4,10 @@ import { Link, useParams } from 'react-router'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { MdOutlineConfirmationNumber } from 'react-icons/md'
 import { IoBus } from 'react-icons/io5'
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 
 const TickstDetailsAdmin = () => {
-  const instance = useAxios()
+  const instance = useAxiosSecure()
   const { id } = useParams()
   const [tickets, setTickets] = useState([])
 

@@ -12,7 +12,6 @@ import TicketDetails from '../Pages/TicketDetails/TicketDetails'
 import UserProfile from '../Components/Dashboard/User/UserProfile/UserProfile'
 import DashboardHome from '../Components/Dashboard/DashboardHome'
 import BookedTickets from '../Components/Dashboard/User/BookedTickets/BookedTickets'
-import TransactionHistory from '../Components/Dashboard/User/TransactionHistory/TransactionHistory'
 import AdminProfile from '../Components/Dashboard/Admin/AdminProfile/AdminProfile'
 import ManageTickets from '../Components/Dashboard/Admin/ManageTickets/ManageTickets'
 import AdvertiseTickets from '../Components/Dashboard/Admin/AdvertiseTickets/AdvertiseTickets'
@@ -24,7 +23,9 @@ import RequestedBookings from '../Components/Dashboard/Vendor/RequestedBookings/
 import RevenueOverview from '../Components/Dashboard/Vendor/RevenueOverview/RevenueOverview'
 import AddTicket from '../Components/Dashboard/Vendor/AddTicket/AddTicket'
 import PaymentSuccess from '../Components/Dashboard/User/BookedTickets/PaymentSuccess'
-import PaymentCancelled from '../Components/Dashboard/User/BookedTickets/PaymentCancel'
+import PaymentCancelled from '../Components/Dashboard/User/BookedTickets/PaymentCancelled'
+import TransactionHistory from '../Components/Dashboard/User/TransactionHistory/TransactionHistory'
+import EditTicket from '../Components/Dashboard/Vendor/EditTicket/EditTicket'
 
 export const router = createBrowserRouter([
   {
@@ -110,7 +111,7 @@ export const router = createBrowserRouter([
         Component: ManageUsers,
       },
       {
-        path: 'advertise-history',
+        path: 'advertise-tickets',
         Component: AdvertiseTickets,
       },
       {
@@ -136,6 +137,10 @@ export const router = createBrowserRouter([
       {
         path: 'revenue-overview',
         Component: RevenueOverview,
+      },
+      {
+        path: 'edit-ticket/:id',
+        Component: EditTicket,
       },
     ],
   },

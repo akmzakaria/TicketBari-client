@@ -24,12 +24,18 @@ const TicketCard = ({ ticket }) => {
         </p>
 
         {/* Perks */}
-        <div className="flex flex-wrap gap-2">
-          {perks.map((perk, index) => (
-            <span key={index} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
-              {perk}
-            </span>
-          ))}
+        <div className="flex gap-1">
+          <p className="text-gray-600 text-sm">Perks:</p>
+          <div className="flex flex-wrap gap-2">
+            {perks.map((perk, index) => (
+              <span
+                key={index}
+                className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+              >
+                {perk}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Button */}
