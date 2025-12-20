@@ -7,7 +7,7 @@ const ManageUsers = () => {
   const instance = useAxiosSecure()
 
   const { refetch, data: users = [] } = useQuery({
-    queryKey: ['users'],
+    queryKey: ['users', 'manage-users'],
     queryFn: async () => {
       const res = await instance.get(`/users`)
       return res.data

@@ -27,6 +27,7 @@ import PaymentCancelled from '../Components/Dashboard/User/BookedTickets/Payment
 import TransactionHistory from '../Components/Dashboard/User/TransactionHistory/TransactionHistory'
 import EditTicket from '../Components/Dashboard/Vendor/EditTicket/EditTicket'
 import Error404 from '../Pages/Error404/Error404'
+import ContactUs from '../Pages/ContactUs/ContactUs'
 
 export const router = createBrowserRouter([
   {
@@ -62,8 +63,12 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'aboutus',
+        path: 'aboutUs',
         Component: About,
+      },
+      {
+        path: 'contactUs',
+        Component: ContactUs,
       },
       {
         path: 'ticket-details/:id',

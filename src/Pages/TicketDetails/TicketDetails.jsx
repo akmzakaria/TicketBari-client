@@ -8,35 +8,58 @@ import Loading from '../../Components/Loading/Loading'
 import { PiClockCountdownBold } from 'react-icons/pi'
 import { AuthContext } from '../../Context/AuthContext'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import toast from 'react-hot-toast'
+import { useQuery } from '@tanstack/react-query'
 
 const TicketDetails = () => {
   const instance = useAxiosSecure()
   const { id } = useParams()
-
   const { user } = use(AuthContext)
   //   console.log(user.email)
 
-  const [tickets, setTickets] = useState([])
-  const [ticket, setTicket] = useState(null)
+  // const [tickets, setTickets] = useState([])
+  // const [ticket, setTicket] = useState(null)
   const [countdown, setCountdown] = useState('Loading...')
   const [bookingQty, setBookingQty] = useState(1)
 
-  // Fetch tickets
-  useEffect(() => {
-    instance.get('/tickets').then((res) => {
-      setTickets(res.data)
-    })
-  }, [])
+  // get all tickets
+  // useEffect(() => {
+  //   instance.get('/tickets').then((res) => {
+  //     setTickets(res.data)
+  //   })
+  // }, [])
 
-  // Find selected ticket
-  useEffect(() => {
-    if (tickets.length > 0) {
-      const fltData = tickets.find((t) => t._id === id)
-      setTicket(fltData)
-    }
-  }, [tickets, id])
+  const { data: ticket = [] } = useQuery({
+    queryKey: ['ticket', id],
+    queryFn: async () => {
+      const res = await instance.get(`/tickets/${id}`)
+      return res.data
+    },
+  })
 
-  // Countdown logic
+  // get booked tickets by the user to block double booking request  [NO NEED]
+  // const { refetch, data: bookedTickets = [] } = useQuery({
+  //   queryKey: [user?.email, 'booked-tickets'],
+  //   queryFn: async () => {
+  //     const res = await instance.get(`/booked-tickets?email=${user.email}`)
+  //     return res.data
+  //   },
+  // })
+
+  // const bookedTicket = bookedTickets.find((t) => t.title === ticket.title)
+  // console.log(bookedTicket)
+
+  // console.log(bookedTickets)
+
+  // find selected ticket
+  // useEffect(() => {
+  //   if (tickets.length > 0) {
+  //     const fltData = tickets.find((t) => t._id === id)
+  //     setTicket(fltData)
+  //   }
+  // }, [id, tickets])
+
+  // countdown
   useEffect(() => {
     if (!ticket?.departure) return
 
@@ -65,7 +88,7 @@ const TicketDetails = () => {
 
   if (!ticket) return <Loading />
 
-  // Quantity handlers
+  // quantity count
   const increaseQty = () => {
     if (bookingQty < ticket.quantity) {
       setBookingQty((prev) => prev + 1)
@@ -97,7 +120,13 @@ const TicketDetails = () => {
       vendorEmail: ticket.vendor_email,
     }
 
-    instance.post('/booked-tickets', data)
+    instance.post('/booked-tickets', data).then((res) => {
+      if (res.status === 200) {
+        toast.success('Booking request sent!')
+      } else {
+        toast.error('Cannot sent booking request! Try again later.')
+      }
+    })
   }
 
   return (

@@ -84,7 +84,7 @@ const VendorAddedTickets = () => {
               key={ticket._id}
               className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col justify-between"
             >
-              <img src="/logo1.png" alt={ticket.title} className="w-full h-48 object-cover" />
+              <img src={ticket.image} alt={ticket.title} className="w-full h-48 object-cover" />
 
               <div className="p-5">
                 <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>

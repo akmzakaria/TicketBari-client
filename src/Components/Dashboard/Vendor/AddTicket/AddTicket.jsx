@@ -7,6 +7,7 @@ import toast, { Toaster, ToastIcon } from 'react-hot-toast'
 
 const AddTicket = () => {
   const { user } = use(AuthContext)
+  const axios = useAxios()
   const {
     register,
     handleSubmit,
@@ -16,16 +17,33 @@ const AddTicket = () => {
   const instance = useAxiosSecure()
 
   const onSubmit = (data) => {
-    console.log(data)
-    // later: upload image to imgbb, then send data to backend
+    // console.log(data)
 
-    instance.post('/tickets', data).then((res) => {
-      if (res.status) {
-        toast.success('Ticket request sent!')
-        reset()
+    // upload image to imgbb
+    // console.log(data.image[0])
+
+    const ticketImg = data.image[0]
+    const formData = new FormData()
+    formData.append('image', ticketImg)
+
+    const imgAPI_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOST_KEY}`
+
+    axios.post(imgAPI_URL, formData).then((res) => {
+      const photoURL = res.data.data.url
+      console.log('after image upload', photoURL)
+      const allData = {
+        ...data,
+        image: photoURL,
       }
-      // console.log(res.status)
-      return res.data
+
+      instance.post('/tickets', allData).then((res) => {
+        if (res.status) {
+          toast.success('Ticket request sent!')
+          reset()
+        }
+        // console.log(res.status)
+        return res.data
+      })
     })
   }
 
@@ -246,7 +264,7 @@ const AddTicket = () => {
         </div>
 
         {/* Submit */}
-        <button className="btn btn-primary w-full">Add Ticket</button>
+        <button className="btn text-white bg-[#086c52] w-full">Add Ticket</button>
       </form>
     </div>
   )

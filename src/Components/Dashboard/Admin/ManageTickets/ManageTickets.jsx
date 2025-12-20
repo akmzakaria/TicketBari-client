@@ -8,7 +8,7 @@ const ManageTickets = () => {
   const instance = useAxiosSecure()
 
   const { refetch, data: tickets = [] } = useQuery({
-    queryKey: ['tickets', 'pending'],
+    queryKey: ['tickets', 'pending', 'manage-tickets'],
     queryFn: async () => {
       const res = await instance.get('/tickets?ticketStatus=pending')
       return res.data

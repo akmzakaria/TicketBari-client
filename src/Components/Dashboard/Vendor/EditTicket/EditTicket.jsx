@@ -5,10 +5,12 @@ import { AuthContext } from '../../../../Context/AuthContext'
 import { useParams } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
 import toast, { Toaster } from 'react-hot-toast'
+import useAxios from '../../../../Hooks/useAxios'
 
 const EditTicket = () => {
   const { id } = useParams()
   const instance = useAxiosSecure()
+  const axios = useAxios()
 
   const { data: tickets = [] } = useQuery({
     queryKey: ['tickets'],
@@ -32,13 +34,28 @@ const EditTicket = () => {
     console.log(data)
     // later: upload image to imgbb, then send data to backend
 
-    const res = await instance.patch(`/tickets/${id}`, data)
-    if (res.data.modifiedCount) {
-      toast.success('Ticket updated successfully')
-    }
-    console.log(res.data)
+    const ticketImg = data.image[0]
+    const formData = new FormData()
+    formData.append('image', ticketImg)
 
-    return res.data
+    const imgAPI_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_HOST_KEY}`
+
+    axios.post(imgAPI_URL, formData).then(async (res) => {
+      const photoURL = res.data.data.url
+      console.log('after image upload', photoURL)
+      const allData = {
+        ...data,
+        image: photoURL,
+      }
+
+      const response = await instance.patch(`/tickets/${id}`, allData)
+      if (response.data.modifiedCount) {
+        toast.success('Ticket updated successfully')
+      }
+      console.log(response.data)
+
+      return response.data
+    })
   }
 
   return (
@@ -197,7 +214,7 @@ const EditTicket = () => {
         </div>
 
         {/* Submit */}
-        <button className="btn btn-primary w-full">Update Ticket</button>
+        <button className="btn text-white bg-[#086c52] w-full">Update Ticket</button>
       </form>
     </div>
   )

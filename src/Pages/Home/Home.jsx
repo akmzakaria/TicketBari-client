@@ -20,7 +20,7 @@ const Home = () => {
   //     })
   //   }, [instance])
 
-  const { data: tickets = [] } = useQuery({
+  const { data: adTickets = [] } = useQuery({
     queryKey: ['tickets', 'advertised'],
     queryFn: async () => {
       const res = await instance.get('/tickets?advertiseStatus=advertised')
@@ -50,18 +50,20 @@ const Home = () => {
   return (
     <div className="max-w-350 px-5 mx-auto">
       {/* Advertisement section */}
-      <div className="">
-        <h2 className="text-3xl font-bold text-center my-5">Advertisement</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {tickets.map((ticket) => (
-            <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
-          ))}
+      {adTickets.length !== 0 && (
+        <div className="">
+          <h2 className="text-3xl font-bold text-center my-10">Advertisements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {adTickets.map((ticket) => (
+              <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Latest Tickets section */}
       <div>
-        <h2 className="text-3xl font-bold text-center mt-20 mb-5">Latest Tickets</h2>
+        <h2 className="text-3xl font-bold text-center mt-10 mb-10">Latest Tickets</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {latestTickets.map((ticket) => (
             <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
