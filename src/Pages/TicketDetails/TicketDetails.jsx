@@ -86,6 +86,7 @@ const TicketDetails = () => {
       title: ticket.title,
       image: ticket.image,
       bookingQty,
+      quantity: ticket.quantity,
       price: ticket.price,
       totalPrice,
       from: ticket.from,
@@ -93,6 +94,7 @@ const TicketDetails = () => {
       departure: ticket.departure,
       bookingStatus: 'pending',
       userEmail: user.email,
+      vendorEmail: ticket.vendor_email,
     }
 
     instance.post('/booked-tickets', data)

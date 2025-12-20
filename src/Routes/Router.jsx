@@ -26,6 +26,7 @@ import PaymentSuccess from '../Components/Dashboard/User/BookedTickets/PaymentSu
 import PaymentCancelled from '../Components/Dashboard/User/BookedTickets/PaymentCancelled'
 import TransactionHistory from '../Components/Dashboard/User/TransactionHistory/TransactionHistory'
 import EditTicket from '../Components/Dashboard/Vendor/EditTicket/EditTicket'
+import Error404 from '../Pages/Error404/Error404'
 
 export const router = createBrowserRouter([
   {
@@ -151,5 +152,9 @@ export const router = createBrowserRouter([
   {
     path: 'payment-cancelled',
     Component: PaymentCancelled,
+  },
+  {
+    path: '*',
+    Component: Error404,
   },
 ])

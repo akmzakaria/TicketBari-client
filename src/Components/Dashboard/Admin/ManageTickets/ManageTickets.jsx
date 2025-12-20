@@ -71,7 +71,7 @@ const ManageTickets = () => {
       <div>
         {tickets.length === 0 ? (
           <div className="flex items-center justify-center h-[70vh]">
-            <p>No Requests</p>
+            <p>No ticket requests!</p>
           </div>
         ) : (
           <div>

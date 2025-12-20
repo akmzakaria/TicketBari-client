@@ -10,7 +10,7 @@ import { Link } from 'react-router'
 import Loading from '../../../Loading/Loading'
 
 const VendorAddedTickets = () => {
-  const { user } = use(AuthContext)
+  const { user, loading } = use(AuthContext)
   const instance = useAxiosSecure()
   // console.log(user.email)
 
@@ -19,12 +19,14 @@ const VendorAddedTickets = () => {
     data: tickets = [],
     refetch,
   } = useQuery({
-    queryKey: [user.email],
+    queryKey: ['vendor-tickets', user?.email],
     queryFn: async () => {
       const res = await instance.get(`/tickets?vendor_email=${user.email}`)
       return res.data
     },
   })
+
+  // console.log(tickets)
 
   const handleDelete = async (id) => {
     try {
@@ -37,7 +39,7 @@ const VendorAddedTickets = () => {
     }
   }
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading></Loading>
   }
 
@@ -71,37 +73,42 @@ const VendorAddedTickets = () => {
       <Toaster position="top-center" reverseOrder={false} />
       <h2 className="text-2xl font-bold mb-5">My Added Tickets:</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-10">
-        {tickets.map((ticket) => (
-          <div
-            key={ticket._id}
-            className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col justify-between"
-          >
-            <img src="/logo1.png" alt={ticket.title} className="w-full h-48 object-cover" />
+      {tickets.length === 0 ? (
+        <div className="flex justify-center items-center h-[75vh]">
+          <p>You haven't added any tickets yet!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-10">
+          {tickets.map((ticket) => (
+            <div
+              key={ticket._id}
+              className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col justify-between"
+            >
+              <img src="/logo1.png" alt={ticket.title} className="w-full h-48 object-cover" />
 
-            <div className="p-5">
-              <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>
-              <p className="text-gray-600 mb-2">
-                {ticket.from} → {ticket.to}
-              </p>
+              <div className="p-5">
+                <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>
+                <p className="text-gray-600 mb-2">
+                  {ticket.from} → {ticket.to}
+                </p>
 
-              <p className="text-sm mb-1 flex items-center gap-1">
-                <MdOutlineConfirmationNumber /> Quantity:{' '}
-                <span className="font-medium">{ticket.quantity}</span>
-              </p>
+                <p className="text-sm mb-1 flex items-center gap-1">
+                  <MdOutlineConfirmationNumber /> Quantity:{' '}
+                  <span className="font-medium">{ticket.quantity}</span>
+                </p>
 
-              <p className="text-sm mb-2 flex items-center gap-1">
-                <TbCurrencyTaka /> Total Price:{' '}
-                <span className="font-semibold">{ticket.price} BDT</span>
-              </p>
+                <p className="text-sm mb-2 flex items-center gap-1">
+                  <TbCurrencyTaka /> Total Price:{' '}
+                  <span className="font-semibold">{ticket.price} BDT</span>
+                </p>
 
-              <p className="text-sm mb-2 flex items-center gap-1">
-                <GoClock /> {new Date(ticket.departure).toLocaleString()}
-              </p>
+                <p className="text-sm mb-2 flex items-center gap-1">
+                  <GoClock /> {new Date(ticket.departure).toLocaleString()}
+                </p>
 
-              <div className="flex justify-between items-center">
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
+                <div className="flex justify-between items-center">
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
                     ${
                       ticket.ticketStatus === 'pending'
                         ? 'bg-yellow-100 text-yellow-700'
@@ -109,47 +116,48 @@ const VendorAddedTickets = () => {
                         ? 'bg-green-100 text-green-700'
                         : 'bg-red-100 text-red-600'
                     }`}
-                >
-                  {ticket.ticketStatus}
-                </span>
-              </div>
+                  >
+                    {ticket.ticketStatus}
+                  </span>
+                </div>
 
-              {ticket.ticketStatus !== 'rejected' ? (
-                <div className="flex justify-between mt-2">
-                  <button
-                    onClick={() => confirmDelete(ticket._id)}
-                    className="btn btn-sm rounded-full btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
-                  >
-                    Delete
-                  </button>
-                  <Link
-                    to={`/dashboard/edit-ticket/${ticket._id}`}
-                    className="btn btn-sm rounded-full btn-outline text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
-                  >
-                    Update
-                  </Link>
-                </div>
-              ) : (
-                <div className="flex justify-between mt-2">
-                  <button
-                    disabled
-                    onClick={() => confirmDelete(ticket._id)}
-                    className="bg-gray-200 px-3 py-2 outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-red-600 border-red-600"
-                  >
-                    Delete
-                  </button>
-                  <button
-                    disabled
-                    className="bg-gray-200 px-3 py-2 outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-green-600 border-green-600"
-                  >
-                    Update
-                  </button>
-                </div>
-              )}
+                {ticket.ticketStatus !== 'rejected' ? (
+                  <div className="flex justify-between mt-2">
+                    <button
+                      onClick={() => confirmDelete(ticket._id)}
+                      className="btn btn-sm rounded-full btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
+                    >
+                      Delete
+                    </button>
+                    <Link
+                      to={`/dashboard/edit-ticket/${ticket._id}`}
+                      className="btn btn-sm rounded-full btn-outline text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
+                    >
+                      Update
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="flex justify-between mt-2">
+                    <button
+                      disabled
+                      onClick={() => confirmDelete(ticket._id)}
+                      className="bg-gray-200 px-3 py-2 outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-red-600 border-red-600"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      disabled
+                      className="bg-gray-200 px-3 py-2 outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-green-600 border-green-600"
+                    >
+                      Update
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

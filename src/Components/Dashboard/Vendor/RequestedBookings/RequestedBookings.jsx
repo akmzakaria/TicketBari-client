@@ -51,7 +51,11 @@ const RequestedBookings = () => {
                 if (action === 'reject') handleReject(id)
                 toast.dismiss(t.id)
               }}
-              className={`btn btn-xs ${action === 'accept' ? 'btn-success' : 'btn-error'}`}
+              className={`btn btn-xs ${
+                action === 'accept'
+                  ? 'hover:bg-green-600 btn-outline hover:text-white border-green-600 text-green-600'
+                  : 'hover:bg-red-600 btn-outline hover:text-white border-red-600 text-red-600'
+              }`}
             >
               Confirm
             </button>
@@ -65,48 +69,54 @@ const RequestedBookings = () => {
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} />
-      <h2 className="text-2xl font-bold mb-4">Requested Bookings:</h2>
+      <h2 className="text-2xl font-bold ml-5  my-5">Requested Bookings:</h2>
 
-      <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          <thead>
-            <tr className="text-center">
-              <th>SI. No</th>
-              <th>User Email</th>
-              <th>Ticket Title</th>
-              <th>Booking Quantity</th>
-              <th>Total Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tickets.map((ticket, i) => (
-              <tr key={ticket._id} className="text-center">
-                <th>{i + 1}</th>
-                <td>{ticket.userEmail}</td>
-                <td>{ticket.title}</td>
-                <td>{ticket.bookingQty}</td>
-                <td>{ticket.totalPrice}</td>
-
-                <td className="flex md:flex-row flex-col justify-center gap-5 md:gap-1">
-                  <button
-                    onClick={() => confirmAction(ticket._id, 'accept')}
-                    className="btn w-25 md:w-fit btn-xs btn-success"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={() => confirmAction(ticket._id, 'reject')}
-                    className="btn w-25 md:w-fit btn-xs btn-error"
-                  >
-                    Reject
-                  </button>
-                </td>
+      {tickets.length === 0 ? (
+        <div className="flex justify-center items-center h-[75vh]">
+          <p>No booking requests found!</p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="table table-zebra">
+            <thead>
+              <tr className="text-center">
+                <th>SI. No</th>
+                <th>User Email</th>
+                <th>Ticket Title</th>
+                <th>Booking Quantity</th>
+                <th>Total Price</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {tickets.map((ticket, i) => (
+                <tr key={ticket._id} className="text-center">
+                  <th>{i + 1}</th>
+                  <td>{ticket.userEmail}</td>
+                  <td>{ticket.title}</td>
+                  <td>{ticket.bookingQty}</td>
+                  <td>{ticket.totalPrice}</td>
+
+                  <td className="flex md:flex-row flex-col justify-center gap-5 md:gap-1">
+                    <button
+                      onClick={() => confirmAction(ticket._id, 'accept')}
+                      className="btn w-25 md:w-fit btn-xs hover:bg-green-600 btn-outline hover:text-white border-green-600 text-green-600"
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={() => confirmAction(ticket._id, 'reject')}
+                      className="btn w-25 md:w-fit btn-xs hover:bg-red-600 btn-outline hover:text-white border-red-600 text-red-600"
+                    >
+                      Reject
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }
