@@ -80,9 +80,9 @@ const RequestedBookings = () => {
   }
 
   return (
-    <div>
+    <div className="mx-5">
       <Toaster position="bottom-center" reverseOrder={true} />
-      <h2 className="text-2xl font-bold ml-5  my-5">Requested Bookings:</h2>
+      <h2 className="text-2xl font-bold my-5">Requested Bookings</h2>
 
       {tickets.length === 0 ? (
         <div className="flex justify-center items-center h-[75vh]">

@@ -45,7 +45,7 @@ const AllTickets = () => {
   }
 
   return (
-    <div className="max-w-350 px-5 mx-auto">
+    <div className="max-w-350 px-5 mb-10 mx-auto">
       {/* All Tickets section */}
       <div className="">
         <h2 className="text-3xl font-bold text-center my-5">All Tickets</h2>

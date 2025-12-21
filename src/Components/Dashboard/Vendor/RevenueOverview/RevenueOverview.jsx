@@ -41,7 +41,7 @@ const RevenueOverview = () => {
   return (
     <div className="flex items-center mb-10 justify-center">
       <div>
-        <h2 className="text-2xl my-5 font-bold">Revenue Overview</h2>
+        <h2 className="text-2xl m-5 font-bold">Revenue Overview</h2>
 
         <div className="flex flex-col gap-10 items-center">
           {/* Stats */}

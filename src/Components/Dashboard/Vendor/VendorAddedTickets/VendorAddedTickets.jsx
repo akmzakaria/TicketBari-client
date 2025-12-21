@@ -75,14 +75,14 @@ const VendorAddedTickets = () => {
   return (
     <div>
       <Toaster position="bottom-center" reverseOrder={true} />
-      <h2 className="text-2xl font-bold mb-5">My Added Tickets:</h2>
+      <h2 className="text-2xl font-bold m-5">My Added Tickets</h2>
 
       {tickets.length === 0 ? (
         <div className="flex justify-center items-center h-[75vh]">
           <p>You haven't added any tickets yet!</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-5 pb-10">
           {tickets.map((ticket) => (
             <div
               key={ticket._id}
