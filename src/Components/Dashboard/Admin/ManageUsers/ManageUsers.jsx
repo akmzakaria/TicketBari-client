@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { use } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { toast, Toaster } from 'react-hot-toast'
+import Loading from '../../../Loading/Loading'
+import { AuthContext } from '../../../../Context/AuthContext'
 
 const ManageUsers = () => {
   const instance = useAxiosSecure()
+  const { loading } = use(AuthContext)
 
-  const { refetch, data: users = [] } = useQuery({
+  const {
+    isLoading,
+    refetch,
+    data: users = [],
+  } = useQuery({
     queryKey: ['users', 'manage-users'],
     queryFn: async () => {
       const res = await instance.get(`/users`)
@@ -28,6 +35,10 @@ const ManageUsers = () => {
         position: 'top-center',
       })
     }
+  }
+
+  if (isLoading || loading) {
+    return <Loading></Loading>
   }
 
   const confirmRoleChange = (id, role) => {

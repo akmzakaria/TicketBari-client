@@ -3,11 +3,16 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router'
 import toast, { Toaster } from 'react-hot-toast'
+import Loading from '../../../Loading/Loading'
 
 const ManageTickets = () => {
   const instance = useAxiosSecure()
 
-  const { refetch, data: tickets = [] } = useQuery({
+  const {
+    isLoading,
+    refetch,
+    data: tickets = [],
+  } = useQuery({
     queryKey: ['tickets', 'pending', 'manage-tickets'],
     queryFn: async () => {
       const res = await instance.get('/tickets?ticketStatus=pending')
@@ -37,6 +42,10 @@ const ManageTickets = () => {
     } catch (error) {
       toast.error('Failed to reject ticket')
     }
+  }
+
+  if (isLoading) {
+    return <Loading></Loading>
   }
 
   const confirmAction = (id, action) => {

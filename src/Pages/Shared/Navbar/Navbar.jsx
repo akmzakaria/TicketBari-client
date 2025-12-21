@@ -116,14 +116,14 @@ const Navbar = () => {
             <>
               <Link
                 to={'/login'}
-                className="btn text-[.8rem] md:text-[1rem] hover:text-white hover:bg-green-600 btn-sm md:btn-md rounded-lg mr-2"
+                className="btn text-[.8rem] md:text-[1rem] hover:text-white text-[#086c52] hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2"
               >
                 Sign In
               </Link>
 
               <Link
                 to={'/register'}
-                className="btn text-[.8rem] md:text-[1rem] hover:text-white hover:bg-green-600 btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
+                className="btn text-[.8rem] md:text-[1rem] hover:text-white text-[#086c52] hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
               >
                 Register
               </Link>

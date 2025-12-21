@@ -2,11 +2,16 @@ import React from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import Loading from '../../../Loading/Loading'
 
 const AdvertiseTickets = () => {
   const instance = useAxiosSecure()
 
-  const { refetch, data: tickets = [] } = useQuery({
+  const {
+    isLoading,
+    refetch,
+    data: tickets = [],
+  } = useQuery({
     queryKey: ['approved'],
     queryFn: async () => {
       const res = await instance.get(`/tickets?ticketStatus=approved`)
@@ -14,7 +19,11 @@ const AdvertiseTickets = () => {
     },
   })
 
-  const { refetch: adRefetch, data: advertisedTickets = [] } = useQuery({
+  const {
+    isLoading: adLoading,
+    refetch: adRefetch,
+    data: advertisedTickets = [],
+  } = useQuery({
     queryKey: ['advertised'],
     queryFn: async () => {
       const res = await instance.get(`/tickets?advertiseStatus=advertised`)
@@ -57,6 +66,10 @@ const AdvertiseTickets = () => {
         </div>
       </div>
     ))
+  }
+
+  if (adLoading || isLoading) {
+    return <Loading></Loading>
   }
 
   const confirmUnadvertise = (id) => {

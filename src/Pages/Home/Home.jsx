@@ -12,13 +12,15 @@ const Home = () => {
   const { loading } = use(AuthContext)
   const [showLoading, setShowLoading] = useState(true)
   const instance = useAxiosSecure()
-  //   const [tickets, setTickets] = useState([])
+  // const axios = useAxios()
 
-  //   useEffect(() => {
-  //     instance.get('/tickets').then((res) => {
-  //       setTickets(res.data)
-  //     })
-  //   }, [instance])
+  const { data: fraudUser = [] } = useQuery({
+    queryKey: ['users', 'fraud'],
+    queryFn: async () => {
+      const res = await instance.get('/users?role=fraud')
+      return res.data
+    },
+  })
 
   const { data: adTickets = [] } = useQuery({
     queryKey: ['tickets', 'advertised'],
@@ -36,6 +38,20 @@ const Home = () => {
     },
   })
 
+  const filteredLatestTickets = latestTickets.filter((ticket) => {
+    const isFraud = fraudUser.some((user) => user.userEmail === ticket.vendor_email)
+
+    return !isFraud
+  })
+
+  const filteredAdTickets = adTickets.filter((ticket) => {
+    const isFraud = fraudUser.some((user) => user.userEmail === ticket.vendor_email)
+
+    return !isFraud
+  })
+
+  // console.log(filteredLatestTickets)
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoading(false)
@@ -50,11 +66,11 @@ const Home = () => {
   return (
     <div className="md:max-w-350 px-5 mx-auto">
       {/* Advertisement section */}
-      {adTickets.length !== 0 && (
+      {filteredAdTickets.length !== 0 && (
         <div className="">
           <h2 className="text-3xl font-bold text-center my-10">Advertisements</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {adTickets.map((ticket) => (
+            {filteredAdTickets.map((ticket) => (
               <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
             ))}
           </div>
@@ -65,7 +81,7 @@ const Home = () => {
       <div>
         <h2 className="text-3xl font-bold text-center mt-10 mb-10">Latest Tickets</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {latestTickets.map((ticket) => (
+          {filteredLatestTickets.map((ticket) => (
             <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
           ))}
         </div>

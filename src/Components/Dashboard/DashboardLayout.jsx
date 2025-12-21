@@ -307,6 +307,89 @@ const DashboardLayout = () => {
               </li>
             </ul>
           )}
+
+          {fltUser?.role === 'fraud' && (
+            <ul className="menu w-full grow">
+              {/* List item */}
+
+              <li className="dash-nav">
+                <NavLink
+                  to={'/'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Home Page"
+                >
+                  {/* Home icon */}
+                  {/* <HiHome /> */}
+                  <LuHouse />
+                  <span className="is-drawer-close:hidden">Home Page</span>
+                </NavLink>
+              </li>
+
+              {/* List item */}
+              <li className="dash-nav">
+                <NavLink
+                  to={'/dashboard/vendor-profile'}
+                  className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                  data-tip="Vendor Profile"
+                >
+                  {/* <FaUserCircle /> */}
+                  <LuUserRound />
+                  <span className="is-drawer-close:hidden">Vendor Profile</span>
+                </NavLink>
+              </li>
+
+              <li>
+                <button
+                  disabled
+                  className="is-drawer-close:tooltip dash-block text-black/40 hover:cursor-not-allowed is-drawer-close:tooltip-right"
+                  data-tip="Add Ticket"
+                >
+                  <MdAddCard />
+                  <span className="is-drawer-close:hidden">Add Ticket</span>
+                </button>
+              </li>
+
+              {/* List item */}
+              <li>
+                <button
+                  disabled
+                  className="is-drawer-close:tooltip dash-block hover:cursor-not-allowed text-black/40 is-drawer-close:tooltip-right"
+                  data-tip="Added Tickets"
+                >
+                  {/* <MdBookmarkAdded /> */}
+                  <MdOutlineBookmarkAdded className="text-[17px] -mx-[1.5px]" />
+
+                  <span className="is-drawer-close:hidden">Added Tickets</span>
+                </button>
+              </li>
+
+              {/* List item */}
+              <li>
+                <button
+                  disabled
+                  className="is-drawer-close:tooltip dash-block hover:cursor-not-allowed text-black/40 is-drawer-close:tooltip-right"
+                  data-tip="Requested Bookings"
+                >
+                  <VscGitPullRequestNewChanges />
+
+                  <span className="is-drawer-close:hidden">Requested Bookings</span>
+                </button>
+              </li>
+
+              {/* List item */}
+              <li>
+                <button
+                  disabled
+                  className="is-drawer-close:tooltip dash-block hover:cursor-not-allowed is-drawer-close:tooltip-right text-black/40"
+                  data-tip="Revenue Overview"
+                >
+                  <GrOverview />
+
+                  <span className="is-drawer-close:hidden ">Revenue Overview</span>
+                </button>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>

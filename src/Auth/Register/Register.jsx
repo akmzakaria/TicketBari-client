@@ -156,7 +156,9 @@ const Register = () => {
                   </span>
                 )}
 
-                <button className="btn btn-neutral mt-4">Register</button>
+                <button className="btn bg-[#086c52] hover:bg-[#064e3b] text-white mt-4">
+                  Register
+                </button>
               </fieldset>
             </form>
             {/* google */}
@@ -192,7 +194,7 @@ const Register = () => {
             </button>
             <span>
               Already have an account?{' '}
-              <Link className="text-blue-700 underline" to={'/login'}>
+              <Link className="text-[#086c52] hover:text-[#064e3b] underline" to={'/login'}>
                 Login now
               </Link>
             </span>

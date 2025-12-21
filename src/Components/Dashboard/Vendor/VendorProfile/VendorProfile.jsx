@@ -27,7 +27,7 @@ const VendorProfile = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center ">
       <div className="max-w-2xl w-full p-6 bg-white shadow-lg rounded-xl">
         <div className="flex flex-col items-center">
           <img
@@ -37,22 +37,21 @@ const VendorProfile = () => {
           />
           <h2 className="text-2xl font-bold mb-2">{fltUser.userName}</h2>
           <p className="text-gray-600 mb-1">Email: {fltUser.userEmail}</p>
-          <p className="text-gray-600">Role: {fltUser.role}</p>
-        </div>
-
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-2">Profile Details</h3>
-          <ul className="text-gray-700 space-y-1">
-            <li>
-              <span className="font-semibold">Name:</span> {fltUser.userName}
-            </li>
-            <li>
-              <span className="font-semibold">Email:</span> {fltUser.userEmail}
-            </li>
-            <li>
-              <span className="font-semibold">Role:</span> {fltUser.role}
-            </li>
-          </ul>
+          {fltUser.role !== 'fraud' ? (
+            <p className="text-gray-600">
+              Role:{' '}
+              <span className="text-yellow-600 px-3 py-0.5 rounded-full bg-yellow-600/15">
+                {fltUser.role}
+              </span>
+            </p>
+          ) : (
+            <p className="text-gray-600">
+              Role:{' '}
+              <span className="text-red-600 px-3 py-0.5 rounded-full bg-red-600/15">
+                {fltUser.role}
+              </span>
+            </p>
+          )}
         </div>
       </div>
     </div>

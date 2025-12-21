@@ -37,22 +37,12 @@ const UserProfile = () => {
           />
           <h2 className="text-2xl font-bold mb-2">{fltUser.userName}</h2>
           <p className="text-gray-600 mb-1">Email: {fltUser.userEmail}</p>
-          <p className="text-gray-600">Role: {fltUser.role}</p>
-        </div>
-
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold mb-2">Profile Details</h3>
-          <ul className="text-gray-700 space-y-1">
-            <li>
-              <span className="font-semibold">Name:</span> {fltUser.userName}
-            </li>
-            <li>
-              <span className="font-semibold">Email:</span> {fltUser.userEmail}
-            </li>
-            <li>
-              <span className="font-semibold">Role:</span> {fltUser.role}
-            </li>
-          </ul>
+          <p className="text-gray-600">
+            Role:{' '}
+            <span className="text-slate-600 px-3 py-0.5 rounded-full bg-slate-600/15">
+              {fltUser.role}
+            </span>
+          </p>
         </div>
       </div>
     </div>

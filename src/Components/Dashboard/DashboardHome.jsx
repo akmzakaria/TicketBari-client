@@ -5,6 +5,7 @@ import useAxios from '../../Hooks/useAxios'
 import AdminProfile from './Admin/AdminProfile/AdminProfile'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import VendorProfile from './Vendor/VendorProfile/VendorProfile'
+import Fraud from './Fraud/Fraud'
 
 const DashboardHome = () => {
   const { user } = use(AuthContext)
@@ -15,7 +16,7 @@ const DashboardHome = () => {
     instance.get('/users').then((res) => {
       setUsers(res.data)
     })
-  })
+  }, [])
   const fltUser = users.find((u) => u.userEmail === user.email)
 
   if (fltUser?.role === 'user') {
@@ -28,6 +29,10 @@ const DashboardHome = () => {
 
   if (fltUser?.role === 'admin') {
     return <AdminProfile></AdminProfile>
+  }
+
+  if (fltUser?.role === 'fraud') {
+    return <Fraud></Fraud>
   }
 }
 
