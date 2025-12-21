@@ -75,7 +75,7 @@ const BookedTickets = () => {
 
       {tickets.length === 0 && (
         <div className="flex justify-center h-[70vh] items-center">
-          <p>You haven't purchased any ticket yet!</p>
+          <p>No booked tickets found!</p>
         </div>
       )}
 
