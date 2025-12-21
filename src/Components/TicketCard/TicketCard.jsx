@@ -13,7 +13,7 @@ const TicketCard = ({ ticket }) => {
       <div className="p-4 space-y-2">
         <h2 className="text-lg font-semibold">{title}</h2>
 
-        <p className="text-primary font-bold">
+        <p className="text-[#086c52] font-bold">
           ৳ {price} <span className="text-sm font-normal"></span>
         </p>
 
@@ -30,7 +30,7 @@ const TicketCard = ({ ticket }) => {
             {perks.map((perk, index) => (
               <span
                 key={index}
-                className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                className="text-xs bg-[#086c52]/10 text-[#086c52] px-2 py-1 rounded-full"
               >
                 {perk}
               </span>
@@ -39,7 +39,10 @@ const TicketCard = ({ ticket }) => {
         </div>
 
         {/* Button */}
-        <Link to={`/ticket-details/${_id}`} className="btn btn-primary btn-sm w-full mt-3">
+        <Link
+          to={`/ticket-details/${_id}`}
+          className="btn bg-[#086c52] text-white btn-sm w-full mt-3"
+        >
           See Details
         </Link>
       </div>

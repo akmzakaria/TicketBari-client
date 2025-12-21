@@ -193,10 +193,10 @@ const TicketDetails = () => {
             <button
               onClick={handleBookTicket}
               disabled={countdown === 'Departed'}
-              className={`px-4 py-2 rounded text-white transition ${
+              className={`px-4 py-2 rounded text-white  transition ${
                 countdown === 'Departed'
                   ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
+                  : 'bg-[#086c52] hover:bg-[#064e3b]'
               }`}
             >
               Book Now
@@ -204,7 +204,7 @@ const TicketDetails = () => {
 
             <Link
               to={-1}
-              className="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 transition"
+              className="px-4 py-2 border border-[#086c52] text-[#086c52] rounded hover:bg-[#cae1db] transition"
             >
               Back
             </Link>

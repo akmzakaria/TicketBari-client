@@ -3,12 +3,17 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import toast, { Toaster } from 'react-hot-toast'
 import { AuthContext } from '../../../../Context/AuthContext'
+import Loading from '../../../Loading/Loading'
 
 const RequestedBookings = () => {
   const instance = useAxiosSecure()
-  const { user } = use(AuthContext)
+  const { user, loading } = use(AuthContext)
 
-  const { refetch, data: tickets = [] } = useQuery({
+  const {
+    isLoading,
+    refetch,
+    data: tickets = [],
+  } = useQuery({
     queryKey: ['booked-tickets', 'pending', user.email],
     queryFn: async () => {
       const res = await instance.get(`/booked-tickets?bookingStatus=pending&email=${user.email}`)
@@ -38,6 +43,10 @@ const RequestedBookings = () => {
     } catch (error) {
       toast.error('Failed to reject booking')
     }
+  }
+
+  if (isLoading || loading) {
+    return <Loading></Loading>
   }
 
   const confirmAction = (id, action) => {

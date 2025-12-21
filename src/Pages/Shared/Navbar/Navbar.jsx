@@ -5,6 +5,7 @@ import { FaCircleArrowRight } from 'react-icons/fa6'
 import { useScrollDirection } from './useScrollDir'
 import Logo from '../../../Components/Logo/Logo'
 import { AuthContext } from '../../../Context/AuthContext'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext)
@@ -41,6 +42,9 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut()
+    toast.success('Logged Out successfully!', {
+      position: 'top-center',
+    })
   }
 
   return (
@@ -112,14 +116,14 @@ const Navbar = () => {
             <>
               <Link
                 to={'/login'}
-                className="btn text-[.8rem] md:text-[1rem] btn-sm md:btn-md rounded-lg mr-2"
+                className="btn text-[.8rem] md:text-[1rem] hover:text-white hover:bg-green-600 btn-sm md:btn-md rounded-lg mr-2"
               >
                 Sign In
               </Link>
 
               <Link
                 to={'/register'}
-                className="btn text-[.8rem] md:text-[1rem] btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
+                className="btn text-[.8rem] md:text-[1rem] hover:text-white hover:bg-green-600 btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
               >
                 Register
               </Link>

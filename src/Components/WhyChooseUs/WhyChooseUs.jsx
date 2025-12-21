@@ -38,7 +38,7 @@ const WhyChooseUs = () => {
             key={item.id}
             className="text-center p-6 border rounded-xl hover:shadow-lg transition"
           >
-            <div className="text-3xl text-primary mb-3 mx-auto">{item.icon}</div>
+            <div className="text-3xl text-[#086c52] mb-3 mx-auto">{item.icon}</div>
             <h3 className="font-semibold text-lg">{item.title}</h3>
             <p className="text-sm text-gray-500 mt-2">{item.desc}</p>
           </div>

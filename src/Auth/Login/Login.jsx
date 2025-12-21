@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthContext'
 import { Link, useLocation, useNavigate } from 'react-router'
 import useAxios from '../../Hooks/useAxios'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import toast from 'react-hot-toast'
 
 const Login = () => {
   const instance = useAxiosSecure()
@@ -20,22 +21,48 @@ const Login = () => {
     const email = data.email
     const password = data.password
 
-    userLogin(email, password).then(() => {
-      navigate(location?.state || '/')
-    })
+    userLogin(email, password)
+      .then((res) => {
+        navigate(location?.state || '/')
+        toast.success('Logged in successfully!', {
+          position: 'top-center',
+        })
+      })
+      .catch(() => {
+        toast.error('Login unsuccessful! Try again.', {
+          position: 'top-center',
+        })
+      })
   }
 
   const handleGoogleLogin = () => {
-    googleLogin().then((res) => {
-      const profile = {
-        userName: res.user.displayName,
-        photoURL: res.user.photoURL,
-        userEmail: res.user.email,
-        role: 'user',
-      }
-      instance.post('/users', profile)
-      navigate(location?.state || '/')
-    })
+    googleLogin()
+      .then((res) => {
+        const profile = {
+          userName: res.user.displayName,
+          photoURL: res.user.photoURL,
+          userEmail: res.user.email,
+          role: 'user',
+        }
+        instance
+          .post('/users', profile)
+          .then(() => {
+            navigate(location?.state || '/')
+            toast.success('Logged in successfully!', {
+              position: 'top-center',
+            })
+          })
+          .catch(() => {
+            toast.error('Profile uploading unsuccessful!', {
+              position: 'top-center',
+            })
+          })
+      })
+      .catch(() => {
+        toast.error('Login unsuccessful! Try again.', {
+          position: 'top-center',
+        })
+      })
   }
 
   return (

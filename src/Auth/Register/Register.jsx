@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthContext'
 import { Link, useLocation, useNavigate } from 'react-router'
 import useAxios from '../../Hooks/useAxios'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import toast from 'react-hot-toast'
 
 const Register = () => {
   const instance = useAxiosSecure()
@@ -34,7 +35,7 @@ const Register = () => {
 
       instance.post('/users', userInfo).then(() => {
         // navigate(location?.state || '/')
-        console.log('user created')
+        // console.log('user created')
       })
 
       const profile = {
@@ -44,6 +45,16 @@ const Register = () => {
       }
 
       updateUserProfile(profile)
+        .then((res) => {
+          toast.success('Registered successfully!', {
+            position: 'top-center',
+          })
+        })
+        .catch(() => {
+          toast.error('Register unsuccessful! Try again.', {
+            position: 'top-center',
+          })
+        })
       navigate(location?.state || '/')
     })
   }
@@ -57,8 +68,19 @@ const Register = () => {
         userEmail: res.user.email,
         role: 'user',
       }
-      instance.post('/users', profile)
-      navigate(location?.state || '/')
+      instance
+        .post('/users', profile)
+        .then((res) => {
+          navigate(location?.state || '/')
+          toast.success('Logged in successfully!', {
+            position: 'top-center',
+          })
+        })
+        .catch(() => {
+          toast.error('Logged in unsuccessful! Try again.', {
+            position: 'top-center',
+          })
+        })
     })
   }
 

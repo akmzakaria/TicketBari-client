@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { use } from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { AuthContext } from '../../../../Context/AuthContext'
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 import { FaBangladeshiTakaSign } from 'react-icons/fa6'
+import Loading from '../../../Loading/Loading'
 
 const RevenueOverview = () => {
-  const { user } = React.useContext(AuthContext)
+  const { user, loading } = use(AuthContext)
   const instance = useAxiosSecure()
 
-  const { data: stats = {} } = useQuery({
+  const { isLoading, data: stats = {} } = useQuery({
     queryKey: [user?.email, 'vendor-stats'],
     queryFn: async () => {
       const res = await instance.get(`/vendors/ticket-status?email=${user?.email}`)
@@ -24,7 +25,7 @@ const RevenueOverview = () => {
 
   // Pie chart data
   const ticketData = [
-    { name: 'Total Added Tickets', value: approvedTickets },
+    { name: 'Added Tickets', value: approvedTickets },
     { name: 'Sold Tickets', value: soldTickets },
   ]
 
@@ -33,12 +34,16 @@ const RevenueOverview = () => {
     { name: 'Total Revenue', value: totalRevenue },
   ]
 
+  if (isLoading || loading) {
+    return <Loading></Loading>
+  }
+
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center mb-10 justify-center">
       <div>
         <h2 className="text-2xl my-5 font-bold">Revenue Overview</h2>
 
-        <div className="flex flex-col md:flex-row gap-10 items-center">
+        <div className="flex flex-col gap-10 items-center">
           {/* Stats */}
           <div className="stats stats-vertical lg:stats-horizontal shadow text-center md:h-35 ">
             <div className="stat">
@@ -71,7 +76,7 @@ const RevenueOverview = () => {
           {/* Tickets Pie Chart */}
           <div className=" flex gap-5 flex-col md:flex-row">
             <div className="mb-10 flex justify-center">
-              <PieChart width={300} height={300}>
+              <PieChart width={400} height={300}>
                 <Pie
                   data={ticketData}
                   dataKey="value"
@@ -93,7 +98,7 @@ const RevenueOverview = () => {
 
             {/* Revenue Pie Chart */}
             <div className="flex justify-center">
-              <PieChart width={300} height={300}>
+              <PieChart width={400} height={300}>
                 <Pie
                   data={revenueData}
                   dataKey="value"

@@ -9,25 +9,25 @@ body {
 }
 
 .nav a.active {
-  border-bottom: 2px solid #432bd5;
-  color: #432bd5;
+  border-bottom: 2px solid #086c52;
+  color: #086c52;
   padding-bottom: 0.25rem;
   font-weight: 600;
 }
 .dash-nav a.active {
-  color: #432bd5;
+  color: #086c52;
   padding-bottom: 0.25rem;
   font-weight: 600;
 }
 
 .nav a:hover {
-  color: #432bd5;
+  color: #086c52;
   transform: scale(1.05);
   transition: all 0.3s ease;
 }
 
 .dash-nav a:hover {
-  color: #432bd5;
+  color: #086c52;
   transform: scale(1.05);
   transition: all 0.3s ease;
 }

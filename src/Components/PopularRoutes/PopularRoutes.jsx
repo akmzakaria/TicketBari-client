@@ -35,11 +35,11 @@ const PopularRoutes = () => {
             </h3>
 
             <p className="text-sm mt-2">Starting from</p>
-            <p className="text-xl font-bold text-primary">{route.price}</p>
+            <p className="text-xl font-bold text-[#086c52]">{route.price}</p>
 
             <p className="mt-2 text-sm text-gray-500">Transport: {route.transport}</p>
 
-            <button className="btn btn-sm btn-primary mt-4 w-full">View Tickets</button>
+            <button className="btn btn-sm bg-[#086c52] text-white mt-4 w-full">View Tickets</button>
           </div>
         ))}
       </div>

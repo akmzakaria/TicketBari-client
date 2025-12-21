@@ -68,7 +68,7 @@ const About = () => {
           <p className="text-gray-600 mb-5">
             Discover routes, compare prices, and book your tickets today.
           </p>
-          <Link to={'/all-tickets'} className="btn btn-primary">
+          <Link to={'/all-tickets'} className="btn bg-[#086c52] text-white">
             Explore Tickets
           </Link>
         </section>
