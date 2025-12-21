@@ -24,11 +24,13 @@ const ManageUsers = () => {
 
   const handleRoleChange = async (id, role) => {
     try {
-      await instance.patch(`/users/${id}`, { role }).then(() => {
+      await instance.patch(`/users/${id}`, { role }).then((res) => {
         refetch()
-        toast.success(`User role changed to ${role}`, {
-          position: 'top-center',
-        })
+        if (res.data.modifiedCount) {
+          toast.success(`User role changed to ${role}`, {
+            position: 'top-center',
+          })
+        }
       })
     } catch (error) {
       toast.error('Failed to change role', {

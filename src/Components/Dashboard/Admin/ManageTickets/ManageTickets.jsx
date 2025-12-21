@@ -22,10 +22,13 @@ const ManageTickets = () => {
 
   const handleApprove = async (id) => {
     try {
-      await instance.patch(`/tickets/${id}`, { ticketStatus: 'approved' })
-      refetch()
-      toast.success('Ticket approved', {
-        position: 'top-center',
+      await instance.patch(`/tickets/${id}`, { ticketStatus: 'approved' }).then((res) => {
+        if (res.data.modifiedCount) {
+          refetch()
+          toast.success('Ticket approved', {
+            position: 'top-center',
+          })
+        }
       })
     } catch (error) {
       toast.error('Failed to approve ticket')
@@ -34,10 +37,11 @@ const ManageTickets = () => {
 
   const handleReject = async (id) => {
     try {
-      await instance.patch(`/tickets/${id}`, { ticketStatus: 'rejected' })
-      refetch()
-      toast.success('Ticket rejected', {
-        position: 'top-center',
+      await instance.patch(`/tickets/${id}`, { ticketStatus: 'rejected' }).then((res) => {
+        refetch()
+        toast.success('Ticket rejected', {
+          position: 'top-center',
+        })
       })
     } catch (error) {
       toast.error('Failed to reject ticket')
