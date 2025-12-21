@@ -50,7 +50,7 @@ const Navbar = () => {
         direction === 'down' ? '-translate-y-full' : 'translate-y-0'
       } `}
     >
-      <div className={` navbar bg-base-100 max-w-350 mx-auto  `}>
+      <div className="navbar bg-base-100 max-w-[95vw] md:max-w-350 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -72,7 +72,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+              className="menu menu-md dropdown-content bg-base-100 rounded-box z-50 mt-3 w-40 p-2 shadow"
             >
               {links}
             </ul>
@@ -119,7 +119,7 @@ const Navbar = () => {
 
               <Link
                 to={'/register'}
-                className="btn text-[.8rem] md:text-[1rem] btn-sm md:btn-md rounded-lg mr-2 md:mr-3"
+                className="btn text-[.8rem] md:text-[1rem] btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
               >
                 Register
               </Link>

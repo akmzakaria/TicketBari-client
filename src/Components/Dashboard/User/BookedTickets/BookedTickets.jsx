@@ -61,6 +61,7 @@ const BookedTickets = () => {
       title: ticket.title,
     }
     const res = await instance.post('/create-checkout-session', paymentInfo)
+    // console.log(res)
     window.location.assign(res.data.url)
   }
 

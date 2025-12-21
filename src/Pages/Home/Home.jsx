@@ -48,7 +48,7 @@ const Home = () => {
   }
 
   return (
-    <div className="max-w-350 px-5 mx-auto">
+    <div className="md:max-w-350 px-5 mx-auto">
       {/* Advertisement section */}
       {adTickets.length !== 0 && (
         <div className="">
