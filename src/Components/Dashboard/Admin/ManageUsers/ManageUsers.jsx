@@ -91,7 +91,31 @@ const ManageUsers = () => {
                 <th>{i + 1}</th>
                 <td>{user.userName}</td>
                 <td>{user.userEmail}</td>
-                <td>{user.role}</td>
+                {user.role === 'user' ? (
+                  <td>
+                    <span className="text-slate-600 px-3 py-0.5 rounded-full bg-slate-600/15">
+                      {user.role}
+                    </span>
+                  </td>
+                ) : user.role === 'vendor' ? (
+                  <td>
+                    <span className="text-yellow-600 px-3 py-0.5 rounded-full bg-yellow-600/15">
+                      {user.role}
+                    </span>
+                  </td>
+                ) : user.role === 'admin' ? (
+                  <td>
+                    <span className="text-green-600 px-3 py-0.5 rounded-full bg-green-600/15">
+                      {user.role}
+                    </span>
+                  </td>
+                ) : (
+                  <td>
+                    <span className="text-red-600 px-3 py-0.5 rounded-full bg-red-600/15">
+                      {user.role}
+                    </span>
+                  </td>
+                )}
                 <td className="flex md:flex-row flex-col justify-center gap-1 md:gap-2">
                   <button
                     onClick={() => confirmRoleChange(user._id, 'user')}

@@ -33,18 +33,8 @@ const Register = () => {
         role: 'user',
       }
 
-      instance.post('/users', userInfo).then(() => {
-        // navigate(location?.state || '/')
-        // console.log('user created')
-      })
-
-      const profile = {
-        displayName: name,
-        photoURL: photo,
-        userEmail: email,
-      }
-
-      updateUserProfile(profile)
+      instance
+        .post('/users', userInfo)
         .then((res) => {
           toast.success('Registered successfully!', {
             position: 'top-center',
@@ -56,6 +46,14 @@ const Register = () => {
           })
         })
       navigate(location?.state || '/')
+
+      const profile = {
+        displayName: name,
+        photoURL: photo,
+        userEmail: email,
+      }
+
+      updateUserProfile(profile)
     })
   }
 
