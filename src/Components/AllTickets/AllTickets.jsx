@@ -10,20 +10,27 @@ const AllTickets = () => {
   const { loading } = use(AuthContext)
   const [showLoading, setShowLoading] = useState(true)
   const instance = useAxiosSecure()
-  //   const [tickets, setTickets] = useState([])
 
-  //   useEffect(() => {
-  //     instance.get('/tickets').then((res) => {
-  //       setTickets(res.data)
-  //     })
-  //   }, [instance])
+  const { data: fraudUser = [] } = useQuery({
+    queryKey: ['users', 'fraud'],
+    queryFn: async () => {
+      const res = await instance.get('/users?role=fraud')
+      return res.data
+    },
+  })
 
   const { data: tickets = [] } = useQuery({
-    queryKey: ['tickets', 'approved'],
+    queryKey: ['all-tickets', 'approved'],
     queryFn: async () => {
       const res = await instance.get('/tickets?ticketStatus=approved')
       return res.data
     },
+  })
+
+  const filteredAllTickets = tickets.filter((ticket) => {
+    const isFraud = fraudUser.some((user) => user.userEmail === ticket.vendor_email)
+
+    return !isFraud
   })
 
   useEffect(() => {
@@ -43,7 +50,7 @@ const AllTickets = () => {
       <div className="">
         <h2 className="text-3xl font-bold text-center my-5">All Tickets</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {tickets.map((ticket) => (
+          {filteredAllTickets.map((ticket) => (
             <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
           ))}
         </div>

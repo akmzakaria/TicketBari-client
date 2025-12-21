@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi'
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
+import { AuthContext } from '../../Context/AuthContext'
+import Loading from '../../Components/Loading/Loading'
 
 const ContactUs = () => {
+  const { loading } = use(AuthContext)
+  const [showLoading, setShowLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoading(false)
+    }, 1500)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (loading || showLoading) {
+    return <Loading></Loading>
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     // Logic for sending email or saving message goes here
