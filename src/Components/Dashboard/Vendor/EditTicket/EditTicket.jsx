@@ -198,7 +198,7 @@ const EditTicket = () => {
               {...register('vendor_name')}
               value={user?.displayName || ''}
               readOnly
-              className="input input-bordered w-full bg-gray-100"
+              className="input input-bordered w-full"
             />
           </div>
 
@@ -208,7 +208,7 @@ const EditTicket = () => {
               {...register('vendor_email')}
               value={user?.email || ''}
               readOnly
-              className="input input-bordered w-full bg-gray-100"
+              className="input input-bordered w-full"
             />
           </div>
         </div>

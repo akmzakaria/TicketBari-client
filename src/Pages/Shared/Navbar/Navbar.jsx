@@ -1,5 +1,4 @@
-import React, { use } from 'react'
-// import Logo from '../../../Components/Logo/Logo'
+import React, { use, useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router'
 import { FaCircleArrowRight } from 'react-icons/fa6'
 import { useScrollDirection } from './useScrollDir'
@@ -9,10 +8,26 @@ import toast from 'react-hot-toast'
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext)
-
-  //   console.log(user)
-
   const direction = useScrollDirection()
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
+  )
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme)
+    const localTheme = localStorage.getItem('theme')
+
+    document.querySelector('html').setAttribute('data-theme', localTheme)
+  }, [theme])
+
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
+  }
 
   const links = (
     <>
@@ -91,22 +106,39 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             // profile logo
-            <div className="dropdown dropdown-center">
+            <div className="dropdown dropdown-end">
               <div
                 className="tooltip tooltip-bottom"
                 tabIndex={0}
                 role="button"
                 data-tip={user?.displayName}
               >
-                <img className="w-10 h-10 object-cover  rounded-full" src={user?.photoURL} />
+                <img
+                  className="w-10 h-10 object-cover rounded-full"
+                  src={user?.photoURL}
+                  alt="User Profile"
+                />
               </div>
               <ul
                 tabIndex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box z-50 w-35 p-2 shadow-sm"
+                className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow-sm gap-1"
               >
                 <li>
                   <Link to={'/dashboard'}>Profile</Link>
                 </li>
+
+                <li>
+                  <label className="flex cursor-pointer gap-2 justify-between">
+                    <span>Light/Dark</span>
+                    <input
+                      type="checkbox"
+                      onChange={handleToggle}
+                      checked={theme === 'dark'}
+                      className="toggle toggle-sm theme-controller"
+                    />
+                  </label>
+                </li>
+
                 <li>
                   <button onClick={handleLogOut}>Log Out</button>
                 </li>
@@ -114,16 +146,59 @@ const Navbar = () => {
             </div>
           ) : (
             <>
+              {/* toggle theme */}
+              <label className="toggle text-base-content mr-2">
+                <input
+                  type="checkbox"
+                  value="synthwave"
+                  className="theme-controller"
+                  onChange={handleToggle}
+                  checked={theme === 'dark'}
+                />
+
+                <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M12 2v2"></path>
+                    <path d="M12 20v2"></path>
+                    <path d="m4.93 4.93 1.41 1.41"></path>
+                    <path d="m17.66 17.66 1.41 1.41"></path>
+                    <path d="M2 12h2"></path>
+                    <path d="M20 12h2"></path>
+                    <path d="m6.34 17.66-1.41 1.41"></path>
+                    <path d="m19.07 4.93-1.41 1.41"></path>
+                  </g>
+                </svg>
+
+                <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                  </g>
+                </svg>
+              </label>
+
               <Link
                 to={'/login'}
-                className="btn text-[.8rem] md:text-[1rem] hover:text-white text-[#086c52] hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2"
+                className="btn text-[.8rem] md:text-[1rem] hover:text-white  hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2"
               >
                 Sign In
               </Link>
 
               <Link
                 to={'/register'}
-                className="btn text-[.8rem] md:text-[1rem] hover:text-white text-[#086c52] hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
+                className="btn text-[.8rem] md:text-[1rem] hover:text-white  hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
               >
                 Register
               </Link>

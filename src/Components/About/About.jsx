@@ -25,7 +25,7 @@ const About = () => {
         {/* Hero Section */}
         <section className="text-center mb-14">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">About Us</h1>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             We make ticket booking simple, fast, and reliable for everyone.
           </p>
         </section>

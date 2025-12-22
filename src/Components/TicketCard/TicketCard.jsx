@@ -17,7 +17,7 @@ const TicketCard = ({ ticket }) => {
           ৳ {price} <span className="text-sm font-normal"></span>
         </p>
 
-        <p className="text-sm text-gray-600">Quantity: {quantity}</p>
+        <p className="text-sm">Quantity: {quantity}</p>
 
         <p className="text-sm">
           Transport: <span className="font-medium">{transport}</span>
@@ -25,7 +25,7 @@ const TicketCard = ({ ticket }) => {
 
         {/* Perks */}
         <div className="flex gap-1">
-          <p className="text-gray-600 text-sm">Perks:</p>
+          <p className="text-sm">Perks:</p>
           <div className="flex flex-wrap gap-2">
             {perks.map((perk, index) => (
               <span

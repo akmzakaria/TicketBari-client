@@ -84,7 +84,7 @@ const RequestedBookings = () => {
   }
 
   return (
-    <div className="mx-5">
+    <div className="mx-5 mb-10">
       <Toaster position="bottom-center" reverseOrder={true} />
       <h2 className="text-2xl font-bold my-5">Requested Bookings</h2>
 

@@ -86,7 +86,7 @@ const VendorAddedTickets = () => {
           {tickets.map((ticket) => (
             <div
               key={ticket._id}
-              className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden flex flex-col justify-between"
+              className=" rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
             >
               <img src={ticket.image} alt={ticket.title} className="w-full h-48 object-cover" />
 

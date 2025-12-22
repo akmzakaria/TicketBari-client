@@ -28,7 +28,7 @@ const AdminProfile = () => {
 
   return (
     <div className="min-h-screen flex items-center bg-base-200 justify-center">
-      <div className="max-w-2xl w-full p-6 bg-white pt-15 shadow-lg rounded-xl">
+      <div className="max-w-2xl w-full p-6  pt-15 shadow-xl rounded-xl">
         <div className="flex flex-col items-center">
           <img
             src={fltUser.photoURL || '/default-profile.png'}

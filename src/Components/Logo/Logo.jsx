@@ -1,5 +1,5 @@
 import React from 'react'
-import logo1 from '../../assets/logo1.png'
+import logo1 from '/fav2.png'
 import { Link } from 'react-router'
 
 const Logo = () => {

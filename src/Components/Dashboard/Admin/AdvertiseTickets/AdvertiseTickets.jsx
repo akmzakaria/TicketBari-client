@@ -128,7 +128,10 @@ const AdvertiseTickets = () => {
                 <td>{ticket.title}</td>
                 <td className="flex gap-2">
                   {ticket.perks.map((perk) => (
-                    <span key={perk} className="w-fit px-2 py-px rounded-full bg-gray-200">
+                    <span
+                      key={perk}
+                      className="w-fit px-2 py-px rounded-full text-black/70 bg-gray-200"
+                    >
                       {perk}
                     </span>
                   ))}
