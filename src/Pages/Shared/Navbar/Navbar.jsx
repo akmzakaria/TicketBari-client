@@ -108,20 +108,20 @@ const Navbar = () => {
             // profile logo
             <div className="dropdown dropdown-end">
               <div
-                className="tooltip tooltip-bottom"
+                className="tooltip tooltip-left md:tooltip-bottom flex items-center"
                 tabIndex={0}
                 role="button"
                 data-tip={user?.displayName}
               >
                 <img
-                  className="w-10 h-10 object-cover rounded-full"
+                  className="w-10 h-10 border border-[#086c52] object-cover rounded-full"
                   src={user?.photoURL}
                   alt="User Profile"
                 />
               </div>
               <ul
                 tabIndex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow-sm gap-1"
+                className="dropdown-content menu bg-base-100 rounded-box z-50 w-40 p-2 shadow-sm gap-1"
               >
                 <li>
                   <Link to={'/dashboard'}>Profile</Link>
