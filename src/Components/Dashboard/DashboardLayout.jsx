@@ -18,6 +18,7 @@ import { LuHouse, LuHousePlug, LuHousePlus, LuUserRound, LuUserRoundPen } from '
 import { GoHistory } from 'react-icons/go'
 import { AiOutlineFileDone } from 'react-icons/ai'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import Footer from '../../Pages/Shared/Footer/Footer'
 
 const DashboardLayout = () => {
   const { user, loading } = use(AuthContext)

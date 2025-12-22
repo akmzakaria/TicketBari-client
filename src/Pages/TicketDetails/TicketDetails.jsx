@@ -185,9 +185,7 @@ const TicketDetails = () => {
             Time left: {countdown}
           </p>
 
-          <p className="font-semibold mb-6">
-            Total Price: <TbCurrencyTaka className="inline" /> {totalPrice}
-          </p>
+          <p className="font-semibold flex items-center mb-6">Total Price: ৳ {totalPrice}</p>
 
           <div className="flex justify-between gap-3">
             <button
