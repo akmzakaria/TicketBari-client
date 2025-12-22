@@ -36,16 +36,16 @@ const VendorProfile = () => {
             className="w-32 h-32 rounded-full object-cover mb-4 border-2 border-green-600"
           />
           <h2 className="text-2xl font-bold mb-2">{fltUser.userName}</h2>
-          <p className="text-gray-600 mb-1">Email: {fltUser.userEmail}</p>
+          <p className="mb-1">Email: {fltUser.userEmail}</p>
           {fltUser.role !== 'fraud' ? (
-            <p className="text-gray-600">
+            <p className="">
               Role:{' '}
               <span className="text-yellow-600 px-3 py-0.5 rounded-full bg-yellow-600/15">
                 {fltUser.role}
               </span>
             </p>
           ) : (
-            <p className="text-gray-600">
+            <p className="">
               Role:{' '}
               <span className="text-red-600 px-3 py-0.5 rounded-full bg-red-600/15">
                 {fltUser.role}
