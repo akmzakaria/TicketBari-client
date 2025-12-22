@@ -27,8 +27,8 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="max-w-2xl w-full p-6 shadow-xl rounded-xl">
+    <div className="flex items-center p-5 h-screen justify-center ">
+      <div className="max-w-2xl w-full h-[50vh] flex items-center justify-center p-6 shadow-lg hover:shadow-xl transition transform border border-gray-200 rounded-xl">
         <div className="flex flex-col items-center">
           <img
             src={fltUser.photoURL || '/default-profile.png'}
