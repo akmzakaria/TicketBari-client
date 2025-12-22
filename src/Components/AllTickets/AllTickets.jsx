@@ -171,7 +171,7 @@ const AllTickets = () => {
               isFilterOpen ? 'max-h-48 opacity-100 mt-4' : 'max-h-0 opacity-0'
             }`}
           >
-            <div className="bg-gray-50 p-3 rounded-lg border border-gray-100 space-y-3">
+            <div className=" p-3 rounded-lg border border-gray-100 space-y-3">
               <div>
                 <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Transport Mode</p>
                 <div className="flex gap-2">
