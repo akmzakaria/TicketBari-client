@@ -84,7 +84,7 @@ const AllTickets = () => {
       <div className="">
         <div className="max-w-350 mx-auto px-4 py-3">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-xl font-bold">Find Tickets</h2>
+            <h2 className="text-xl md:text-3xl font-bold">Find Tickets</h2>
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className={`btn btn-sm btn-circle ${

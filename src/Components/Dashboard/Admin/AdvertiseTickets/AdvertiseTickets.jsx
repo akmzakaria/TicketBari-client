@@ -108,7 +108,7 @@ const AdvertiseTickets = () => {
 
   return (
     <div className="m-5">
-      <h2 className="text-2xl font-bold">Manage Advertise</h2>
+      <h2 className="text-xl md:text-3xl font-bold">Manage Advertise</h2>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">

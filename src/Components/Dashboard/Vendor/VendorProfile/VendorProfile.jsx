@@ -5,7 +5,7 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import Loading from '../../../Loading/Loading'
 
 const VendorProfile = () => {
-  const { user } = use(AuthContext)
+  const { user, loading } = use(AuthContext)
   const instance = useAxiosSecure()
 
   const { isLoading, data: users = [] } = useQuery({
@@ -16,14 +16,14 @@ const VendorProfile = () => {
     },
   })
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading />
   }
 
   const fltUser = users.find((u) => u.userEmail === user.email)
 
   if (!fltUser) {
-    return <p className="text-center mt-10 text-red-600">User not found</p>
+    return <p className="text-center mt-10 text-red-600">User not found!</p>
   }
 
   return (

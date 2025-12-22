@@ -52,7 +52,7 @@ const AddTicket = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Toaster position="top-center" reverseOrder={true}></Toaster>
-      <h2 className="text-3xl font-bold mb-6">Add New Ticket</h2>
+      <h2 className="text-xl md:text-3xl font-bold mb-6">Add New Ticket</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Ticket title */}

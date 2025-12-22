@@ -20,33 +20,43 @@ import { AiOutlineFileDone } from 'react-icons/ai'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import Footer from '../../Pages/Shared/Footer/Footer'
 import Logo from '../Logo/Logo'
+import { useQuery } from '@tanstack/react-query'
 
 const DashboardLayout = () => {
   const { user, loading } = use(AuthContext)
-  const [showLoading, setShowLoading] = useState(true)
+  // const [showLoading, setShowLoading] = useState(true)
 
-  const [users, setUsers] = useState([])
+  // const [users, setUsers] = useState([])
   const instance = useAxiosSecure()
 
-  useEffect(() => {
-    instance.get('/users').then((res) => {
-      setUsers(res.data)
-    })
-  }, [])
+  // useEffect(() => {
+  //   instance.get('/users').then((res) => {
+  //     setUsers(res.data)
+  //   })
+  // }, [])
+
+  const { isLoading, data: users = [] } = useQuery({
+    queryKey: ['users', 'all-users'],
+    queryFn: async () => {
+      const res = await instance.get('/users')
+      return res.data
+    },
+  })
+
   const fltUser = users.find((u) => u.userEmail === user.email)
 
   // console.log(fltUser?.role)
 
   // console.log(users)
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoading(false)
-    }, 2000)
-    return () => clearTimeout(timer)
-  }, [])
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowLoading(false)
+  //   }, 2000)
+  //   return () => clearTimeout(timer)
+  // }, [])
 
-  if (loading || showLoading) {
+  if (loading || isLoading) {
     return <Loading></Loading>
   }
 
@@ -54,7 +64,7 @@ const DashboardLayout = () => {
     <div>
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content">
+        <div className="drawer-content min-h-screen flex flex-col">
           {/* Navbar */}
           <nav className="navbar w-full bg-base-300">
             <label
@@ -95,6 +105,10 @@ const DashboardLayout = () => {
 
             {fltUser?.role === 'user' && (
               <ul className="menu w-full grow">
+                <Link className="ml-3 md:hidden" to={'/'}>
+                  <Logo></Logo>
+                </Link>
+
                 {/* List item */}
 
                 <li className="dash-nav">
@@ -158,6 +172,10 @@ const DashboardLayout = () => {
 
             {fltUser?.role === 'admin' && (
               <ul className="menu w-full grow">
+                <Link className="ml-3 md:hidden" to={'/'}>
+                  <Logo></Logo>
+                </Link>
+
                 {/* List item */}
 
                 <li className="dash-nav">
@@ -321,6 +339,10 @@ const DashboardLayout = () => {
 
             {fltUser?.role === 'fraud' && (
               <ul className="menu w-full grow">
+                <Link className="ml-3 md:hidden" to={'/'}>
+                  <Logo></Logo>
+                </Link>
+
                 {/* List item */}
 
                 <li className="dash-nav">

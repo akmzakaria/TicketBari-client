@@ -84,7 +84,7 @@ const ManageTickets = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold my-5 ml-5">Manage Tickets:</h2>
+      <h2 className="text-xl md:text-3xl font-bold my-5 ml-5">Manage Tickets:</h2>
       <div>
         {tickets.length === 0 ? (
           <div className="flex items-center justify-center h-[70vh]">

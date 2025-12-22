@@ -86,7 +86,7 @@ const RequestedBookings = () => {
   return (
     <div className="mx-5 mb-10">
       <Toaster position="bottom-center" reverseOrder={true} />
-      <h2 className="text-2xl font-bold my-5">Requested Bookings</h2>
+      <h2 className="text-xl md:text-3xl font-bold my-5">Requested Bookings</h2>
 
       {tickets.length === 0 ? (
         <div className="flex justify-center items-center h-[75vh]">
@@ -114,7 +114,7 @@ const RequestedBookings = () => {
                   <td>{ticket.bookingQty}</td>
                   <td>{ticket.totalPrice}</td>
 
-                  <td className="flex md:flex-row flex-col justify-center gap-5 md:gap-1">
+                  <td className="flex md:flex-row flex-col justify-center gap-1 md:gap-1">
                     <button
                       onClick={() => confirmAction(ticket._id, 'accept')}
                       className="btn w-25 md:w-fit btn-xs hover:bg-green-600 btn-outline hover:text-white border-green-600 text-green-600"

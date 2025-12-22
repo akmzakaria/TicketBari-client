@@ -75,7 +75,7 @@ const VendorAddedTickets = () => {
   return (
     <div>
       <Toaster position="bottom-center" reverseOrder={true} />
-      <h2 className="text-2xl font-bold m-5">My Added Tickets</h2>
+      <h2 className="text-xl md:text-3xl font-bold m-5">My Added Tickets</h2>
 
       {tickets.length === 0 ? (
         <div className="flex justify-center items-center h-[75vh]">

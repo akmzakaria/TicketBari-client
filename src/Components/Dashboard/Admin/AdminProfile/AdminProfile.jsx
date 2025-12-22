@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import Loading from '../../../Loading/Loading'
 
 const AdminProfile = () => {
-  const { user } = use(AuthContext)
+  const { user, loading } = use(AuthContext)
   const instance = useAxiosSecure()
 
   const { isLoading, data: users = [] } = useQuery({
@@ -16,7 +16,7 @@ const AdminProfile = () => {
     },
   })
 
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading />
   }
 

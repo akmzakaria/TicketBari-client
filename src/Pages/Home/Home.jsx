@@ -64,11 +64,11 @@ const Home = () => {
   }
 
   return (
-    <div className="md:max-w-350 px-5 mx-auto">
+    <div className="md:max-w-350 px-2 md:px-5 mx-auto">
       {/* Advertisement section */}
       {filteredAdTickets.length !== 0 && (
-        <div className="">
-          <h2 className="text-3xl font-bold text-center my-10">Advertisements</h2>
+        <div className="bg-black/5 shadow-xl border border-gray-200 px-3 md:px-10 py-5 md:pb-10 mt-5 rounded-lg">
+          <h2 className="text-xl md:text-3xl font-bold text-center mb-5">Advertisements</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {filteredAdTickets.map((ticket) => (
               <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
@@ -78,8 +78,8 @@ const Home = () => {
       )}
 
       {/* Latest Tickets section */}
-      <div>
-        <h2 className="text-3xl font-bold text-center mt-10 mb-10">Latest Tickets</h2>
+      <div className="bg-black/5 shadow-xl border border-gray-200 px-3 md:px-10 py-5 md:pb-10 mt-15 rounded-lg">
+        <h2 className="text-xl md:text-3xl font-bold text-center mb-5">Latest Tickets</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {filteredLatestTickets.map((ticket) => (
             <TicketCard key={ticket._id} ticket={ticket}></TicketCard>
