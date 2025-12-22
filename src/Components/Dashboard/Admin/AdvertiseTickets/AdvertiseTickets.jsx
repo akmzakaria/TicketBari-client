@@ -33,7 +33,9 @@ const AdvertiseTickets = () => {
 
   const confirmAdvertise = (id) => {
     if (advertisedTickets.length >= 6) {
-      toast.error('Cannot advertise more than 6 tickets')
+      toast.error('Cannot advertise more than 6 tickets', {
+        position: 'top-center',
+      })
       return
     }
 

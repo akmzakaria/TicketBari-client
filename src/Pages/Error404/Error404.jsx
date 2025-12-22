@@ -7,7 +7,7 @@ const Error404 = () => {
       <div className="text-center">
         <div className="relative inline-block">
           <h1 className="text-9xl font-extrabold text-gray-200 tracking-widest">404</h1>
-          <div className="bg-green-600 px-2 text-sm rounded rotate-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
+          <div className="bg-[#086c52] px-2 text-sm rounded rotate-12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
             Page Not Found
           </div>
         </div>
@@ -22,7 +22,7 @@ const Error404 = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
               to="/"
-              className="px-8 py-3 bg-green-600 text-white font-semibold rounded-full shadow-lg hover:bg-green-700 hover:scale-105 transition-all active:scale-95"
+              className="px-8 py-3 bg-[#086c52] text-white font-semibold rounded-full shadow-lg hover:bg-[#064e3b] hover:scale-105 transition-all active:scale-95"
             >
               Back to Home
             </Link>

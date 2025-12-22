@@ -100,7 +100,8 @@ const BookedTickets = () => {
                 <span className="font-semibold">{ticket.totalPrice} BDT</span>
               </p>
               <p className="text-sm mb-2 flex items-center gap-1">
-                <GoClock /> {new Date(ticket.departure).toLocaleString()}
+                <GoClock />
+                Departure: {new Date(ticket.departure).toLocaleString()}
               </p>
               {ticket.bookingStatus !== 'rejected' && (
                 <p className="text-red-600 font-semibold text-sm mb-3 flex items-center gap-1">

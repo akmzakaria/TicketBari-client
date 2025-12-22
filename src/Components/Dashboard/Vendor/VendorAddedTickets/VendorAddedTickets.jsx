@@ -145,13 +145,13 @@ const VendorAddedTickets = () => {
                     <button
                       disabled
                       onClick={() => confirmDelete(ticket._id)}
-                      className="bg-gray-200 px-3 py-2 outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-red-600 border-red-600"
+                      className="bg-gray-200 px-3 py-2 font-semibold outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-red-600 border-red-600"
                     >
                       Delete
                     </button>
                     <button
                       disabled
-                      className="bg-gray-200 px-3 py-2 outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-green-600 border-green-600"
+                      className="bg-gray-200 px-3 py-2 font-semibold outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-green-600 border-green-600"
                     >
                       Update
                     </button>
