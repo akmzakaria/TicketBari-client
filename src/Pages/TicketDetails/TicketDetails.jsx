@@ -1,63 +1,32 @@
 import { use, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import useAxios from '../../Hooks/useAxios'
 import { TbCurrencyTaka } from 'react-icons/tb'
 import { IoBus } from 'react-icons/io5'
 import { MdOutlineConfirmationNumber } from 'react-icons/md'
-import Loading from '../../Components/Loading/Loading'
 import { PiClockCountdownBold } from 'react-icons/pi'
+import { useQuery } from '@tanstack/react-query'
+import toast from 'react-hot-toast'
+
+import Loading from '../../Components/Loading/Loading'
 import { AuthContext } from '../../Context/AuthContext'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
-import toast from 'react-hot-toast'
-import { useQuery } from '@tanstack/react-query'
 
 const TicketDetails = () => {
   const instance = useAxiosSecure()
   const { id } = useParams()
   const { user, loading } = use(AuthContext)
-  //   console.log(user.email)
 
-  // const [tickets, setTickets] = useState([])
-  // const [ticket, setTicket] = useState(null)
   const [countdown, setCountdown] = useState('Loading...')
   const [bookingQty, setBookingQty] = useState(1)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // get all tickets
-  // useEffect(() => {
-  //   instance.get('/tickets').then((res) => {
-  //     setTickets(res.data)
-  //   })
-  // }, [])
-
-  const { isLoading, data: ticket = [] } = useQuery({
+  const { isLoading, data: ticket = {} } = useQuery({
     queryKey: ['ticket', id],
     queryFn: async () => {
       const res = await instance.get(`/tickets/${id}`)
       return res.data
     },
   })
-
-  // get booked tickets by the user to block double booking request  [NO NEED]
-  // const { refetch, data: bookedTickets = [] } = useQuery({
-  //   queryKey: [user?.email, 'booked-tickets'],
-  //   queryFn: async () => {
-  //     const res = await instance.get(`/booked-tickets?email=${user.email}`)
-  //     return res.data
-  //   },
-  // })
-
-  // const bookedTicket = bookedTickets.find((t) => t.title === ticket.title)
-  // console.log(bookedTicket)
-
-  // console.log(bookedTickets)
-
-  // find selected ticket
-  // useEffect(() => {
-  //   if (tickets.length > 0) {
-  //     const fltData = tickets.find((t) => t._id === id)
-  //     setTicket(fltData)
-  //   }
-  // }, [id, tickets])
 
   // countdown
   useEffect(() => {
@@ -86,9 +55,9 @@ const TicketDetails = () => {
     return () => clearInterval(interval)
   }, [ticket?.departure])
 
-  if (!ticket) return <Loading />
+  if (isLoading || loading) return <Loading />
 
-  // quantity count
+  // quantity logic
   const increaseQty = () => {
     if (bookingQty < ticket.quantity) {
       setBookingQty((prev) => prev + 1)
@@ -122,19 +91,11 @@ const TicketDetails = () => {
 
     instance.post('/booked-tickets', data).then((res) => {
       if (res.status === 200) {
-        toast.success('Booking request sent!', {
-          position: 'top-center',
-        })
+        toast.success('Booking request sent!', { position: 'top-center' })
       } else {
-        toast.error('Cannot sent booking request! Try again later.', {
-          position: 'top-center',
-        })
+        toast.error('Cannot send booking request!', { position: 'top-center' })
       }
     })
-  }
-
-  if (isLoading || loading) {
-    return <Loading></Loading>
   }
 
   return (
@@ -161,37 +122,21 @@ const TicketDetails = () => {
             </span>
           </div>
 
-          {/* Quantity Selector */}
-          <div className="mb-4">
-            <p className="font-semibold mb-2">Booking Quantity</p>
-            <div className="flex items-center gap-4">
-              <button onClick={decreaseQty} className="px-3 py-1 border rounded hover:bg-gray-100">
-                −
-              </button>
-              <span className="font-semibold">{bookingQty}</span>
-              <button onClick={increaseQty} className="px-3 py-1 border rounded hover:bg-gray-100">
-                +
-              </button>
-            </div>
-          </div>
-
           <p className="mb-2">
             <span className="font-semibold">Departure:</span>{' '}
             {new Date(ticket.departure).toLocaleString()}
           </p>
 
-          <p className="text-red-600 font-semibold mb-2 flex items-center gap-1">
+          <p className="text-red-600 font-semibold mb-4 flex items-center gap-1">
             <PiClockCountdownBold />
             Time left: {countdown}
           </p>
 
-          <p className="font-semibold flex items-center mb-6">Total Price: ৳ {totalPrice}</p>
-
           <div className="flex justify-between gap-3">
             <button
-              onClick={handleBookTicket}
+              onClick={() => setIsModalOpen(true)}
               disabled={countdown === 'Departed'}
-              className={`px-4 py-2 rounded text-white  transition ${
+              className={`px-4 py-2 rounded text-white transition ${
                 countdown === 'Departed'
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-[#086c52] hover:bg-[#064e3b]'
@@ -209,6 +154,49 @@ const TicketDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <dialog className="modal modal-open">
+          <div className="modal-box">
+            <h3 className="font-bold text-lg mb-4">Select Ticket Quantity</h3>
+
+            <div className="flex items-center justify-center gap-6 mb-4">
+              <button onClick={decreaseQty} className="btn btn-outline btn-sm">
+                −
+              </button>
+
+              <span className="text-xl font-semibold">{bookingQty}</span>
+
+              <button onClick={increaseQty} className="btn btn-outline btn-sm">
+                +
+              </button>
+            </div>
+
+            <p className="text-center mb-2">
+              Available tickets: <b>{ticket.quantity}</b>
+            </p>
+
+            <p className="text-center font-semibold mb-6">Total Price: ৳ {totalPrice}</p>
+
+            <div className="modal-action">
+              <button onClick={() => setIsModalOpen(false)} className="btn btn-ghost">
+                Cancel
+              </button>
+
+              <button
+                onClick={() => {
+                  handleBookTicket()
+                  setIsModalOpen(false)
+                }}
+                className="btn bg-[#086c52] hover:bg-[#064e3b] text-white"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </dialog>
+      )}
     </div>
   )
 }

@@ -30,7 +30,7 @@ const AddTicket = () => {
 
     axios.post(imgAPI_URL, formData).then((res) => {
       const photoURL = res.data.data.url
-      console.log('after image upload', photoURL)
+      // console.log('after image upload', photoURL)
       const allData = {
         ...data,
         image: photoURL,

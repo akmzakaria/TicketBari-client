@@ -39,21 +39,21 @@ const RevenueOverview = () => {
   }
 
   return (
-    <div className="flex items-center mb-10 justify-center">
+    <div className="flex items-center mb-10 justify-center overflow-x-hidden">
       <div>
         <h2 className="text-2xl m-5 font-bold">Revenue Overview</h2>
 
-        <div className="flex flex-col gap-10 items-center">
+        <div className="flex flex-col gap-10 items-center justify-center">
           {/* Stats */}
           <div className="stats stats-vertical lg:stats-horizontal shadow text-center md:h-35 ">
             <div className="stat">
               <div className="stat-title">Total Added Tickets</div>
-              <div className="stat-value">{approvedTickets}</div>
+              <div className="stat-value flex justify-center items-center">{approvedTickets}</div>
             </div>
 
             <div className="stat">
               <div className="stat-title">Total Sold Tickets</div>
-              <div className="stat-value">{soldTickets}</div>
+              <div className="stat-value flex justify-center items-center">{soldTickets}</div>
             </div>
 
             <div className="stat">

@@ -18,7 +18,7 @@ const PaymentSuccess = () => {
         transactionId: res.data.transactionId,
       })
     })
-  }, [sessionId, instance])
+  }, [])
 
   return (
     <div className="p-5">

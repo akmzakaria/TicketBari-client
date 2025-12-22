@@ -18,7 +18,7 @@ const TickstDetailsAdmin = () => {
   }, [])
 
   const ticket = tickets.find((t) => t._id === id)
-  console.log(ticket)
+  // console.log(ticket)
 
   return (
     <div>

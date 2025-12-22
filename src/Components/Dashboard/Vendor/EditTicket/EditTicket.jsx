@@ -31,7 +31,7 @@ const EditTicket = () => {
   } = useForm()
 
   const onSubmit = async (data) => {
-    console.log(data)
+    // console.log(data)
     // later: upload image to imgbb, then send data to backend
 
     const ticketImg = data.image[0]
@@ -42,7 +42,7 @@ const EditTicket = () => {
 
     axios.post(imgAPI_URL, formData).then(async (res) => {
       const photoURL = res.data.data.url
-      console.log('after image upload', photoURL)
+      // console.log('after image upload', photoURL)
       const allData = {
         ...data,
         image: photoURL,
@@ -52,7 +52,7 @@ const EditTicket = () => {
       if (response.data.modifiedCount) {
         toast.success('Ticket updated successfully')
       }
-      console.log(response.data)
+      // console.log(response.data)
 
       return response.data
     })

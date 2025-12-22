@@ -25,11 +25,11 @@ const RequestedBookings = () => {
     try {
       await instance.patch(`/booked-tickets/${id}`, { bookingStatus: 'accepted' })
       refetch()
-      toast.success('Booking accepted', {
+      toast.success('Booking accepted!', {
         position: 'top-center',
       })
     } catch (error) {
-      toast.error('Failed to accept booking', {
+      toast.error('Failed to accept booking!', {
         position: 'top-center',
       })
     }
@@ -39,9 +39,13 @@ const RequestedBookings = () => {
     try {
       await instance.patch(`/booked-tickets/${id}`, { bookingStatus: 'rejected' })
       refetch()
-      toast.error('Booking rejected')
+      toast.success('Booking rejected!', {
+        position: 'top-center',
+      })
     } catch (error) {
-      toast.error('Failed to reject booking')
+      toast.error('Failed to reject booking!', {
+        position: 'top-center',
+      })
     }
   }
 
