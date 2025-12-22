@@ -207,7 +207,7 @@ const AllTickets = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 mt-6">
+      <div className="max-w-350 mx-auto px-4 mt-6">
         <div className="mb-4 flex justify-between items-center">
           <span className="text-sm text-gray-500 font-medium">
             Showing {currentItems.length} of {filteredAndSortedTickets.length} tickets
