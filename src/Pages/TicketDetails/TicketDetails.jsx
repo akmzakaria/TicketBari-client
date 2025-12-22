@@ -28,7 +28,7 @@ const TicketDetails = () => {
     },
   })
 
-  // countdown
+  // countdown timer
   useEffect(() => {
     if (!ticket?.departure) return
 
@@ -57,7 +57,7 @@ const TicketDetails = () => {
 
   if (isLoading || loading) return <Loading />
 
-  // quantity logic
+  // quantity logic (now allows 0)
   const increaseQty = () => {
     if (bookingQty < ticket.quantity) {
       setBookingQty((prev) => prev + 1)
@@ -65,7 +65,7 @@ const TicketDetails = () => {
   }
 
   const decreaseQty = () => {
-    if (bookingQty > 1) {
+    if (bookingQty > 0) {
       setBookingQty((prev) => prev - 1)
     }
   }
@@ -73,6 +73,8 @@ const TicketDetails = () => {
   const totalPrice = bookingQty * ticket.price
 
   const handleBookTicket = () => {
+    if (bookingQty === 0) return
+
     const data = {
       ticketId: ticket._id,
       title: ticket.title,
@@ -185,11 +187,14 @@ const TicketDetails = () => {
               </button>
 
               <button
+                disabled={bookingQty === 0}
                 onClick={() => {
                   handleBookTicket()
                   setIsModalOpen(false)
                 }}
-                className="btn bg-[#086c52] hover:bg-[#064e3b] text-white"
+                className={`btn text-white ${
+                  bookingQty === 0 ? 'bg-[#086c52]/60' : 'bg-[#086c52] hover:bg-[#064e3b]'
+                }`}
               >
                 Confirm
               </button>
