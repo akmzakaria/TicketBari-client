@@ -1,0 +1,22 @@
+{
+  "name": "TicketBari",
+  "short_name": "TicketBari",
+  "description": "Fast & secure ticket booking platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#086c52",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/fav2.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/fav2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

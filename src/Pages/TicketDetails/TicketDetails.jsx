@@ -10,6 +10,7 @@ import toast from 'react-hot-toast'
 import Loading from '../../Components/Loading/Loading'
 import { AuthContext } from '../../Context/AuthContext'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import Aos from 'aos'
 
 const TicketDetails = () => {
   const instance = useAxiosSecure()
@@ -27,6 +28,14 @@ const TicketDetails = () => {
       return res.data
     },
   })
+
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
 
   // countdown timer
   useEffect(() => {
@@ -101,7 +110,7 @@ const TicketDetails = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div data-aos="fade-in" className="h-[92vh] flex items-center justify-center p-4">
       <div className="max-w-3xl w-full rounded-lg shadow-xl overflow-hidden">
         <img src={ticket.image} alt="ticket" className="w-full h-72 object-cover" />
 
@@ -113,13 +122,13 @@ const TicketDetails = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 mb-4">
-            <span className="bg-gray-100 px-3 py-1 rounded text-sm flex items-center gap-1">
+            <span className="bg-black/10 px-3 py-1 rounded text-sm flex items-center gap-1">
               <IoBus /> {ticket.transport}
             </span>
-            <span className="bg-gray-100 px-3 py-1 rounded text-sm flex items-center">
+            <span className="bg-black/10 px-3 py-1 rounded text-sm flex items-center">
               <TbCurrencyTaka /> {ticket.price}
             </span>
-            <span className="bg-gray-100 px-3 py-1 rounded text-sm flex items-center gap-1">
+            <span className="bg-black/10 px-3 py-1 rounded text-sm flex items-center gap-1">
               <MdOutlineConfirmationNumber /> Available: {ticket.quantity}
             </span>
           </div>
