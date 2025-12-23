@@ -1,10 +1,11 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { AuthContext } from '../../../../Context/AuthContext'
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 import { FaBangladeshiTakaSign } from 'react-icons/fa6'
 import Loading from '../../../Loading/Loading'
+import Aos from 'aos'
 
 const RevenueOverview = () => {
   const { user, loading } = use(AuthContext)
@@ -34,6 +35,14 @@ const RevenueOverview = () => {
     { name: 'Total Revenue', value: totalRevenue },
   ]
 
+  useEffect(() => {
+    Aos.init({
+      duration: 500,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
+
   if (isLoading || loading) {
     return <Loading></Loading>
   }
@@ -41,11 +50,16 @@ const RevenueOverview = () => {
   return (
     <div className="flex items-center mb-10 justify-center overflow-x-hidden">
       <div>
-        <h2 className="text-xl md:text-3xl m-5 font-bold">Revenue Overview</h2>
+        <h2 data-aos="fade-down" className="text-xl md:text-3xl m-5 font-bold">
+          Revenue Overview
+        </h2>
 
         <div className="flex flex-col gap-10 items-center justify-center">
           {/* Stats */}
-          <div className="stats stats-vertical lg:stats-horizontal shadow text-center md:h-35 ">
+          <div
+            data-aos="zoom-out-down"
+            className="stats stats-vertical lg:stats-horizontal shadow text-center md:h-35 "
+          >
             <div className="stat">
               <div className="stat-title">Total Added Tickets</div>
               <div className="stat-value flex justify-center items-center">{approvedTickets}</div>
@@ -75,7 +89,12 @@ const RevenueOverview = () => {
 
           {/* Tickets Pie Chart */}
           <div className=" flex gap-5 flex-col md:flex-row">
-            <div className="mb-10 flex justify-center">
+            <div
+              data-aos="zoom-out-left"
+              data-aos-delay="500"
+              data-aos-duration="800"
+              className="mb-10 flex justify-center"
+            >
               <PieChart width={400} height={300}>
                 <Pie
                   data={ticketData}
@@ -97,7 +116,12 @@ const RevenueOverview = () => {
             </div>
 
             {/* Revenue Pie Chart */}
-            <div className="flex justify-center">
+            <div
+              data-aos="zoom-out-right"
+              data-aos-delay="500"
+              data-aos-duration="800"
+              className="flex justify-center"
+            >
               <PieChart width={400} height={300}>
                 <Pie
                   data={revenueData}

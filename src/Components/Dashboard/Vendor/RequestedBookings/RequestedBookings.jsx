@@ -1,9 +1,10 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import toast, { Toaster } from 'react-hot-toast'
 import { AuthContext } from '../../../../Context/AuthContext'
 import Loading from '../../../Loading/Loading'
+import Aos from 'aos'
 
 const RequestedBookings = () => {
   const instance = useAxiosSecure()
@@ -49,6 +50,14 @@ const RequestedBookings = () => {
     }
   }
 
+  useEffect(() => {
+    Aos.init({
+      duration: 500,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
+
   if (isLoading || loading) {
     return <Loading></Loading>
   }
@@ -86,7 +95,9 @@ const RequestedBookings = () => {
   return (
     <div className="mx-5 mb-10">
       <Toaster position="bottom-center" reverseOrder={true} />
-      <h2 className="text-xl md:text-3xl font-bold my-5">Requested Bookings</h2>
+      <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold my-5">
+        Requested Bookings
+      </h2>
 
       {tickets.length === 0 ? (
         <div className="flex justify-center items-center h-[75vh]">
@@ -96,7 +107,7 @@ const RequestedBookings = () => {
         <div className="overflow-x-auto">
           <table className="table table-zebra">
             <thead>
-              <tr className="text-center">
+              <tr data-aos="fade-right" className="text-center">
                 <th>SI. No</th>
                 <th>User Email</th>
                 <th>Ticket Title</th>
@@ -107,7 +118,12 @@ const RequestedBookings = () => {
             </thead>
             <tbody>
               {tickets.map((ticket, i) => (
-                <tr key={ticket._id} className="text-center">
+                <tr
+                  data-aos="fade-right"
+                  data-aos-delay={i * 100}
+                  key={ticket._id}
+                  className="text-center"
+                >
                   <th>{i + 1}</th>
                   <td>{ticket.userEmail}</td>
                   <td>{ticket.title}</td>

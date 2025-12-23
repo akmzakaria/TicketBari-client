@@ -1,4 +1,4 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { AuthContext } from '../../../../Context/AuthContext'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
@@ -8,6 +8,7 @@ import { GoClock } from 'react-icons/go'
 import toast, { Toaster } from 'react-hot-toast'
 import { Link } from 'react-router'
 import Loading from '../../../Loading/Loading'
+import Aos from 'aos'
 
 const VendorAddedTickets = () => {
   const { user, loading } = use(AuthContext)
@@ -25,6 +26,14 @@ const VendorAddedTickets = () => {
       return res.data
     },
   })
+
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
 
   // console.log(tickets)
 
@@ -75,7 +84,9 @@ const VendorAddedTickets = () => {
   return (
     <div>
       <Toaster position="bottom-center" reverseOrder={true} />
-      <h2 className="text-xl md:text-3xl font-bold m-5">My Added Tickets</h2>
+      <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold m-5">
+        My Added Tickets
+      </h2>
 
       {tickets.length === 0 ? (
         <div className="flex justify-center items-center h-[75vh]">
@@ -83,8 +94,11 @@ const VendorAddedTickets = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-5 pb-10">
-          {tickets.map((ticket) => (
+          {tickets.map((ticket, index) => (
             <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay={index * 250}
               key={ticket._id}
               className=" rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
             >

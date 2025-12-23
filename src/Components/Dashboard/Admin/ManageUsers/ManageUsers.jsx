@@ -1,9 +1,10 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { toast, Toaster } from 'react-hot-toast'
 import Loading from '../../../Loading/Loading'
 import { AuthContext } from '../../../../Context/AuthContext'
+import Aos from 'aos'
 
 const ManageUsers = () => {
   const instance = useAxiosSecure()
@@ -21,6 +22,14 @@ const ManageUsers = () => {
     },
     // staleTime: 5 * 60 * 1000,
   })
+
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
 
   const handleRoleChange = async (id, role) => {
     try {
@@ -74,12 +83,14 @@ const ManageUsers = () => {
 
   return (
     <div>
-      <h2 className="text-xl md:text-3xl font-bold my-5 ml-5">Manage Users:</h2>
+      <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold my-5 ml-5">
+        Manage Users:
+      </h2>
 
       <div className="overflow-x-auto">
         <table className="table table-zebra">
           <thead>
-            <tr className="text-center">
+            <tr data-aos="fade-right" className="text-center">
               <th>SI. No</th>
               <th>Name</th>
               <th>Email</th>
@@ -89,7 +100,12 @@ const ManageUsers = () => {
           </thead>
           <tbody>
             {users.map((user, i) => (
-              <tr key={user._id} className="text-center">
+              <tr
+                data-aos="fade-right"
+                data-aos-delay={i * 100}
+                key={user._id}
+                className="text-center"
+              >
                 <th>{i + 1}</th>
                 <td>{user.userName}</td>
                 <td>{user.userEmail}</td>

@@ -1,10 +1,11 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../Context/AuthContext'
 import { Link, useLocation, useNavigate } from 'react-router'
 import useAxios from '../../Hooks/useAxios'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import toast from 'react-hot-toast'
+import Aos from 'aos'
 
 const Login = () => {
   const instance = useAxiosSecure()
@@ -16,6 +17,14 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
+
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
 
   const handleLogin = (data) => {
     const email = data.email
@@ -67,11 +76,12 @@ const Login = () => {
 
   return (
     <div className="hero bg-base-200 min-h-screen">
-      <div className="hero-content flex-col">
-        <div className="text-center lg:text-left">
+      <div data-aos="zoom-in-up" className="hero-content flex-col">
+        {/* <div className="text-center lg:text-left">
           <h1 className="text-xl md:text-3xl font-bold">Login now!</h1>
-        </div>
+        </div> */}
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+          <h1 className="text-xl text-center mt-5 md:text-3xl font-bold">Login now!</h1>
           <div className="card-body">
             <form onSubmit={handleSubmit(handleLogin)}>
               <fieldset className="fieldset">

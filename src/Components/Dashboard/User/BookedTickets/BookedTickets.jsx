@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import { AuthContext } from '../../../../Context/AuthContext'
 import Loading from '../../../Loading/Loading'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
+import Aos from 'aos'
 
 const BookedTickets = () => {
   const [countdowns, setCountdowns] = useState({})
@@ -65,12 +66,20 @@ const BookedTickets = () => {
     window.location.assign(res.data.url)
   }
 
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
+
   if (loading || isLoading) {
     return <Loading />
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-5 mt-5 mb-10">
+    <div className="px-5 mt-5 mb-10">
       <h2 className="text-xl md:text-3xl font-bold text-center mb-5">My Booked Tickets</h2>
 
       {tickets.length === 0 && (
@@ -80,8 +89,11 @@ const BookedTickets = () => {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tickets.map((ticket) => (
+        {tickets.map((ticket, index) => (
           <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay={index * 250}
             key={ticket._id}
             className="rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
           >

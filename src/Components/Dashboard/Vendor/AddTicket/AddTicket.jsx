@@ -1,9 +1,10 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { AuthContext } from '../../../../Context/AuthContext'
 import useAxios from '../../../../Hooks/useAxios'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import toast, { Toaster, ToastIcon } from 'react-hot-toast'
+import Aos from 'aos'
 
 const AddTicket = () => {
   const { user } = use(AuthContext)
@@ -49,12 +50,22 @@ const AddTicket = () => {
     })
   }
 
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Toaster position="top-center" reverseOrder={true}></Toaster>
-      <h2 className="text-xl md:text-3xl font-bold mb-6">Add New Ticket</h2>
+      <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold mb-6">
+        Add New Ticket
+      </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form data-aos="fade-in" onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Ticket title */}
         <div>
           <label className="label">Ticket Title</label>

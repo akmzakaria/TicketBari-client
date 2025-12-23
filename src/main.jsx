@@ -8,6 +8,7 @@ import { router } from './Routes/Router.jsx'
 import { AuthProvider } from './Context/AuthProvider.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'react-hot-toast'
+import 'aos/dist/aos.css'
 
 const queryClient = new QueryClient()
 

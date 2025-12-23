@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router'
 import toast, { Toaster } from 'react-hot-toast'
 import Loading from '../../../Loading/Loading'
+import Aos from 'aos'
 
 const ManageTickets = () => {
   const instance = useAxiosSecure()
@@ -19,6 +20,14 @@ const ManageTickets = () => {
       return res.data
     },
   })
+
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
 
   const handleApprove = async (id) => {
     try {
@@ -84,18 +93,20 @@ const ManageTickets = () => {
 
   return (
     <div>
-      <h2 className="text-xl md:text-3xl font-bold my-5 ml-5">Manage Tickets:</h2>
+      <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold my-5 ml-5">
+        Manage Tickets:
+      </h2>
       <div>
         {tickets.length === 0 ? (
           <div className="flex items-center justify-center h-[70vh]">
-            <p>No ticket requests!</p>
+            <p data-aos="zoom-in">No ticket requests!</p>
           </div>
         ) : (
           <div>
             <div className="overflow-x-auto">
               <table className="table table-zebra">
                 <thead>
-                  <tr className="text-center">
+                  <tr data-aos="fade-right" className="text-center">
                     <th>SI. No</th>
                     <th>Ticket Title</th>
                     <th>Vendor Name</th>
@@ -105,7 +116,12 @@ const ManageTickets = () => {
                 </thead>
                 <tbody>
                   {tickets.map((ticket, i) => (
-                    <tr key={ticket._id} className="text-center">
+                    <tr
+                      data-aos="fade-right"
+                      data-aos-delay={i * 100}
+                      key={ticket._id}
+                      className="text-center"
+                    >
                       <th>{i + 1}</th>
                       <td>{ticket.title}</td>
                       <td>{ticket.vendor_name}</td>

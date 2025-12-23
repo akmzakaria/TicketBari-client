@@ -5,6 +5,7 @@ import Loading from '../Loading/Loading'
 import TicketCard from '../TicketCard/TicketCard'
 import { useQuery } from '@tanstack/react-query'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import Aos from 'aos'
 
 const AllTickets = () => {
   const { loading } = use(AuthContext)
@@ -70,6 +71,13 @@ const AllTickets = () => {
     setItemOffset(newOffset)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  useEffect(() => {
+    Aos.init({
+      // duration: 800,
+      once: true,
+    })
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => setShowLoading(false), 1000)
@@ -231,8 +239,10 @@ const AllTickets = () => {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {currentItems.map((ticket) => (
-                <TicketCard key={ticket._id} ticket={ticket} />
+              {currentItems.map((ticket, index) => (
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 250}>
+                  <TicketCard key={ticket._id} ticket={ticket} />
+                </div>
               ))}
             </div>
 

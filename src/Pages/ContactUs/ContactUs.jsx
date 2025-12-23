@@ -3,6 +3,8 @@ import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-ic
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'
 import { AuthContext } from '../../Context/AuthContext'
 import Loading from '../../Components/Loading/Loading'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
 
 const ContactUs = () => {
   const { loading } = use(AuthContext)
@@ -15,21 +17,22 @@ const ContactUs = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  if (loading || showLoading) {
-    return <Loading></Loading>
-  }
+  useEffect(() => {
+    Aos.init({ duration: 800, once: true, easing: 'ease-in-out' })
+  }, [])
+
+  if (loading || showLoading) return <Loading />
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Logic for sending email or saving message goes here
     alert('Thank you! Your message has been sent.')
   }
 
   return (
-    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <div data-aos="fade-down" className="text-center mb-16">
           <h1 className="text-4xl font-extrabold sm:text-5xl">Get in Touch</h1>
           <p className="mt-4 text-xl text-gray-500">
             Have questions about your ticket? We're here to help you 24/7.
@@ -39,7 +42,11 @@ const ContactUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information Cards */}
           <div className="space-y-8">
-            <div className=" p-8 rounded-xl shadow-md flex items-start space-x-4">
+            <div
+              data-aos="fade-right"
+              data-aos-delay="100"
+              className="p-8 rounded-xl shadow-md flex items-start space-x-4"
+            >
               <div className="bg-blue-100 p-3 rounded-lg text-blue-600">
                 <HiOutlinePhone size={24} />
               </div>
@@ -50,30 +57,42 @@ const ContactUs = () => {
               </div>
             </div>
 
-            <div className=" p-8 rounded-xl shadow-md flex items-start space-x-4">
+            <div
+              data-aos="fade-right"
+              data-aos-delay="250"
+              className="p-8 rounded-xl shadow-md flex items-start space-x-4"
+            >
               <div className="bg-green-100 p-3 rounded-lg text-green-600">
                 <HiOutlineMail size={24} />
               </div>
               <div>
-                <h3 className="text-lg font-bold ">Email Support</h3>
+                <h3 className="text-lg font-bold">Email Support</h3>
                 <p className="text-gray-500">For booking inquiries and receipts.</p>
                 <p className="mt-2 font-semibold text-green-600">support@ticketgo.com</p>
               </div>
             </div>
 
-            <div className="p-8 rounded-xl shadow-md flex items-start space-x-4">
+            <div
+              data-aos="fade-right"
+              data-aos-delay="400"
+              className="p-8 rounded-xl shadow-md flex items-start space-x-4"
+            >
               <div className="bg-purple-100 p-3 rounded-lg text-purple-600">
                 <HiOutlineLocationMarker size={24} />
               </div>
               <div>
-                <h3 className="text-lg font-bold ">Head Office</h3>
+                <h3 className="text-lg font-bold">Head Office</h3>
                 <p className="text-gray-500">Visit us for corporate partnerships.</p>
                 <p className="mt-2 text-gray-500">123 Travel Road, Gulshan, Dhaka.</p>
               </div>
             </div>
 
             {/* Social Links */}
-            <div className="pt-6 flex space-x-6 justify-center lg:justify-start">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="550"
+              className="pt-6 flex space-x-6 justify-center lg:justify-start"
+            >
               <a href="#" className="text-gray-400 hover:text-green-600">
                 <FaFacebookF size={20} />
               </a>
@@ -87,11 +106,11 @@ const ContactUs = () => {
           </div>
 
           {/* Contact Form */}
-          <div className=" p-8 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold mb-6 ">Send us a message</h2>
+          <div data-aos="fade-left" data-aos-delay="300" className="p-8 rounded-xl shadow-lg">
+            <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium ">Full Name</label>
+                <label className="block text-sm font-medium">Full Name</label>
                 <input
                   type="text"
                   required
@@ -100,7 +119,7 @@ const ContactUs = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium ">Email Address</label>
+                <label className="block text-sm font-medium">Email Address</label>
                 <input
                   type="email"
                   required
@@ -118,7 +137,7 @@ const ContactUs = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium ">Message</label>
+                <label className="block text-sm font-medium">Message</label>
                 <textarea
                   rows="4"
                   required

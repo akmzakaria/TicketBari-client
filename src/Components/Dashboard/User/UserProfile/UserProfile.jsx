@@ -1,8 +1,9 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { AuthContext } from '../../../../Context/AuthContext'
 import { useQuery } from '@tanstack/react-query'
 import Loading from '../../../Loading/Loading'
+import Aos from 'aos'
 
 const UserProfile = () => {
   const { user, loading } = use(AuthContext)
@@ -16,6 +17,14 @@ const UserProfile = () => {
     },
   })
 
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
+
   if (isLoading || loading) {
     return <Loading />
   }
@@ -27,7 +36,7 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="flex items-center p-5 h-screen justify-center ">
+    <div data-aos="zoom-in" className="flex items-center p-5 h-screen justify-center ">
       <div className="max-w-2xl w-full h-[50vh] flex items-center justify-center p-6 shadow-lg hover:shadow-xl transition transform border border-gray-200 rounded-xl">
         <div className="flex flex-col items-center">
           <img

@@ -1,3 +1,5 @@
+import Aos from 'aos'
+import { useEffect } from 'react'
 import { FaTicketAlt, FaLock, FaClock, FaHeadset } from 'react-icons/fa'
 
 const features = [
@@ -28,13 +30,26 @@ const features = [
 ]
 
 const WhyChooseUs = () => {
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+    })
+  }, [])
+
   return (
     <section className="my-14">
-      <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Us?</h2>
+      <h2 data-aos="zoom-in" className="text-3xl font-bold mb-8 text-center">
+        Why Choose Us?
+      </h2>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {features.map((item) => (
+        {features.map((item, index) => (
           <div
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="1500"
+            data-aos-delay={index * 350}
             key={item.id}
             className="text-center p-6 border rounded-xl hover:shadow-lg transition"
           >

@@ -1,3 +1,6 @@
+import Aos from 'aos'
+import { useEffect } from 'react'
+
 const routes = [
   {
     id: 1,
@@ -23,13 +26,29 @@ const routes = [
 ]
 
 const PopularRoutes = () => {
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+      once: true,
+    })
+  }, [])
+
   return (
     <section className="my-12">
-      <h2 className="text-3xl font-bold mb-6 text-center">Popular Routes</h2>
+      <h2 data-aos="zoom-in" className="text-3xl font-bold mb-6 text-center">
+        Popular Routes
+      </h2>
 
       <div className="grid md:grid-cols-3 gap-6">
-        {routes.map((route) => (
-          <div key={route.id} className="border rounded-xl p-5 hover:shadow-lg transition">
+        {routes.map((route, index) => (
+          <div
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="1500"
+            data-aos-delay={index * 350}
+            key={route.id}
+            className="border rounded-xl p-5 hover:shadow-lg transition"
+          >
             <h3 className="text-lg font-semibold">
               {route.from} → {route.to}
             </h3>
