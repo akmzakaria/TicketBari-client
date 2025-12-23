@@ -24,7 +24,7 @@ const PaymentSuccess = () => {
     <div className="p-5">
       <h2 className="text-3xl">Payment successful</h2>
       <p>Your Transaction id: {paymentInfo.transactionId}</p>
-      <Link to={'/dashboard'} className="btn btn-sm mt-3">
+      <Link to={'/dashboard/booked-tickets'} className="btn btn-sm mt-3">
         Return Dashboard
       </Link>
     </div>

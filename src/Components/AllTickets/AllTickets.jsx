@@ -24,7 +24,7 @@ const AllTickets = () => {
   const itemsPerPage = 6
 
   // get fraud users
-  const { data: fraudUser = [] } = useQuery({
+  const { isLoading: fraudLoading, data: fraudUser = [] } = useQuery({
     queryKey: ['users', 'fraud'],
     queryFn: async () => {
       const res = await instance.get('/users?role=fraud')
@@ -33,7 +33,7 @@ const AllTickets = () => {
   })
 
   // get all approved tickets
-  const { data: tickets = [] } = useQuery({
+  const { isLoading: approvedLoading, data: tickets = [] } = useQuery({
     queryKey: ['all-tickets', 'approved'],
     queryFn: async () => {
       const res = await instance.get('/tickets?ticketStatus=approved')
@@ -74,17 +74,19 @@ const AllTickets = () => {
 
   useEffect(() => {
     Aos.init({
-      // duration: 800,
+      duration: 1000,
       once: true,
     })
   }, [])
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowLoading(false), 1000)
+    const timer = setTimeout(() => setShowLoading(false), 1500)
     return () => clearTimeout(timer)
   }, [])
 
-  if (loading || showLoading) return <Loading />
+  if (loading || approvedLoading || fraudLoading || showLoading) {
+    return <Loading />
+  }
 
   return (
     <div className="min-h-screen  pb-10">
@@ -92,8 +94,11 @@ const AllTickets = () => {
       <div className="">
         <div className="max-w-350 mx-auto px-4 py-3">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-xl md:text-3xl font-bold">Find Tickets</h2>
+            <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold">
+              Find Tickets
+            </h2>
             <button
+              data-aos="zoom-in"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className={`btn btn-sm btn-circle ${
                 isFilterOpen ? 'bg-[#086c52] text-white' : 'btn-ghost'
@@ -115,7 +120,7 @@ const AllTickets = () => {
             </button>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div data-aos="zoom-in" className="flex gap-2 items-center">
             <div className="flex-1 relative">
               <input
                 type="text"
@@ -247,7 +252,7 @@ const AllTickets = () => {
             </div>
 
             {/* pagination */}
-            <div className="mt-12 flex justify-center">
+            <div data-aos="zoom-in" className="mt-12 flex justify-center">
               <ReactPaginate
                 breakLabel="..."
                 nextLabel="Next →"

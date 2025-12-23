@@ -42,48 +42,54 @@ const ContactUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information Cards */}
           <div className="space-y-8">
-            <div
-              data-aos="fade-right"
-              data-aos-delay="100"
-              className="p-8 rounded-xl shadow-md flex items-start space-x-4"
-            >
-              <div className="bg-blue-100 p-3 rounded-lg text-blue-600">
-                <HiOutlinePhone size={24} />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold">Call Us</h3>
-                <p className="text-gray-500">Fastest way to get help during travel.</p>
-                <p className="mt-2 font-semibold text-blue-600">+880 1234 567 890</p>
-              </div>
-            </div>
-
-            <div
-              data-aos="fade-right"
-              data-aos-delay="250"
-              className="p-8 rounded-xl shadow-md flex items-start space-x-4"
-            >
-              <div className="bg-green-100 p-3 rounded-lg text-green-600">
-                <HiOutlineMail size={24} />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold">Email Support</h3>
-                <p className="text-gray-500">For booking inquiries and receipts.</p>
-                <p className="mt-2 font-semibold text-green-600">support@ticketgo.com</p>
+            <div className="rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-105 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+              <div
+                data-aos="fade-right"
+                data-aos-delay="100"
+                className="p-8 rounded-xl shadow-md flex items-start space-x-4"
+              >
+                <div className="bg-blue-100 p-3 rounded-lg text-blue-600">
+                  <HiOutlinePhone size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold">Call Us</h3>
+                  <p className="text-gray-500">Fastest way to get help during travel.</p>
+                  <p className="mt-2 font-semibold text-blue-600">+880 1234 567 890</p>
+                </div>
               </div>
             </div>
 
-            <div
-              data-aos="fade-right"
-              data-aos-delay="400"
-              className="p-8 rounded-xl shadow-md flex items-start space-x-4"
-            >
-              <div className="bg-purple-100 p-3 rounded-lg text-purple-600">
-                <HiOutlineLocationMarker size={24} />
+            <div className="rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+              <div
+                data-aos="fade-right"
+                data-aos-delay="250"
+                className="p-8 rounded-xl shadow-md flex items-start space-x-4"
+              >
+                <div className="bg-green-100 p-3 rounded-lg text-green-600">
+                  <HiOutlineMail size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold">Email Support</h3>
+                  <p className="text-gray-500">For booking inquiries and receipts.</p>
+                  <p className="mt-2 font-semibold text-green-600">support@ticketgo.com</p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-bold">Head Office</h3>
-                <p className="text-gray-500">Visit us for corporate partnerships.</p>
-                <p className="mt-2 text-gray-500">123 Travel Road, Gulshan, Dhaka.</p>
+            </div>
+
+            <div className="rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+              <div
+                data-aos="fade-right"
+                data-aos-delay="400"
+                className="p-8 rounded-xl shadow-md flex items-start space-x-4"
+              >
+                <div className="bg-purple-100 p-3 rounded-lg text-purple-600">
+                  <HiOutlineLocationMarker size={24} />
+                </div>
+                <div>
+                  <h3 className="text-lg font-bold">Head Office</h3>
+                  <p className="text-gray-500">Visit us for corporate partnerships.</p>
+                  <p className="mt-2 text-gray-500">123 Travel Road, Gulshan, Dhaka.</p>
+                </div>
               </div>
             </div>
 

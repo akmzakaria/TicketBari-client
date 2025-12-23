@@ -15,7 +15,7 @@ const Home = () => {
   const instance = useAxiosSecure()
 
   // Fetch fraud users
-  const { data: fraudUser = [] } = useQuery({
+  const { isLoading: fraudLoading, data: fraudUser = [] } = useQuery({
     queryKey: ['users', 'fraud'],
     queryFn: async () => {
       const res = await instance.get('/users?role=fraud')
@@ -24,7 +24,7 @@ const Home = () => {
   })
 
   // Fetch advertised tickets
-  const { data: adTickets = [] } = useQuery({
+  const { isLoading: adLoading, data: adTickets = [] } = useQuery({
     queryKey: ['tickets', 'advertised'],
     queryFn: async () => {
       const res = await instance.get('/tickets?advertiseStatus=advertised')
@@ -33,7 +33,7 @@ const Home = () => {
   })
 
   // Fetch latest tickets
-  const { data: latestTickets = [] } = useQuery({
+  const { isLoading: approvedLoading, data: latestTickets = [] } = useQuery({
     queryKey: ['tickets', 'approved', 6],
     queryFn: async () => {
       const res = await instance.get('/tickets?ticketStatus=approved&limit=6')
@@ -68,7 +68,7 @@ const Home = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  if (loading || showLoading) {
+  if (loading || approvedLoading || adLoading || fraudLoading || showLoading) {
     return <Loading />
   }
 

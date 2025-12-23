@@ -37,7 +37,7 @@ const RevenueOverview = () => {
 
   useEffect(() => {
     Aos.init({
-      duration: 500,
+      duration: 1000,
       once: true,
       easing: 'ease-in-out',
     })
@@ -58,6 +58,7 @@ const RevenueOverview = () => {
           {/* Stats */}
           <div
             data-aos="zoom-out-down"
+            data-aos-delay="300"
             className="stats stats-vertical lg:stats-horizontal shadow text-center md:h-35 "
           >
             <div className="stat">
@@ -91,8 +92,8 @@ const RevenueOverview = () => {
           <div className=" flex gap-5 flex-col md:flex-row">
             <div
               data-aos="zoom-out-left"
-              data-aos-delay="500"
-              data-aos-duration="800"
+              data-aos-delay="700"
+              data-aos-duration="1000"
               className="mb-10 flex justify-center"
             >
               <PieChart width={400} height={300}>
@@ -118,8 +119,8 @@ const RevenueOverview = () => {
             {/* Revenue Pie Chart */}
             <div
               data-aos="zoom-out-right"
-              data-aos-delay="500"
-              data-aos-duration="800"
+              data-aos-delay="700"
+              data-aos-duration="1000"
               className="flex justify-center"
             >
               <PieChart width={400} height={300}>

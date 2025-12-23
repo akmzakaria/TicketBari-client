@@ -79,8 +79,10 @@ const BookedTickets = () => {
   }
 
   return (
-    <div className="px-5 mt-5 mb-10">
-      <h2 className="text-xl md:text-3xl font-bold text-center mb-5">My Booked Tickets</h2>
+    <div className="px-5 mt-5 mb-10 ">
+      <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold text-center mb-5">
+        My Booked Tickets
+      </h2>
 
       {tickets.length === 0 && (
         <div className="flex justify-center h-[70vh] items-center">
@@ -90,39 +92,44 @@ const BookedTickets = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tickets.map((ticket, index) => (
-          <div
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay={index * 250}
-            key={ticket._id}
-            className="rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
-          >
-            <img src={ticket.image} alt={ticket.title} className="w-full h-48 object-cover" />
-            <div className="p-5">
-              <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>
-              <p className="text-gray-600 mb-2">
-                {ticket.from} → {ticket.to}
-              </p>
-              <p className="text-sm mb-1 flex items-center gap-1">
-                <MdOutlineConfirmationNumber /> Quantity:{' '}
-                <span className="font-medium">{ticket.bookingQty}</span>
-              </p>
-              <p className="text-sm mb-2 flex items-center gap-1">
-                <TbCurrencyTaka /> Total Price:{' '}
-                <span className="font-semibold">{ticket.totalPrice} BDT</span>
-              </p>
-              <p className="text-sm mb-2 flex items-center gap-1">
-                <GoClock />
-                Departure: {new Date(ticket.departure).toLocaleString()}
-              </p>
-              {ticket.bookingStatus !== 'rejected' && (
-                <p className="text-red-600 font-semibold text-sm mb-3 flex items-center gap-1">
-                  <PiClockCountdownBold /> {countdowns[ticket._id] || 'Calculating...'}
+          <div className="hover:shadow-lg hover:scale-103 duration-500 transition-all">
+            <div
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay={index * 250}
+              key={ticket._id}
+              className="rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
+            >
+              <img
+                src={ticket.image}
+                alt={ticket.title}
+                className="w-full h-48 object-cover hover:shadow-lg hover:scale-105 duration-500 transition-all"
+              />
+              <div className="p-5">
+                <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>
+                <p className="text-gray-600 mb-2">
+                  {ticket.from} → {ticket.to}
                 </p>
-              )}
-              <div className="flex justify-between items-center">
-                <span
-                  className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
+                <p className="text-sm mb-1 flex items-center gap-1">
+                  <MdOutlineConfirmationNumber /> Quantity:{' '}
+                  <span className="font-medium">{ticket.bookingQty}</span>
+                </p>
+                <p className="text-sm mb-2 flex items-center gap-1">
+                  <TbCurrencyTaka /> Total Price:{' '}
+                  <span className="font-semibold">{ticket.totalPrice} BDT</span>
+                </p>
+                <p className="text-sm mb-2 flex items-center gap-1">
+                  <GoClock />
+                  Departure: {new Date(ticket.departure).toLocaleString()}
+                </p>
+                {ticket.bookingStatus !== 'rejected' && (
+                  <p className="text-red-600 font-semibold text-sm mb-3 flex items-center gap-1">
+                    <PiClockCountdownBold /> {countdowns[ticket._id] || 'Calculating...'}
+                  </p>
+                )}
+                <div className="flex justify-between items-center">
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
                   ${
                     ticket.bookingStatus === 'pending'
                       ? 'bg-yellow-100 text-yellow-700'
@@ -132,24 +139,25 @@ const BookedTickets = () => {
                       ? 'bg-green-100 text-green-700'
                       : 'bg-red-100 text-red-700'
                   }`}
-                >
-                  {ticket.bookingStatus}
-                </span>
-                {ticket.bookingStatus === 'accepted' && countdowns[ticket._id] !== 'Departed' ? (
-                  <button
-                    onClick={() => handlePayment(ticket)}
-                    className="btn btn-sm rounded-full bg-green-600 text-white active:scale-100 hover:scale-105 hover:bg-green-700 transition"
                   >
-                    Pay Now
-                  </button>
-                ) : (
-                  <button
-                    disabled
-                    className="w-fit px-3 py-1.25 text-sm rounded-full bg-gray-500/50 text-white cursor-not-allowed"
-                  >
-                    Pay Now
-                  </button>
-                )}
+                    {ticket.bookingStatus}
+                  </span>
+                  {ticket.bookingStatus === 'accepted' && countdowns[ticket._id] !== 'Departed' ? (
+                    <button
+                      onClick={() => handlePayment(ticket)}
+                      className="btn btn-sm rounded-full bg-green-600 text-white active:scale-100 hover:scale-105 hover:bg-green-700 transition"
+                    >
+                      Pay Now
+                    </button>
+                  ) : (
+                    <button
+                      disabled
+                      className="w-fit px-3 py-1.25 text-sm rounded-full bg-gray-500/50 text-white cursor-not-allowed"
+                    >
+                      Pay Now
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>

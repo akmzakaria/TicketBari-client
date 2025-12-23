@@ -5,9 +5,13 @@ const TicketCard = ({ ticket }) => {
   const { _id, image, title, price, quantity, transport, perks } = ticket
 
   return (
-    <div className="bg-base-100 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+    <div className="bg-base-100 rounded-xl shadow-md overflow-hidden hover:shadow-lg hover:scale-103 duration-500 transition-all">
       {/* Image */}
-      <img src={image} alt={title} className="h-48 w-full object-cover" />
+      <img
+        src={image}
+        alt={title}
+        className="h-48 w-full object-cover hover:scale-105 duration-500 transition-all"
+      />
 
       {/* Content */}
       <div className="p-4 space-y-2">

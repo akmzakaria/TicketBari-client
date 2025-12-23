@@ -1,4 +1,4 @@
-import React, { use } from 'react'
+import React, { use, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 import { AuthContext } from '../../../../Context/AuthContext'
@@ -6,6 +6,7 @@ import { useParams } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
 import toast, { Toaster } from 'react-hot-toast'
 import useAxios from '../../../../Hooks/useAxios'
+import Aos from 'aos'
 
 const EditTicket = () => {
   const { id } = useParams()
@@ -29,6 +30,14 @@ const EditTicket = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
+
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    })
+  }, [])
 
   const onSubmit = async (data) => {
     // console.log(data)
@@ -61,9 +70,11 @@ const EditTicket = () => {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <Toaster position="top-center" reverseOrder={true}></Toaster>
-      <h2 className="text-3xl font-bold my-6">Edit Ticket</h2>
+      <h2 data-aos="fade-down" className="text-3xl font-bold my-6">
+        Edit Ticket
+      </h2>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      <form data-aos="fade-in" onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Ticket title */}
         <div>
           <label className="label">Ticket Title</label>

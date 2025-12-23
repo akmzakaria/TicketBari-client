@@ -95,38 +95,43 @@ const VendorAddedTickets = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-5 pb-10">
           {tickets.map((ticket, index) => (
-            <div
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay={index * 250}
-              key={ticket._id}
-              className=" rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
-            >
-              <img src={ticket.image} alt={ticket.title} className="w-full h-48 object-cover" />
+            <div className="hover:shadow-lg hover:scale-103 duration-500 transition-all">
+              <div
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-delay={index * 250}
+                key={ticket._id}
+                className=" rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
+              >
+                <img
+                  src={ticket.image}
+                  alt={ticket.title}
+                  className="w-full h-48 object-cover hover:shadow-lg hover:scale-105 duration-500 transition-all"
+                />
 
-              <div className="p-5">
-                <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>
-                <p className="text-gray-600 mb-2">
-                  {ticket.from} → {ticket.to}
-                </p>
+                <div className="p-5">
+                  <h3 className="text-xl font-semibold mb-1">{ticket.title}</h3>
+                  <p className="text-gray-600 mb-2">
+                    {ticket.from} → {ticket.to}
+                  </p>
 
-                <p className="text-sm mb-1 flex items-center gap-1">
-                  <MdOutlineConfirmationNumber /> Quantity:{' '}
-                  <span className="font-medium">{ticket.quantity}</span>
-                </p>
+                  <p className="text-sm mb-1 flex items-center gap-1">
+                    <MdOutlineConfirmationNumber /> Quantity:{' '}
+                    <span className="font-medium">{ticket.quantity}</span>
+                  </p>
 
-                <p className="text-sm mb-2 flex items-center gap-1">
-                  <TbCurrencyTaka /> Total Price:{' '}
-                  <span className="font-semibold">{ticket.price} BDT</span>
-                </p>
+                  <p className="text-sm mb-2 flex items-center gap-1">
+                    <TbCurrencyTaka /> Total Price:{' '}
+                    <span className="font-semibold">{ticket.price} BDT</span>
+                  </p>
 
-                <p className="text-sm mb-2 flex items-center gap-1">
-                  <GoClock /> {new Date(ticket.departure).toLocaleString()}
-                </p>
+                  <p className="text-sm mb-2 flex items-center gap-1">
+                    <GoClock /> {new Date(ticket.departure).toLocaleString()}
+                  </p>
 
-                <div className="flex justify-between items-center">
-                  <span
-                    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
+                  <div className="flex justify-between items-center">
+                    <span
+                      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize
                     ${
                       ticket.ticketStatus === 'pending'
                         ? 'bg-yellow-100 text-yellow-700'
@@ -134,43 +139,44 @@ const VendorAddedTickets = () => {
                         ? 'bg-green-100 text-green-700'
                         : 'bg-red-100 text-red-600'
                     }`}
-                  >
-                    {ticket.ticketStatus}
-                  </span>
-                </div>
+                    >
+                      {ticket.ticketStatus}
+                    </span>
+                  </div>
 
-                {ticket.ticketStatus !== 'rejected' ? (
-                  <div className="flex justify-between mt-2">
-                    <button
-                      onClick={() => confirmDelete(ticket._id)}
-                      className="btn btn-sm rounded-full btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
-                    >
-                      Delete
-                    </button>
-                    <Link
-                      to={`/dashboard/edit-ticket/${ticket._id}`}
-                      className="btn btn-sm rounded-full btn-outline text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
-                    >
-                      Update
-                    </Link>
-                  </div>
-                ) : (
-                  <div className="flex justify-between mt-2">
-                    <button
-                      disabled
-                      onClick={() => confirmDelete(ticket._id)}
-                      className="bg-gray-200 px-3 py-2 font-semibold outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-red-600 border-red-600"
-                    >
-                      Delete
-                    </button>
-                    <button
-                      disabled
-                      className="bg-gray-200 px-3 py-2 font-semibold outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-green-600 border-green-600"
-                    >
-                      Update
-                    </button>
-                  </div>
-                )}
+                  {ticket.ticketStatus !== 'rejected' ? (
+                    <div className="flex justify-between mt-2">
+                      <button
+                        onClick={() => confirmDelete(ticket._id)}
+                        className="btn btn-sm rounded-full btn-outline text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
+                      >
+                        Delete
+                      </button>
+                      <Link
+                        to={`/dashboard/edit-ticket/${ticket._id}`}
+                        className="btn btn-sm rounded-full btn-outline text-green-600 border-green-600 hover:bg-green-600 hover:text-white"
+                      >
+                        Update
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="flex justify-between mt-2">
+                      <button
+                        disabled
+                        onClick={() => confirmDelete(ticket._id)}
+                        className="bg-gray-200 px-3 py-2 font-semibold outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-red-600/50 border-red-600/50"
+                      >
+                        Delete
+                      </button>
+                      <button
+                        disabled
+                        className="bg-gray-200 px-3 py-2 font-semibold outline text-xs rounded-full btn-outline hover:cursor-not-allowed text-green-600/50 border-green-600/50"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           ))}
