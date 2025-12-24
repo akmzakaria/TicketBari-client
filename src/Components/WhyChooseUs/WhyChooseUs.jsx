@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
         {features.map((item, index) => (
-          <div className="  rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+          <div className=" rounded-xl transition-all  duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[-6px_6px_15px_rgba(0,0,0,0.35)] will-change-transform backface-hidden">
             <div
               data-aos="flip-left"
               data-aos-easing="ease-out-cubic"

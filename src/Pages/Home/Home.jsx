@@ -76,7 +76,7 @@ const Home = () => {
     <div className="md:max-w-350 px-2 md:px-5 mx-auto">
       {/* Advertisement section */}
       {filteredAdTickets.length !== 0 && (
-        <div className="bg-black/5 shadow-xl border border-gray-200 px-3 md:px-10 py-5 md:pb-10 mt-5 rounded-lg">
+        <div className="bg-black/5 shadow-xl border border-gray-200/10 px-3 md:px-10 py-5 md:pb-10 mt-5 rounded-lg">
           <h2 data-aos="zoom-in" className="text-xl md:text-3xl font-bold text-center mb-5">
             Advertisements
           </h2>
@@ -91,7 +91,7 @@ const Home = () => {
       )}
 
       {/* Latest Tickets section */}
-      <div className="bg-black/5 shadow-xl border border-gray-200 px-3 md:px-10 py-5 md:pb-10 mt-15 rounded-lg">
+      <div className="bg-black/5 shadow-xl border border-gray-200/10 px-3 md:px-10 py-5 md:pb-10 mt-15 rounded-lg">
         <h2 data-aos="zoom-in" className="text-xl md:text-3xl font-bold text-center mb-5">
           Latest Tickets
         </h2>

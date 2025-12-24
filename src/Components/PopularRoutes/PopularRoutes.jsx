@@ -46,19 +46,24 @@ const PopularRoutes = () => {
             data-aos-easing="ease-out-cubic"
             data-aos-duration="1500"
             data-aos-delay={index * 350}
-            key={route.id}
-            className="border rounded-xl p-5 hover:shadow-lg transition"
           >
-            <h3 className="text-lg font-semibold">
-              {route.from} → {route.to}
-            </h3>
+            <div
+              key={route.id}
+              className="border hover:scale-105 duration-300 border-gray-200/20 shadow-md rounded-xl p-5 hover:shadow-xl transition"
+            >
+              <h3 className="text-lg font-semibold">
+                {route.from} → {route.to}
+              </h3>
 
-            <p className="text-sm mt-2">Starting from</p>
-            <p className="text-xl font-bold text-[#086c52]">{route.price}</p>
+              <p className="text-sm mt-2">Starting from</p>
+              <p className="text-xl font-bold text-[#086c52]">{route.price}</p>
 
-            <p className="mt-2 text-sm text-gray-500">Transport: {route.transport}</p>
+              <p className="mt-2 text-sm text-gray-500">Transport: {route.transport}</p>
 
-            <button className="btn btn-sm bg-[#086c52] text-white mt-4 w-full">View Tickets</button>
+              <button className="btn btn-sm bg-[#086c52] text-white mt-4 w-full">
+                View Tickets
+              </button>
+            </div>
           </div>
         ))}
       </div>

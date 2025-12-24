@@ -42,7 +42,7 @@ const ContactUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information Cards */}
           <div className="space-y-8">
-            <div className="rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-105 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+            <div className="rounded-xl  transition-all duration-500 ease-in-out hover:scale-105 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[-6px_6px_15px_rgba(0,0,0,0.25)] will-change-transform backface-hidden">
               <div
                 data-aos="fade-right"
                 data-aos-delay="100"
@@ -59,7 +59,7 @@ const ContactUs = () => {
               </div>
             </div>
 
-            <div className="rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+            <div className="rounded-xl  transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[-6px_6px_15px_rgba(0,0,0,0.25)] will-change-transform backface-hidden">
               <div
                 data-aos="fade-right"
                 data-aos-delay="250"
@@ -76,7 +76,7 @@ const ContactUs = () => {
               </div>
             </div>
 
-            <div className="rounded-xl bg-white transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[20px_20px_60px_#bebebe,-20px_-20px_60px_#ffffff] will-change-transform backface-hidden">
+            <div className="rounded-xl  transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[-6px_6px_15px_rgba(0,0,0,0.25)] will-change-transform backface-hidden">
               <div
                 data-aos="fade-right"
                 data-aos-delay="400"
