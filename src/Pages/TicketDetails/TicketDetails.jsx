@@ -82,7 +82,14 @@ const TicketDetails = () => {
   const totalPrice = bookingQty * ticket.price
 
   const handleBookTicket = () => {
-    if (bookingQty === 0) return
+    if (!user) {
+      return toast.error('Please login!', {
+        position: 'top-center',
+      })
+    }
+    if (bookingQty === 0) {
+      return
+    }
 
     const data = {
       ticketId: ticket._id,
