@@ -32,10 +32,13 @@ const Login = () => {
 
     userLogin(email, password)
       .then((res) => {
-        navigate(location?.state || '/')
-        toast.success('Logged in successfully!', {
-          position: 'top-center',
-        })
+        // console.log(res)
+        if (res.operationType === 'signIn') {
+          navigate(location?.state || '/')
+          toast.success('Logged in successfully!', {
+            position: 'top-center',
+          })
+        }
       })
       .catch(() => {
         toast.error('Login unsuccessful! Try again.', {
