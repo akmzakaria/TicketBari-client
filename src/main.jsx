@@ -19,6 +19,7 @@ createRoot(document.getElementById('root')).render(
         <RouterProvider router={router}></RouterProvider>
       </AuthProvider>
     </QueryClientProvider>
+
     <Toaster
       position="bottom-center"
       reverseOrder={true}

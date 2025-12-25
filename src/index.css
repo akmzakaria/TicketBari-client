@@ -9,10 +9,16 @@ body {
 }
 
 .nav a.active {
-  border-bottom: 2px solid #086c52;
+  /* border-bottom: 2px solid #086c52; */
   color: #086c52;
   padding-bottom: 0.25rem;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.darkmode :active {
+  color: #086c52;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  outline: none;
 }
 .dash-nav a.active {
   color: #086c52;

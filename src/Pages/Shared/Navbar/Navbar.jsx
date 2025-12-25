@@ -1,6 +1,5 @@
 import React, { use, useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router'
-import { FaCircleArrowRight } from 'react-icons/fa6'
 import { useScrollDirection } from './useScrollDir'
 import Logo from '../../../Components/Logo/Logo'
 import { AuthContext } from '../../../Context/AuthContext'
@@ -10,203 +9,201 @@ const Navbar = () => {
   const { user, logOut } = use(AuthContext)
   const direction = useScrollDirection()
 
-  const [theme, setTheme] = useState(
-    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
-  )
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
 
   useEffect(() => {
     localStorage.setItem('theme', theme)
-    const localTheme = localStorage.getItem('theme')
-
-    document.querySelector('html').setAttribute('data-theme', localTheme)
+    document.documentElement.setAttribute('data-theme', theme)
   }, [theme])
 
+  // disable background scroll when drawer open
+  useEffect(() => {
+    document.body.style.overflow = isDrawerOpen ? 'hidden' : 'auto'
+  }, [isDrawerOpen])
+
   const handleToggle = (e) => {
-    if (e.target.checked) {
-      setTheme('dark')
-    } else {
-      setTheme('light')
-    }
+    setTheme(e.target.checked ? 'dark' : 'light')
+  }
+
+  const handleLogOut = () => {
+    logOut()
+    toast.success('Logged Out successfully!', { position: 'top-center' })
+    setIsDrawerOpen(false)
   }
 
   const links = (
     <>
       <li className="nav">
-        <NavLink to={'/'}>Home</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li className="nav">
-        <NavLink to={'/all-tickets'}>All Tickets</NavLink>
+        <NavLink to="/all-tickets">All Tickets</NavLink>
       </li>
 
       {user && (
-        <>
-          <li className="nav">
-            <NavLink to={'/dashboard'}>Dashboard</NavLink>
-          </li>
-        </>
+        <li className="nav">
+          <NavLink to="/dashboard">Dashboard</NavLink>
+        </li>
       )}
 
       <li className="nav">
-        <NavLink to={'/aboutUs'}>About Us</NavLink>
+        <NavLink to="/aboutUs">About Us</NavLink>
       </li>
       <li className="nav">
-        <NavLink to={'/contactUs'}>Contact Us</NavLink>
+        <NavLink to="/contactUs">Contact Us</NavLink>
+      </li>
+      <li className="darkmode">
+        <label className="flex items-center">
+          <span>Dark mode</span>
+          <input
+            type="checkbox"
+            checked={theme === 'dark'}
+            onChange={handleToggle}
+            className="toggle toggle-sm"
+          />
+        </label>
       </li>
     </>
   )
 
-  const handleLogOut = () => {
-    logOut()
-    toast.success('Logged Out successfully!', {
-      position: 'top-center',
-    })
-  }
-
   return (
-    <div
-      className={`shadow sticky top-0 z-50
-      transition-transform duration-300 ${
-        direction === 'down' ? '-translate-y-full' : 'translate-y-0'
-      } `}
-    >
-      <div className="navbar bg-base-100 max-w-[95vw] md:max-w-350 mx-auto">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+    <>
+      {/* ================= NAVBAR ================= */}
+      <div
+        className={`shadow bg-base-100 sticky top-0 z-50 transition-transform duration-300 ${
+          direction === 'down' ? '-translate-y-full' : 'translate-y-0'
+        }`}
+      >
+        <div className="navbar max-w-[95vw] md:max-w-350 mx-auto">
+          {/* LEFT */}
+          <div className="navbar-start">
+            <button onClick={() => setIsDrawerOpen(true)} className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                {' '}
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{' '}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               </svg>
-            </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-md dropdown-content bg-base-100 rounded-box z-50 mt-3 w-40 p-2 shadow"
-            >
-              {links}
-            </ul>
+            </button>
+
+            <span className="btn btn-ghost text-xl">
+              <Logo />
+            </span>
           </div>
-          <span className="btn btn-ghost text-xl">
-            <Logo></Logo>
-          </span>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
-        </div>
-        <div className="navbar-end">
-          {user ? (
-            // profile logo
-            <div className="dropdown dropdown-end">
-              <div
-                className="tooltip tooltip-left md:tooltip-bottom flex items-center"
-                tabIndex={0}
-                role="button"
-                data-tip={user?.displayName}
-              >
-                <img
-                  className="w-10 h-10 object-cover rounded-full"
-                  src={user?.photoURL}
-                  alt="User Profile"
-                />
+
+          {/* CENTER (DESKTOP) */}
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1">{links}</ul>
+          </div>
+
+          {/* RIGHT */}
+          <div className="navbar-end">
+            {user ? (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="tooltip tooltip-left md:tooltip-bottom"
+                  data-tip={user?.displayName}
+                >
+                  <img
+                    className="w-10 h-10 rounded-full object-cover"
+                    src={user?.photoURL}
+                    alt="profile"
+                  />
+                </div>
+
+                <ul className="dropdown-content menu bg-base-100 rounded-box w-40 p-2 shadow z-50">
+                  <li className="darkmode">
+                    <Link to="/dashboard">Profile</Link>
+                  </li>
+
+                  <li className="darkmode">
+                    <label className="flex justify-between items-center">
+                      <span>Dark mode</span>
+                      <input
+                        type="checkbox"
+                        checked={theme === 'dark'}
+                        onChange={handleToggle}
+                        className="toggle toggle-sm"
+                      />
+                    </label>
+                  </li>
+
+                  <li className="darkmode">
+                    <button onClick={handleLogOut}>Log Out</button>
+                  </li>
+                </ul>
               </div>
-              <ul
-                tabIndex="-1"
-                className="dropdown-content menu bg-base-100 rounded-box z-50 w-40 p-2 shadow-sm gap-1"
-              >
-                <li>
-                  <Link to={'/dashboard'}>Profile</Link>
-                </li>
+            ) : (
+              <>
+                {/* <label className="toggle mr-2">
+                  <input type="checkbox" checked={theme === 'dark'} onChange={handleToggle} />
+                </label> */}
 
-                <li>
-                  <label className="flex cursor-pointer gap-2 justify-between">
-                    <span>Light/Dark</span>
-                    <input
-                      type="checkbox"
-                      onChange={handleToggle}
-                      checked={theme === 'dark'}
-                      className="toggle toggle-sm theme-controller"
-                    />
-                  </label>
-                </li>
+                <Link to="/login" className="btn btn-sm md:btn-md mr-2">
+                  Sign In
+                </Link>
 
-                <li>
-                  <button onClick={handleLogOut}>Log Out</button>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <>
-              {/* toggle theme */}
-              <label className="toggle text-base-content mr-2">
-                <input
-                  type="checkbox"
-                  value="synthwave"
-                  className="theme-controller"
-                  onChange={handleToggle}
-                  checked={theme === 'dark'}
-                />
-
-                <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M12 2v2"></path>
-                    <path d="M12 20v2"></path>
-                    <path d="m4.93 4.93 1.41 1.41"></path>
-                    <path d="m17.66 17.66 1.41 1.41"></path>
-                    <path d="M2 12h2"></path>
-                    <path d="M20 12h2"></path>
-                    <path d="m6.34 17.66-1.41 1.41"></path>
-                    <path d="m19.07 4.93-1.41 1.41"></path>
-                  </g>
-                </svg>
-
-                <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-                  </g>
-                </svg>
-              </label>
-
-              <Link
-                to={'/login'}
-                className="btn text-[.8rem] md:text-[1rem] hover:text-white  hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2"
-              >
-                Sign In
-              </Link>
-
-              <Link
-                to={'/register'}
-                className="btn text-[.8rem] md:text-[1rem] hover:text-white  hover:bg-[#064e3b] btn-sm md:btn-md rounded-lg mr-2 md:mr-3 hidden md:flex"
-              >
-                Register
-              </Link>
-            </>
-          )}
+                <Link to="/register" className="btn btn-sm md:btn-md hidden md:flex">
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* ================= OVERLAY ================= */}
+      {isDrawerOpen && (
+        <div
+          onClick={() => setIsDrawerOpen(false)}
+          className="fixed inset-0 bg-black/50 z-90 lg:hidden"
+        />
+      )}
+
+      {/* ================= DRAWER ================= */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-base-100 z-100 transform transition-transform duration-300 lg:hidden
+          ${isDrawerOpen ? 'translate-x-0' : '-translate-x-full'}
+        `}
+      >
+        <button
+          onClick={() => setIsDrawerOpen(false)}
+          className="btn btn-ghost absolute top-4 right-4"
+        >
+          ✕
+        </button>
+
+        <ul
+          onClick={() => setIsDrawerOpen(false)}
+          className="menu p-6 w-full mt-10 gap-2 bg-base-100"
+        >
+          {links}
+
+          {!user && (
+            <>
+              <li className="nav">
+                <NavLink to="/login">Sign In</NavLink>
+              </li>
+              <li className="nav">
+                <NavLink to="/register">Register</NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
+    </>
   )
 }
 
