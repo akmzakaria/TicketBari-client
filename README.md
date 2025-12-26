@@ -46,6 +46,7 @@ This repository contains the **frontend** of the application, built using **Reac
 - **Firebase Authentication**
 - **Stripe Payment Gateway**
 - **Lottie Animation**
+- **Swiper.js**
 - **React Icons**
 
 ---

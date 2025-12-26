@@ -93,12 +93,9 @@ const AllTickets = () => {
       {/* search */}
       <div className="">
         <div className="max-w-350 mx-auto px-4 py-3">
-          <div className="flex justify-between items-center mb-3">
-            <h2 data-aos="fade-down" className="text-xl md:text-3xl font-bold">
-              Find Tickets
-            </h2>
+          <div data-aos="fade-down" className="flex justify-between items-center mb-3">
+            <h2 className="text-xl md:text-3xl font-bold">Find Tickets</h2>
             <button
-              data-aos="zoom-in"
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className={`btn btn-sm btn-circle ${
                 isFilterOpen ? 'bg-[#086c52] text-white' : 'btn-ghost'
@@ -221,7 +218,7 @@ const AllTickets = () => {
       </div>
 
       <div className="max-w-350 mx-auto px-4 mt-6">
-        <div className="mb-4 flex justify-between items-center">
+        <div data-aos="fade-in" className="mb-4 flex justify-between items-center">
           <span className="text-sm text-gray-500 font-medium">
             Showing {currentItems.length} of {filteredAndSortedTickets.length} tickets
           </span>

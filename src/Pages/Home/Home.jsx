@@ -8,6 +8,12 @@ import { useQuery } from '@tanstack/react-query'
 import useAxiosSecure from '../../Hooks/useAxiosSecure'
 import 'aos/dist/aos.css'
 import Aos from 'aos'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Link } from 'react-router'
 
 const Home = () => {
   const { loading } = useContext(AuthContext)
@@ -51,15 +57,8 @@ const Home = () => {
   )
 
   useEffect(() => {
-    Aos.init({
-      // duration: 800,
-      once: true,
-    })
+    Aos.init({ once: true })
   }, [])
-
-  // useEffect(() => {
-  //   Aos.refresh()
-  // }, [filteredAdTickets, filteredLatestTickets])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -78,15 +77,36 @@ const Home = () => {
       {filteredAdTickets.length !== 0 && (
         <div className="bg-black/5 shadow-xl border border-gray-200/10 px-3 md:px-10 py-5 md:pb-10 mt-5 rounded-lg">
           <h2 data-aos="zoom-in" className="text-xl md:text-3xl font-bold text-center mb-5">
-            Advertisements
+            Popular Tickets
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+          <Swiper
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            modules={[Autoplay, Navigation, Pagination]}
+            spaceBetween={20}
+            // slidesPerView={1}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            pagination={{ clickable: true }}
+            navigation
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="pb-10"
+          >
             {filteredAdTickets.map((ticket, index) => (
-              <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 250}>
-                <TicketCard key={ticket._id} ticket={ticket} />
-              </div>
+              <SwiperSlide key={ticket._id}>
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 250}>
+                  <TicketCard ticket={ticket} />
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
       )}
 
@@ -95,12 +115,29 @@ const Home = () => {
         <h2 data-aos="zoom-in" className="text-xl md:text-3xl font-bold text-center mb-5">
           Latest Tickets
         </h2>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {filteredLatestTickets.map((ticket, index) => (
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 250}>
-              <TicketCard key={ticket._id} ticket={ticket} />
+            <div
+              key={ticket._id}
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay={index * 250}
+            >
+              <TicketCard ticket={ticket} />
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center mt-5">
+        <div data-aos="fade-down" data-aos-duration="1000">
+          <Link
+            to={'/all-tickets'}
+            className="btn bg-[#086c52] text-white hover:scale-105 transition duration-300 active:scale-95"
+          >
+            Explore More Tickets
+          </Link>
         </div>
       </div>
 
