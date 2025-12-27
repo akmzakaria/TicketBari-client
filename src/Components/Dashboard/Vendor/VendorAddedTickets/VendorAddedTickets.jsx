@@ -95,13 +95,10 @@ const VendorAddedTickets = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 px-5 pb-10">
           {tickets.map((ticket, index) => (
-            <div className="hover:shadow-lg hover:scale-103 duration-500 transition-all">
+            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay={index * 250}>
               <div
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-delay={index * 250}
                 key={ticket._id}
-                className=" rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
+                className=" rounded-xl hover:scale-103 duration-500 transition-all shadow-md hover:shadow-xl overflow-hidden flex flex-col justify-between"
               >
                 <img
                   src={ticket.image}
