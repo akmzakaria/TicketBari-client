@@ -49,7 +49,7 @@ const PopularRoutes = () => {
           >
             <div
               key={route.id}
-              className="border hover:scale-105 duration-300 border-gray-200/20 shadow-md rounded-xl p-5 hover:shadow-xl transition"
+              className="border hover:-translate-y-1 duration-300 border-gray-200/20 shadow-md rounded-xl p-5 hover:shadow-xl transition"
             >
               <h3 className="text-lg font-semibold">
                 {route.from} → {route.to}

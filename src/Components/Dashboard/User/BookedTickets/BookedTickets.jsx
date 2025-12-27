@@ -56,8 +56,11 @@ const BookedTickets = () => {
 
   const handlePayment = async (ticket) => {
     const paymentInfo = {
+      quantity: ticket.quantity,
+      bookingQty: ticket.bookingQty,
       totalPrice: ticket.totalPrice,
-      ticketId: ticket._id,
+      bookedTicketId: ticket._id,
+      ticketId: ticket.ticketId,
       userEmail: ticket.userEmail,
       title: ticket.title,
     }
@@ -92,13 +95,15 @@ const BookedTickets = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {tickets.map((ticket, index) => (
-          <div className="hover:shadow-lg hover:scale-103 duration-500 transition-all">
+          <div
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay={index * 250}
+            className=""
+          >
             <div
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-delay={index * 250}
               key={ticket._id}
-              className="rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden flex flex-col justify-between"
+              className="rounded-xl shadow-md hover:shadow-xl hover:scale-103 duration-500 transition-all overflow-hidden flex flex-col justify-between"
             >
               <img
                 src={ticket.image}

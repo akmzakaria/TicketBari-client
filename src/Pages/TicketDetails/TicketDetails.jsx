@@ -107,6 +107,8 @@ const TicketDetails = () => {
       vendorEmail: ticket.vendor_email,
     }
 
+    console.log(data)
+
     instance.post('/booked-tickets', data).then((res) => {
       if (res.status === 200) {
         toast.success('Booking request sent!', { position: 'top-center' })
@@ -151,17 +153,26 @@ const TicketDetails = () => {
           </p>
 
           <div className="flex justify-between gap-3">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              disabled={countdown === 'Departed'}
-              className={`px-4 py-2 rounded text-white transition ${
-                countdown === 'Departed'
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-[#086c52] hover:bg-[#064e3b]'
-              }`}
-            >
-              Book Now
-            </button>
+            {ticket.quantity > 0 ? (
+              <button
+                onClick={() => setIsModalOpen(true)}
+                disabled={countdown === 'Departed'}
+                className={`px-4 py-2 rounded text-white transition ${
+                  countdown === 'Departed'
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-[#086c52] hover:bg-[#064e3b]'
+                }`}
+              >
+                Book Now
+              </button>
+            ) : (
+              <button
+                disabled
+                className="px-4 py-2 rounded text-white transition cursor-not-allowed bg-[#086c52]/50"
+              >
+                Book Now
+              </button>
+            )}
 
             <Link
               to={-1}

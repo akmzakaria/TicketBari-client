@@ -135,7 +135,7 @@ const AddTicket = () => {
           <div>
             <label className="label">Ticket Quantity</label>
             <input
-              {...register('quantity', { required: true })}
+              {...register('quantity', { required: true, valueAsNumber: true })}
               type="number"
               className="input input-bordered w-full"
               placeholder="40"

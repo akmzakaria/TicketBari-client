@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
-import useAxios from '../../../../Hooks/useAxios'
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure'
 
 const PaymentSuccess = () => {
   const [paymentInfo, setPaymentInfo] = useState({})
   const [searchParams] = useSearchParams()
   const sessionId = searchParams.get('session_id')
+  const quantity = searchParams.get('quantity')
+  const bookingQty = searchParams.get('bookingQty')
   // console.log(sessionId)
 
   const instance = useAxiosSecure()
 
   useEffect(() => {
     instance.patch(`/payment-success?session_id=${sessionId}`).then((res) => {
-      // console.log(res.data)
+      console.log(res.data)
       setPaymentInfo({
         transactionId: res.data.transactionId,
       })
+      // instance.patch('/tickets')
     })
   }, [])
 
