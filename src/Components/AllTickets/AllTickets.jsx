@@ -249,7 +249,10 @@ const AllTickets = () => {
             </div>
 
             {/* pagination */}
-            <div className="mt-5 flex md:justify-center overflow-x-auto w-full h-15 pt-2">
+            <div
+              data-aos="zoom-in"
+              className="mt-5 flex md:justify-center overflow-x-auto w-full h-15 pt-2"
+            >
               <ReactPaginate
                 breakLabel="..."
                 // nextLabel="Next →"
