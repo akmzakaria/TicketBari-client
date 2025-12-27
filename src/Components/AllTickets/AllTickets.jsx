@@ -249,15 +249,16 @@ const AllTickets = () => {
             </div>
 
             {/* pagination */}
-            <div data-aos="zoom-in" className="mt-12 flex justify-center">
+            <div className="mt-5 flex md:justify-center overflow-x-auto w-full h-15 pt-2">
               <ReactPaginate
                 breakLabel="..."
-                nextLabel="Next →"
+                // nextLabel="Next →"
+                // previousLabel="← Prev"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={3}
-                marginPagesDisplayed={1}
                 pageCount={pageCount}
-                previousLabel="← Prev"
+                forcePage={Math.floor(itemOffset / itemsPerPage)} // set current page
+                pageRangeDisplayed={2} // show only 2 pages in the window
+                marginPagesDisplayed={1} // hide first/last pages on mobile
                 renderOnZeroPageCount={null}
                 containerClassName="flex items-center gap-2 select-none"
                 pageClassName="inline-block"
