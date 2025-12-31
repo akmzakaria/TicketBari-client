@@ -45,18 +45,18 @@ const WhyChooseUs = () => {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
         {features.map((item, index) => (
-          <div className=" rounded-xl transition-all  duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[-6px_6px_15px_rgba(0,0,0,0.35)] will-change-transform backface-hidden">
-            <div
-              data-aos="flip-left"
-              data-aos-easing="ease-out-cubic"
-              data-aos-duration="1500"
-              data-aos-delay={index * 350}
-              key={item.id}
-              className="text-center p-6 shadow-md rounded-xl"
-            >
-              <div className="text-3xl text-[#086c52] mb-3 mx-auto">{item.icon}</div>
-              <h3 className="font-semibold text-lg">{item.title}</h3>
-              <p className="text-sm text-gray-500 mt-2">{item.desc}</p>
+          <div
+            data-aos="flip-left"
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="1500"
+            data-aos-delay={index * 350}
+          >
+            <div className=" rounded-xl transition-all duration-500 ease-in-out hover:scale-110 hover:transform-[perspective(1000px)_rotateX(10deg)_rotateY(-10deg)_rotateZ(2deg)] hover:shadow-[-6px_6px_15px_rgba(0,0,0,0.35)] backface-hidden">
+              <div key={item.id} className="text-center p-6 shadow-md rounded-xl">
+                <div className="text-3xl text-[#086c52] mb-3 mx-auto">{item.icon}</div>
+                <h3 className="font-semibold text-lg">{item.title}</h3>
+                <p className="text-sm text-gray-500 mt-2">{item.desc}</p>
+              </div>
             </div>
           </div>
         ))}
