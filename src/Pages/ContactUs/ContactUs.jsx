@@ -93,10 +93,10 @@ const ContactUs = () => {
               data-aos-delay="550"
               className="pt-6 flex space-x-6 justify-center lg:justify-start"
             >
-              <a href="#" className="text-gray-400 hover:text-green-600">
+              <a href="#" className="text-gray-400 hover:text-blue-600">
                 <FaFacebookF size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-green-400">
+              <a href="#" className="text-gray-400 hover:text-blue-400">
                 <FaTwitter size={20} />
               </a>
               <a href="#" className="text-gray-400 hover:text-pink-600">
