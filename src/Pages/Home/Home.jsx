@@ -84,7 +84,7 @@ const Home = () => {
             <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 text-base-content">
               Book your next trip with{' '}
               <span className="bg-linear-to-r from-emerald-400 via-emerald-500 to-cyan-400 bg-clip-text text-transparent">
-                TicketBari
+                TicketGhor
               </span>
             </h1>
             <p className="text-sm md:text-base text-base-content/80 max-w-xl mb-6">
