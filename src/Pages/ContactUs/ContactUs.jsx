@@ -66,7 +66,7 @@ const ContactUs = () => {
                   <div>
                     <h3 className="text-lg font-bold">Email Support</h3>
                     <p className="text-gray-500">For booking inquiries and receipts.</p>
-                    <p className="mt-2 font-semibold text-green-600">support@ticketgo.com</p>
+                    <p className="mt-2 font-semibold text-green-600">support@ticketghor.com</p>
                   </div>
                 </div>
               </div>

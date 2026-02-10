@@ -5,7 +5,7 @@ const TicketCard = ({ ticket }) => {
   const { _id, image, title, price, quantity, transport, perks } = ticket
 
   return (
-    <div className="bg-base-100 rounded-xl shadow-md overflow-hidden hover:shadow-lg hover:scale-103 duration-500 transition-all">
+    <div className="bg-base-100 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-2 duration-300 transition-all">
       {/* Image */}
       <img
         src={image}

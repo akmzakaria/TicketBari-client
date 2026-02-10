@@ -62,10 +62,6 @@ const AllTickets = () => {
   const currentItems = filteredAndSortedTickets.slice(itemOffset, endOffset)
   const pageCount = Math.ceil(filteredAndSortedTickets.length / itemsPerPage)
 
-  useEffect(() => {
-    setItemOffset(0)
-  }, [fromSearch, toSearch, transportFilter, sortPrice])
-
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % filteredAndSortedTickets.length
     setItemOffset(newOffset)
@@ -89,12 +85,12 @@ const AllTickets = () => {
   }
 
   return (
-    <div className="min-h-screen  pb-10">
+    <div className="min-h-screen bg-base-200 pb-10">
       {/* search */}
       <div className="">
         <div className="max-w-350 mx-auto px-4 py-3">
           <div data-aos="fade-down" className="flex justify-between items-center mb-3">
-            <h2 className="text-xl md:text-3xl font-bold">Find Tickets</h2>
+            <h2 className="text-xl md:text-3xl font-bold text-base-content">Find Tickets</h2>
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className={`btn btn-sm btn-circle ${
@@ -124,10 +120,10 @@ const AllTickets = () => {
                 placeholder="From"
                 value={fromSearch}
                 onChange={(e) => setFromSearch(e.target.value)}
-                className="input input-sm input-bordered w-full pl-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-600"
+                className="input input-sm input-bordered w-full pl-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#086c52]"
               />
               <svg
-                className="absolute left-2.5 top-2 text-gray-400"
+                className="absolute left-2.5 top-2 text-base-content/50"
                 width="14"
                 height="14"
                 viewBox="0 0 24 24"
@@ -139,7 +135,7 @@ const AllTickets = () => {
                 <circle cx="12" cy="10" r="3"></circle>
               </svg>
             </div>
-            <span className="text-gray-400">
+            <span className="text-base-content/50">
               <svg
                 width="16"
                 height="16"
@@ -161,7 +157,7 @@ const AllTickets = () => {
                 className="input input-sm input-bordered w-full pl-8 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-500"
               />
               <svg
-                className="absolute left-2.5 top-2 text-gray-400"
+                className="absolute left-2.5 top-2 text-base-content/50"
                 width="14"
                 height="14"
                 viewBox="0 0 24 24"
@@ -181,9 +177,11 @@ const AllTickets = () => {
               isFilterOpen ? 'max-h-48 opacity-100 mt-4' : 'max-h-0 opacity-0'
             }`}
           >
-            <div className=" p-3 rounded-lg border border-gray-100 space-y-3">
+            <div className="p-3 rounded-lg border border-base-300/60 bg-base-100 space-y-3">
               <div>
-                <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Transport Mode</p>
+                <p className="text-xs font-semibold text-base-content/60 uppercase mb-2">
+                  Transport Mode
+                </p>
                 <div className="flex gap-2">
                   {['all', 'Bus', 'Train', 'Flight'].map((mode) => (
                     <button
@@ -192,7 +190,7 @@ const AllTickets = () => {
                       className={`px-4 py-1.5 rounded-full text-xs font-medium border transition-colors ${
                         transportFilter === mode
                           ? 'bg-[#086c52] text-white border-[#086c52]'
-                          : 'bg-white text-gray-600'
+                          : 'bg-base-100 text-base-content/70 border-base-300/70'
                       }`}
                     >
                       {mode === 'all' ? 'All' : mode}
@@ -201,7 +199,7 @@ const AllTickets = () => {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <p className="text-xs font-semibold text-gray-500 uppercase">Sort By</p>
+                <p className="text-xs font-semibold text-base-content/60 uppercase">Sort By</p>
                 <select
                   value={sortPrice}
                   onChange={(e) => setSortPrice(e.target.value)}
@@ -219,14 +217,14 @@ const AllTickets = () => {
 
       <div className="max-w-350 mx-auto px-4 mt-6">
         <div data-aos="fade-in" className="mb-4 flex justify-between items-center">
-          <span className="text-sm text-gray-500 font-medium">
+          <span className="text-sm text-base-content/60 font-medium">
             Showing {currentItems.length} of {filteredAndSortedTickets.length} tickets
           </span>
         </div>
 
         {filteredAndSortedTickets.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
-            <h3 className="text-lg font-semibold text-gray-700">No tickets found</h3>
+            <h3 className="text-lg font-semibold text-base-content">No tickets found</h3>
             <button
               onClick={() => {
                 setFromSearch('')
@@ -267,12 +265,12 @@ const AllTickets = () => {
                 pageClassName="inline-block"
                 pageLinkClassName="px-4 py-2 border border-gray-300 rounded-md hover:cursor-pointer transition-colors text-sm font-medium"
                 previousClassName="inline-block"
-                previousLinkClassName="px-4 py-2 border hover:cursor-pointer border-gray-300 rounded-md hover:bg-gray-100 text-sm font-medium"
+                previousLinkClassName="px-4 py-2 border hover:cursor-pointer border-base-300 rounded-md bg-base-100 hover:bg-base-300/70 text-sm font-medium text-base-content"
                 nextClassName="inline-block"
-                nextLinkClassName="px-4 py-2 border hover:cursor-pointer border-gray-300 rounded-md hover:bg-gray-100 text-sm font-medium"
+                nextLinkClassName="px-4 py-2 border hover:cursor-pointer border-base-300 rounded-md bg-base-100 hover:bg-base-300/70 text-sm font-medium text-base-content"
                 activeLinkClassName="bg-[#086c52] text-white border-[#086c52] hover:bg-[#065a44]"
-                disabledLinkClassName="text-gray-300 cursor-not-allowed hover:bg-white"
-                breakLinkClassName="px-3 py-2 text-gray-500"
+                disabledLinkClassName="text-base-content/30 cursor-not-allowed hover:bg-transparent"
+                breakLinkClassName="px-3 py-2 text-base-content/60"
               />
             </div>
           </>
