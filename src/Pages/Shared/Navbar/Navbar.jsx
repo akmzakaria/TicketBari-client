@@ -472,10 +472,10 @@ const Navbar = () => {
               </li>
               <li className="nav">
                 <NavLink to="/register" className={navLinkClasses}>
-                  <svg
+                  <svg className='ml-1'
                     xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
+                    width="16"
+                    height="16"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -488,7 +488,7 @@ const Navbar = () => {
                     <line x1="20" y1="8" x2="20" y2="14" />
                     <line x1="23" y1="11" x2="17" y2="11" />
                   </svg>
-                  <span>Register</span>
+                  <span className='-ml-0.5'>Register</span>
                 </NavLink>
               </li>
             </>
