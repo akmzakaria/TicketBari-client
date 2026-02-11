@@ -27,6 +27,8 @@ const Navbar = () => {
     setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }
 
+  const navLinkClasses = ({ isActive }) => `flex items-center gap-2 ${isActive ? 'active' : ''}`
+
   const handleLogOut = () => {
     logOut()
     toast.success('Logged Out successfully!', { position: 'top-center' })
@@ -36,7 +38,7 @@ const Navbar = () => {
   const links = (
     <>
       <li className="nav">
-        <NavLink to="/" className="flex items-center gap-2">
+        <NavLink to="/" className={navLinkClasses}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -54,7 +56,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li className="nav">
-        <NavLink to="/all-tickets" className="flex items-center gap-2">
+        <NavLink to="/all-tickets" className={navLinkClasses}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -75,7 +77,7 @@ const Navbar = () => {
 
       {user && (
         <li className="nav">
-          <NavLink to="/dashboard" className="flex items-center gap-2">
+          <NavLink to="/dashboard" className={navLinkClasses}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -98,7 +100,7 @@ const Navbar = () => {
       )}
 
       <li className="nav">
-        <NavLink to="/aboutUs" className="flex items-center gap-2">
+        <NavLink to="/aboutUs" className={navLinkClasses}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -118,7 +120,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li className="nav">
-        <NavLink to="/contactUs" className="flex items-center gap-2">
+        <NavLink to="/contactUs" className={navLinkClasses}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="18"
@@ -449,7 +451,7 @@ const Navbar = () => {
           {!user && (
             <>
               <li className="nav">
-                <NavLink to="/login" className="flex items-center gap-2">
+                <NavLink to="/login" className={navLinkClasses}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -469,7 +471,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li className="nav">
-                <NavLink to="/register" className="flex items-center gap-2">
+                <NavLink to="/register" className={navLinkClasses}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
