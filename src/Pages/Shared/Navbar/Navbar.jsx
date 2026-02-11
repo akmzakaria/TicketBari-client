@@ -144,7 +144,7 @@ const Navbar = () => {
             e.stopPropagation()
             toggleTheme()
           }}
-          className="flex items-center gap-2 px-3 py-2 min-h-11 rounded-md hover:bg-base-200 transition-colors w-full text-left leading-none"
+          className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-base-200 transition-colors w-full text-left"
         >
           <span className="inline-flex items-center justify-center w-5 h-5 shrink-0">
             {theme === 'dark' ? (
@@ -180,7 +180,7 @@ const Navbar = () => {
               </svg>
             )}
           </span>
-          <span>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
+          <span className='-ml-0.5'>{theme === 'dark' ? 'Light mode' : 'Dark mode'}</span>
         </button>
       </li>
     </>
