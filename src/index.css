@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @plugin "daisyui" {
-  themes: light --default, dark;
+  themes:
+    light --default,
+    dark;
 }
 
 body {
@@ -51,4 +53,17 @@ body {
 .dash-block {
   background-color: rgba(255, 255, 255, 0.2) !important;
   outline: none;
+}
+
+/* Custom pagination dots styling for popular tickets section */
+.popular-pagination .swiper-pagination-bullet {
+  background-color: #10b981 !important; /* Green color */
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.popular-pagination .swiper-pagination-bullet-active {
+  background-color: #059669 !important; /* Darker green for active */
+  opacity: 1;
+  transform: scale(1.2);
 }
