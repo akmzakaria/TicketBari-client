@@ -28,7 +28,7 @@ const About = () => {
   if (loading || showLoading) return <Loading />
 
   return (
-    <div className="max-w-350 px-5 mx-auto">
+    <div className="max-w-350 px-5 mx-auto overflow-x-hidden">
       <div className="max-w-350 px-5 mx-auto my-10">
         {/* Hero Section */}
         <section data-aos="fade-down" className="text-center mb-14">

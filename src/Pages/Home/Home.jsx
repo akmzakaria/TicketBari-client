@@ -72,7 +72,7 @@ const Home = () => {
   }
 
   return (
-    <div className="md:max-w-350 px-2 md:px-5 mx-auto">
+    <div className="md:max-w-350 px-2 md:px-5 mx-auto overflow-x-hidden">
       {/* Hero section */}
       <section className="mt-6 md:mt-10">
         <div className="grid md:grid-cols-2 gap-8 items-center">
